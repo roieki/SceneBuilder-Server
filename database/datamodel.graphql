@@ -1,0 +1,139 @@
+# projectId: cjkitaxwb6adu0178vvexmy88
+# version: 1
+enum CameraMode {
+  LOOK_BEHIND
+  FOLLOW
+}
+
+enum PhysicalAssetType {
+  OBJ
+  GTLF
+  COLLADA
+  GEOMETRY
+}
+
+enum SceneType {
+  INSTANCE
+  AGGREGATION
+}
+
+type Aggregation {
+  asset: String
+  id: ID! @unique
+  kinds: [String!]
+  name: String
+}
+
+type AssetsInScene {
+  assets: [PhysicalAssetType!]! 
+  id: ID! @unique
+}
+
+type CameraSettings {
+  cameraMode: CameraMode
+  id: ID! @unique
+  name: String
+  position: Position @relation(name: "CameraSettingsOnPosition")
+  scenes: [Scene!]! @relation(name: "SceneOnCameraSettings")
+}
+
+type DataOverlay {
+  id: ID! @unique
+  name: String!
+  path: String!
+  position: Position @relation(name: "DataOverlayOnPosition")
+  scale: Scale @relation(name: "DataOverlayOnScale")
+  scenes: [Scene!]! @relation(name: "SceneOnDataOverlay")
+}
+
+type File {
+  contentType: String!
+  createdAt: DateTime!
+  id: ID! @unique
+  name: String!
+  secret: String! @unique
+  size: Int!
+  updatedAt: DateTime!
+  url: String! @unique
+}
+
+type SourceService {
+  id: ID! @unique
+  name: String!
+  scenes: [Scene!]! @relation(name: "SceneOnSourceService")
+  url: String!
+}
+
+type PhysicalAsset {
+  colladaPath: String
+  geometry: Json
+  gltfPath: String
+  id: ID! @unique
+  modelType: PhysicalAssetType
+  mtlPath: String
+  name: String!
+  objPath: String
+  physicalModels: [PhysicalModel!]! @relation(name: "PhysicalModelOnPhysicalAsset")
+  scale: Float 
+}
+
+type PhysicalModel {
+  id: ID! @unique
+  name: String
+  physicalAsset: PhysicalAsset @relation(name: "PhysicalModelOnPhysicalAsset")
+  scenes: [Scene!]! @relation(name: "SceneOnPhysicalModel")
+  semanticLayoutNodes: [SemanticLayoutNode!]! @relation(name: "SemanticLayoutNodeOnPhysicalModel")
+}
+
+type Position {
+  cameraSettingses: [CameraSettings!]! @relation(name: "CameraSettingsOnPosition")
+  dataOverlays: [DataOverlay!]! @relation(name: "DataOverlayOnPosition")
+  id: ID! @unique
+  semanticLayoutNodes: [SemanticLayoutNode!]! @relation(name: "SemanticLayoutNodeOnPosition")
+  x: Float
+  y: Float
+  z: Float
+}
+
+type QueryPhysicalModel {
+  id: ID! @unique
+  name: String!
+  queryId: String!
+}
+
+type Scale {
+  dataOverlays: [DataOverlay!]! @relation(name: "DataOverlayOnScale")
+  id: ID! @unique
+  semanticLayoutNodes: [SemanticLayoutNode!]! @relation(name: "SemanticLayoutNodeOnScale")
+  x: Float
+  y: Float
+  z: Float
+}
+
+type Scene {
+  cameraSettings: CameraSettings @relation(name: "SceneOnCameraSettings")
+  containerNode: SemanticLayoutNode @relation(name: "SceneOnSemanticLayoutNode1")
+  dataOverlays: [DataOverlay!]! @relation(name: "SceneOnDataOverlay")
+  id: ID! @unique
+  sourceService: SourceService @relation(name: "SceneOnSourceService")
+  name: String!
+  physicalModels: [PhysicalModel!]! @relation(name: "SceneOnPhysicalModel")
+  semanticLayoutNodes: [SemanticLayoutNode!]! @relation(name: "SceneOnSemanticLayoutNode")
+}
+
+type SemanticLayoutNode {
+  id: ID! @unique
+  name: String
+  physicalModel: PhysicalModel @relation(name: "SemanticLayoutNodeOnPhysicalModel")
+  position: Position @relation(name: "SemanticLayoutNodeOnPosition")
+  quantity: Int 
+  scale: Scale @relation(name: "SemanticLayoutNodeOnScale")
+  scene: Scene @relation(name: "SceneOnSemanticLayoutNode")
+  scenes: [Scene!]! @relation(name: "SceneOnSemanticLayoutNode1")
+}
+
+type User {
+  createdAt: DateTime!
+  id: ID! @unique
+  updatedAt: DateTime!
+}

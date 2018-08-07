@@ -1,0 +1,4667 @@
+# source: https://us1.prisma.sh/roie-schwaber-cohen-c0f7d8/scenebuilder/dev
+# timestamp: Mon Aug 06 2018 19:09:20 GMT-0700 (PDT)
+
+type AggregateAggregation {
+  count: Int!
+}
+
+type AggregateAssetsInScene {
+  count: Int!
+}
+
+type AggregateCameraSettings {
+  count: Int!
+}
+
+type AggregateDataOverlay {
+  count: Int!
+}
+
+type AggregateFile {
+  count: Int!
+}
+
+type AggregatePhysicalAsset {
+  count: Int!
+}
+
+type AggregatePhysicalModel {
+  count: Int!
+}
+
+type AggregatePosition {
+  count: Int!
+}
+
+type AggregateQueryPhysicalModel {
+  count: Int!
+}
+
+type AggregateScale {
+  count: Int!
+}
+
+type AggregateScene {
+  count: Int!
+}
+
+type AggregateSemanticLayoutNode {
+  count: Int!
+}
+
+type AggregateSourceService {
+  count: Int!
+}
+
+type AggregateUser {
+  count: Int!
+}
+
+type Aggregation implements Node {
+  asset: String
+  id: ID!
+  kinds: [String!]!
+  name: String
+}
+
+"""A connection to a list of items."""
+type AggregationConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [AggregationEdge]!
+  aggregate: AggregateAggregation!
+}
+
+input AggregationCreateInput {
+  asset: String
+  name: String
+  kinds: AggregationCreatekindsInput
+}
+
+input AggregationCreatekindsInput {
+  set: [String!]
+}
+
+"""An edge in a connection."""
+type AggregationEdge {
+  """The item at the end of the edge."""
+  node: Aggregation!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum AggregationOrderByInput {
+  asset_ASC
+  asset_DESC
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type AggregationPreviousValues {
+  asset: String
+  id: ID!
+  kinds: [String!]!
+  name: String
+}
+
+type AggregationSubscriptionPayload {
+  mutation: MutationType!
+  node: Aggregation
+  updatedFields: [String!]
+  previousValues: AggregationPreviousValues
+}
+
+input AggregationSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [AggregationSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [AggregationSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [AggregationSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: AggregationWhereInput
+}
+
+input AggregationUpdateInput {
+  asset: String
+  name: String
+  kinds: AggregationUpdatekindsInput
+}
+
+input AggregationUpdatekindsInput {
+  set: [String!]
+}
+
+input AggregationWhereInput {
+  """Logical AND on all given filters."""
+  AND: [AggregationWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [AggregationWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [AggregationWhereInput!]
+  asset: String
+
+  """All values that are not equal to given value."""
+  asset_not: String
+
+  """All values that are contained in given list."""
+  asset_in: [String!]
+
+  """All values that are not contained in given list."""
+  asset_not_in: [String!]
+
+  """All values less than the given value."""
+  asset_lt: String
+
+  """All values less than or equal the given value."""
+  asset_lte: String
+
+  """All values greater than the given value."""
+  asset_gt: String
+
+  """All values greater than or equal the given value."""
+  asset_gte: String
+
+  """All values containing the given string."""
+  asset_contains: String
+
+  """All values not containing the given string."""
+  asset_not_contains: String
+
+  """All values starting with the given string."""
+  asset_starts_with: String
+
+  """All values not starting with the given string."""
+  asset_not_starts_with: String
+
+  """All values ending with the given string."""
+  asset_ends_with: String
+
+  """All values not ending with the given string."""
+  asset_not_ends_with: String
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+}
+
+input AggregationWhereUniqueInput {
+  id: ID
+}
+
+type AssetsInScene implements Node {
+  assets: [PhysicalAssetType!]!
+  id: ID!
+}
+
+"""A connection to a list of items."""
+type AssetsInSceneConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [AssetsInSceneEdge]!
+  aggregate: AggregateAssetsInScene!
+}
+
+input AssetsInSceneCreateassetsInput {
+  set: [PhysicalAssetType!]
+}
+
+input AssetsInSceneCreateInput {
+  assets: AssetsInSceneCreateassetsInput
+}
+
+"""An edge in a connection."""
+type AssetsInSceneEdge {
+  """The item at the end of the edge."""
+  node: AssetsInScene!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum AssetsInSceneOrderByInput {
+  id_ASC
+  id_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type AssetsInScenePreviousValues {
+  assets: [PhysicalAssetType!]!
+  id: ID!
+}
+
+type AssetsInSceneSubscriptionPayload {
+  mutation: MutationType!
+  node: AssetsInScene
+  updatedFields: [String!]
+  previousValues: AssetsInScenePreviousValues
+}
+
+input AssetsInSceneSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [AssetsInSceneSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [AssetsInSceneSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [AssetsInSceneSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: AssetsInSceneWhereInput
+}
+
+input AssetsInSceneUpdateassetsInput {
+  set: [PhysicalAssetType!]
+}
+
+input AssetsInSceneUpdateInput {
+  assets: AssetsInSceneUpdateassetsInput
+}
+
+input AssetsInSceneWhereInput {
+  """Logical AND on all given filters."""
+  AND: [AssetsInSceneWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [AssetsInSceneWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [AssetsInSceneWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+}
+
+input AssetsInSceneWhereUniqueInput {
+  id: ID
+}
+
+type BatchPayload {
+  """The number of nodes that have been affected by the Batch operation."""
+  count: Long!
+}
+
+enum CameraMode {
+  LOOK_BEHIND
+  FOLLOW
+}
+
+type CameraSettings implements Node {
+  cameraMode: CameraMode
+  id: ID!
+  name: String
+  position(where: PositionWhereInput): Position
+  scenes(where: SceneWhereInput, orderBy: SceneOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Scene!]
+}
+
+"""A connection to a list of items."""
+type CameraSettingsConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [CameraSettingsEdge]!
+  aggregate: AggregateCameraSettings!
+}
+
+input CameraSettingsCreateInput {
+  cameraMode: CameraMode
+  name: String
+  position: PositionCreateOneWithoutCameraSettingsesInput
+  scenes: SceneCreateManyWithoutCameraSettingsInput
+}
+
+input CameraSettingsCreateManyWithoutPositionInput {
+  create: [CameraSettingsCreateWithoutPositionInput!]
+  connect: [CameraSettingsWhereUniqueInput!]
+}
+
+input CameraSettingsCreateOneWithoutScenesInput {
+  create: CameraSettingsCreateWithoutScenesInput
+  connect: CameraSettingsWhereUniqueInput
+}
+
+input CameraSettingsCreateWithoutPositionInput {
+  cameraMode: CameraMode
+  name: String
+  scenes: SceneCreateManyWithoutCameraSettingsInput
+}
+
+input CameraSettingsCreateWithoutScenesInput {
+  cameraMode: CameraMode
+  name: String
+  position: PositionCreateOneWithoutCameraSettingsesInput
+}
+
+"""An edge in a connection."""
+type CameraSettingsEdge {
+  """The item at the end of the edge."""
+  node: CameraSettings!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum CameraSettingsOrderByInput {
+  cameraMode_ASC
+  cameraMode_DESC
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type CameraSettingsPreviousValues {
+  cameraMode: CameraMode
+  id: ID!
+  name: String
+}
+
+type CameraSettingsSubscriptionPayload {
+  mutation: MutationType!
+  node: CameraSettings
+  updatedFields: [String!]
+  previousValues: CameraSettingsPreviousValues
+}
+
+input CameraSettingsSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [CameraSettingsSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [CameraSettingsSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [CameraSettingsSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: CameraSettingsWhereInput
+}
+
+input CameraSettingsUpdateInput {
+  cameraMode: CameraMode
+  name: String
+  position: PositionUpdateOneWithoutCameraSettingsesInput
+  scenes: SceneUpdateManyWithoutCameraSettingsInput
+}
+
+input CameraSettingsUpdateManyWithoutPositionInput {
+  create: [CameraSettingsCreateWithoutPositionInput!]
+  connect: [CameraSettingsWhereUniqueInput!]
+  disconnect: [CameraSettingsWhereUniqueInput!]
+  delete: [CameraSettingsWhereUniqueInput!]
+  update: [CameraSettingsUpdateWithWhereUniqueWithoutPositionInput!]
+  upsert: [CameraSettingsUpsertWithWhereUniqueWithoutPositionInput!]
+}
+
+input CameraSettingsUpdateOneWithoutScenesInput {
+  create: CameraSettingsCreateWithoutScenesInput
+  connect: CameraSettingsWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: CameraSettingsUpdateWithoutScenesDataInput
+  upsert: CameraSettingsUpsertWithoutScenesInput
+}
+
+input CameraSettingsUpdateWithoutPositionDataInput {
+  cameraMode: CameraMode
+  name: String
+  scenes: SceneUpdateManyWithoutCameraSettingsInput
+}
+
+input CameraSettingsUpdateWithoutScenesDataInput {
+  cameraMode: CameraMode
+  name: String
+  position: PositionUpdateOneWithoutCameraSettingsesInput
+}
+
+input CameraSettingsUpdateWithWhereUniqueWithoutPositionInput {
+  where: CameraSettingsWhereUniqueInput!
+  data: CameraSettingsUpdateWithoutPositionDataInput!
+}
+
+input CameraSettingsUpsertWithoutScenesInput {
+  update: CameraSettingsUpdateWithoutScenesDataInput!
+  create: CameraSettingsCreateWithoutScenesInput!
+}
+
+input CameraSettingsUpsertWithWhereUniqueWithoutPositionInput {
+  where: CameraSettingsWhereUniqueInput!
+  update: CameraSettingsUpdateWithoutPositionDataInput!
+  create: CameraSettingsCreateWithoutPositionInput!
+}
+
+input CameraSettingsWhereInput {
+  """Logical AND on all given filters."""
+  AND: [CameraSettingsWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [CameraSettingsWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [CameraSettingsWhereInput!]
+  cameraMode: CameraMode
+
+  """All values that are not equal to given value."""
+  cameraMode_not: CameraMode
+
+  """All values that are contained in given list."""
+  cameraMode_in: [CameraMode!]
+
+  """All values that are not contained in given list."""
+  cameraMode_not_in: [CameraMode!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+  position: PositionWhereInput
+  scenes_every: SceneWhereInput
+  scenes_some: SceneWhereInput
+  scenes_none: SceneWhereInput
+}
+
+input CameraSettingsWhereUniqueInput {
+  id: ID
+}
+
+type DataOverlay implements Node {
+  id: ID!
+  name: String!
+  path: String!
+  position(where: PositionWhereInput): Position
+  scale(where: ScaleWhereInput): Scale
+  scenes(where: SceneWhereInput, orderBy: SceneOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Scene!]
+}
+
+"""A connection to a list of items."""
+type DataOverlayConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [DataOverlayEdge]!
+  aggregate: AggregateDataOverlay!
+}
+
+input DataOverlayCreateInput {
+  name: String!
+  path: String!
+  position: PositionCreateOneWithoutDataOverlaysInput
+  scale: ScaleCreateOneWithoutDataOverlaysInput
+  scenes: SceneCreateManyWithoutDataOverlaysInput
+}
+
+input DataOverlayCreateManyWithoutPositionInput {
+  create: [DataOverlayCreateWithoutPositionInput!]
+  connect: [DataOverlayWhereUniqueInput!]
+}
+
+input DataOverlayCreateManyWithoutScaleInput {
+  create: [DataOverlayCreateWithoutScaleInput!]
+  connect: [DataOverlayWhereUniqueInput!]
+}
+
+input DataOverlayCreateManyWithoutScenesInput {
+  create: [DataOverlayCreateWithoutScenesInput!]
+  connect: [DataOverlayWhereUniqueInput!]
+}
+
+input DataOverlayCreateWithoutPositionInput {
+  name: String!
+  path: String!
+  scale: ScaleCreateOneWithoutDataOverlaysInput
+  scenes: SceneCreateManyWithoutDataOverlaysInput
+}
+
+input DataOverlayCreateWithoutScaleInput {
+  name: String!
+  path: String!
+  position: PositionCreateOneWithoutDataOverlaysInput
+  scenes: SceneCreateManyWithoutDataOverlaysInput
+}
+
+input DataOverlayCreateWithoutScenesInput {
+  name: String!
+  path: String!
+  position: PositionCreateOneWithoutDataOverlaysInput
+  scale: ScaleCreateOneWithoutDataOverlaysInput
+}
+
+"""An edge in a connection."""
+type DataOverlayEdge {
+  """The item at the end of the edge."""
+  node: DataOverlay!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum DataOverlayOrderByInput {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  path_ASC
+  path_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type DataOverlayPreviousValues {
+  id: ID!
+  name: String!
+  path: String!
+}
+
+type DataOverlaySubscriptionPayload {
+  mutation: MutationType!
+  node: DataOverlay
+  updatedFields: [String!]
+  previousValues: DataOverlayPreviousValues
+}
+
+input DataOverlaySubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [DataOverlaySubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [DataOverlaySubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [DataOverlaySubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: DataOverlayWhereInput
+}
+
+input DataOverlayUpdateInput {
+  name: String
+  path: String
+  position: PositionUpdateOneWithoutDataOverlaysInput
+  scale: ScaleUpdateOneWithoutDataOverlaysInput
+  scenes: SceneUpdateManyWithoutDataOverlaysInput
+}
+
+input DataOverlayUpdateManyWithoutPositionInput {
+  create: [DataOverlayCreateWithoutPositionInput!]
+  connect: [DataOverlayWhereUniqueInput!]
+  disconnect: [DataOverlayWhereUniqueInput!]
+  delete: [DataOverlayWhereUniqueInput!]
+  update: [DataOverlayUpdateWithWhereUniqueWithoutPositionInput!]
+  upsert: [DataOverlayUpsertWithWhereUniqueWithoutPositionInput!]
+}
+
+input DataOverlayUpdateManyWithoutScaleInput {
+  create: [DataOverlayCreateWithoutScaleInput!]
+  connect: [DataOverlayWhereUniqueInput!]
+  disconnect: [DataOverlayWhereUniqueInput!]
+  delete: [DataOverlayWhereUniqueInput!]
+  update: [DataOverlayUpdateWithWhereUniqueWithoutScaleInput!]
+  upsert: [DataOverlayUpsertWithWhereUniqueWithoutScaleInput!]
+}
+
+input DataOverlayUpdateManyWithoutScenesInput {
+  create: [DataOverlayCreateWithoutScenesInput!]
+  connect: [DataOverlayWhereUniqueInput!]
+  disconnect: [DataOverlayWhereUniqueInput!]
+  delete: [DataOverlayWhereUniqueInput!]
+  update: [DataOverlayUpdateWithWhereUniqueWithoutScenesInput!]
+  upsert: [DataOverlayUpsertWithWhereUniqueWithoutScenesInput!]
+}
+
+input DataOverlayUpdateWithoutPositionDataInput {
+  name: String
+  path: String
+  scale: ScaleUpdateOneWithoutDataOverlaysInput
+  scenes: SceneUpdateManyWithoutDataOverlaysInput
+}
+
+input DataOverlayUpdateWithoutScaleDataInput {
+  name: String
+  path: String
+  position: PositionUpdateOneWithoutDataOverlaysInput
+  scenes: SceneUpdateManyWithoutDataOverlaysInput
+}
+
+input DataOverlayUpdateWithoutScenesDataInput {
+  name: String
+  path: String
+  position: PositionUpdateOneWithoutDataOverlaysInput
+  scale: ScaleUpdateOneWithoutDataOverlaysInput
+}
+
+input DataOverlayUpdateWithWhereUniqueWithoutPositionInput {
+  where: DataOverlayWhereUniqueInput!
+  data: DataOverlayUpdateWithoutPositionDataInput!
+}
+
+input DataOverlayUpdateWithWhereUniqueWithoutScaleInput {
+  where: DataOverlayWhereUniqueInput!
+  data: DataOverlayUpdateWithoutScaleDataInput!
+}
+
+input DataOverlayUpdateWithWhereUniqueWithoutScenesInput {
+  where: DataOverlayWhereUniqueInput!
+  data: DataOverlayUpdateWithoutScenesDataInput!
+}
+
+input DataOverlayUpsertWithWhereUniqueWithoutPositionInput {
+  where: DataOverlayWhereUniqueInput!
+  update: DataOverlayUpdateWithoutPositionDataInput!
+  create: DataOverlayCreateWithoutPositionInput!
+}
+
+input DataOverlayUpsertWithWhereUniqueWithoutScaleInput {
+  where: DataOverlayWhereUniqueInput!
+  update: DataOverlayUpdateWithoutScaleDataInput!
+  create: DataOverlayCreateWithoutScaleInput!
+}
+
+input DataOverlayUpsertWithWhereUniqueWithoutScenesInput {
+  where: DataOverlayWhereUniqueInput!
+  update: DataOverlayUpdateWithoutScenesDataInput!
+  create: DataOverlayCreateWithoutScenesInput!
+}
+
+input DataOverlayWhereInput {
+  """Logical AND on all given filters."""
+  AND: [DataOverlayWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [DataOverlayWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [DataOverlayWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+  path: String
+
+  """All values that are not equal to given value."""
+  path_not: String
+
+  """All values that are contained in given list."""
+  path_in: [String!]
+
+  """All values that are not contained in given list."""
+  path_not_in: [String!]
+
+  """All values less than the given value."""
+  path_lt: String
+
+  """All values less than or equal the given value."""
+  path_lte: String
+
+  """All values greater than the given value."""
+  path_gt: String
+
+  """All values greater than or equal the given value."""
+  path_gte: String
+
+  """All values containing the given string."""
+  path_contains: String
+
+  """All values not containing the given string."""
+  path_not_contains: String
+
+  """All values starting with the given string."""
+  path_starts_with: String
+
+  """All values not starting with the given string."""
+  path_not_starts_with: String
+
+  """All values ending with the given string."""
+  path_ends_with: String
+
+  """All values not ending with the given string."""
+  path_not_ends_with: String
+  position: PositionWhereInput
+  scale: ScaleWhereInput
+  scenes_every: SceneWhereInput
+  scenes_some: SceneWhereInput
+  scenes_none: SceneWhereInput
+}
+
+input DataOverlayWhereUniqueInput {
+  id: ID
+}
+
+scalar DateTime
+
+type File implements Node {
+  contentType: String!
+  createdAt: DateTime!
+  id: ID!
+  name: String!
+  secret: String!
+  size: Int!
+  updatedAt: DateTime!
+  url: String!
+}
+
+"""A connection to a list of items."""
+type FileConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [FileEdge]!
+  aggregate: AggregateFile!
+}
+
+input FileCreateInput {
+  contentType: String!
+  name: String!
+  secret: String!
+  size: Int!
+  url: String!
+}
+
+"""An edge in a connection."""
+type FileEdge {
+  """The item at the end of the edge."""
+  node: File!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum FileOrderByInput {
+  contentType_ASC
+  contentType_DESC
+  createdAt_ASC
+  createdAt_DESC
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  secret_ASC
+  secret_DESC
+  size_ASC
+  size_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  url_ASC
+  url_DESC
+}
+
+type FilePreviousValues {
+  contentType: String!
+  createdAt: DateTime!
+  id: ID!
+  name: String!
+  secret: String!
+  size: Int!
+  updatedAt: DateTime!
+  url: String!
+}
+
+type FileSubscriptionPayload {
+  mutation: MutationType!
+  node: File
+  updatedFields: [String!]
+  previousValues: FilePreviousValues
+}
+
+input FileSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [FileSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [FileSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [FileSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: FileWhereInput
+}
+
+input FileUpdateInput {
+  contentType: String
+  name: String
+  secret: String
+  size: Int
+  url: String
+}
+
+input FileWhereInput {
+  """Logical AND on all given filters."""
+  AND: [FileWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [FileWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [FileWhereInput!]
+  contentType: String
+
+  """All values that are not equal to given value."""
+  contentType_not: String
+
+  """All values that are contained in given list."""
+  contentType_in: [String!]
+
+  """All values that are not contained in given list."""
+  contentType_not_in: [String!]
+
+  """All values less than the given value."""
+  contentType_lt: String
+
+  """All values less than or equal the given value."""
+  contentType_lte: String
+
+  """All values greater than the given value."""
+  contentType_gt: String
+
+  """All values greater than or equal the given value."""
+  contentType_gte: String
+
+  """All values containing the given string."""
+  contentType_contains: String
+
+  """All values not containing the given string."""
+  contentType_not_contains: String
+
+  """All values starting with the given string."""
+  contentType_starts_with: String
+
+  """All values not starting with the given string."""
+  contentType_not_starts_with: String
+
+  """All values ending with the given string."""
+  contentType_ends_with: String
+
+  """All values not ending with the given string."""
+  contentType_not_ends_with: String
+  createdAt: DateTime
+
+  """All values that are not equal to given value."""
+  createdAt_not: DateTime
+
+  """All values that are contained in given list."""
+  createdAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  createdAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  createdAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  createdAt_lte: DateTime
+
+  """All values greater than the given value."""
+  createdAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  createdAt_gte: DateTime
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+  secret: String
+
+  """All values that are not equal to given value."""
+  secret_not: String
+
+  """All values that are contained in given list."""
+  secret_in: [String!]
+
+  """All values that are not contained in given list."""
+  secret_not_in: [String!]
+
+  """All values less than the given value."""
+  secret_lt: String
+
+  """All values less than or equal the given value."""
+  secret_lte: String
+
+  """All values greater than the given value."""
+  secret_gt: String
+
+  """All values greater than or equal the given value."""
+  secret_gte: String
+
+  """All values containing the given string."""
+  secret_contains: String
+
+  """All values not containing the given string."""
+  secret_not_contains: String
+
+  """All values starting with the given string."""
+  secret_starts_with: String
+
+  """All values not starting with the given string."""
+  secret_not_starts_with: String
+
+  """All values ending with the given string."""
+  secret_ends_with: String
+
+  """All values not ending with the given string."""
+  secret_not_ends_with: String
+  size: Int
+
+  """All values that are not equal to given value."""
+  size_not: Int
+
+  """All values that are contained in given list."""
+  size_in: [Int!]
+
+  """All values that are not contained in given list."""
+  size_not_in: [Int!]
+
+  """All values less than the given value."""
+  size_lt: Int
+
+  """All values less than or equal the given value."""
+  size_lte: Int
+
+  """All values greater than the given value."""
+  size_gt: Int
+
+  """All values greater than or equal the given value."""
+  size_gte: Int
+  updatedAt: DateTime
+
+  """All values that are not equal to given value."""
+  updatedAt_not: DateTime
+
+  """All values that are contained in given list."""
+  updatedAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  updatedAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  updatedAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  updatedAt_lte: DateTime
+
+  """All values greater than the given value."""
+  updatedAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  updatedAt_gte: DateTime
+  url: String
+
+  """All values that are not equal to given value."""
+  url_not: String
+
+  """All values that are contained in given list."""
+  url_in: [String!]
+
+  """All values that are not contained in given list."""
+  url_not_in: [String!]
+
+  """All values less than the given value."""
+  url_lt: String
+
+  """All values less than or equal the given value."""
+  url_lte: String
+
+  """All values greater than the given value."""
+  url_gt: String
+
+  """All values greater than or equal the given value."""
+  url_gte: String
+
+  """All values containing the given string."""
+  url_contains: String
+
+  """All values not containing the given string."""
+  url_not_contains: String
+
+  """All values starting with the given string."""
+  url_starts_with: String
+
+  """All values not starting with the given string."""
+  url_not_starts_with: String
+
+  """All values ending with the given string."""
+  url_ends_with: String
+
+  """All values not ending with the given string."""
+  url_not_ends_with: String
+}
+
+input FileWhereUniqueInput {
+  id: ID
+  secret: String
+  url: String
+}
+
+"""Raw JSON value"""
+scalar Json
+
+"""
+The `Long` scalar type represents non-fractional signed whole numeric values.
+Long can represent values between -(2^63) and 2^63 - 1.
+"""
+scalar Long
+
+type Mutation {
+  createAggregation(data: AggregationCreateInput!): Aggregation!
+  createAssetsInScene(data: AssetsInSceneCreateInput!): AssetsInScene!
+  createCameraSettings(data: CameraSettingsCreateInput!): CameraSettings!
+  createDataOverlay(data: DataOverlayCreateInput!): DataOverlay!
+  createFile(data: FileCreateInput!): File!
+  createSourceService(data: SourceServiceCreateInput!): SourceService!
+  createPhysicalAsset(data: PhysicalAssetCreateInput!): PhysicalAsset!
+  createPhysicalModel(data: PhysicalModelCreateInput!): PhysicalModel!
+  createPosition(data: PositionCreateInput!): Position!
+  createQueryPhysicalModel(data: QueryPhysicalModelCreateInput!): QueryPhysicalModel!
+  createScale(data: ScaleCreateInput!): Scale!
+  createScene(data: SceneCreateInput!): Scene!
+  createSemanticLayoutNode(data: SemanticLayoutNodeCreateInput!): SemanticLayoutNode!
+  createUser: User!
+  updateAggregation(data: AggregationUpdateInput!, where: AggregationWhereUniqueInput!): Aggregation
+  updateAssetsInScene(data: AssetsInSceneUpdateInput!, where: AssetsInSceneWhereUniqueInput!): AssetsInScene
+  updateCameraSettings(data: CameraSettingsUpdateInput!, where: CameraSettingsWhereUniqueInput!): CameraSettings
+  updateDataOverlay(data: DataOverlayUpdateInput!, where: DataOverlayWhereUniqueInput!): DataOverlay
+  updateFile(data: FileUpdateInput!, where: FileWhereUniqueInput!): File
+  updateSourceService(data: SourceServiceUpdateInput!, where: SourceServiceWhereUniqueInput!): SourceService
+  updatePhysicalAsset(data: PhysicalAssetUpdateInput!, where: PhysicalAssetWhereUniqueInput!): PhysicalAsset
+  updatePhysicalModel(data: PhysicalModelUpdateInput!, where: PhysicalModelWhereUniqueInput!): PhysicalModel
+  updatePosition(data: PositionUpdateInput!, where: PositionWhereUniqueInput!): Position
+  updateQueryPhysicalModel(data: QueryPhysicalModelUpdateInput!, where: QueryPhysicalModelWhereUniqueInput!): QueryPhysicalModel
+  updateScale(data: ScaleUpdateInput!, where: ScaleWhereUniqueInput!): Scale
+  updateScene(data: SceneUpdateInput!, where: SceneWhereUniqueInput!): Scene
+  updateSemanticLayoutNode(data: SemanticLayoutNodeUpdateInput!, where: SemanticLayoutNodeWhereUniqueInput!): SemanticLayoutNode
+  deleteAggregation(where: AggregationWhereUniqueInput!): Aggregation
+  deleteAssetsInScene(where: AssetsInSceneWhereUniqueInput!): AssetsInScene
+  deleteCameraSettings(where: CameraSettingsWhereUniqueInput!): CameraSettings
+  deleteDataOverlay(where: DataOverlayWhereUniqueInput!): DataOverlay
+  deleteFile(where: FileWhereUniqueInput!): File
+  deleteSourceService(where: SourceServiceWhereUniqueInput!): SourceService
+  deletePhysicalAsset(where: PhysicalAssetWhereUniqueInput!): PhysicalAsset
+  deletePhysicalModel(where: PhysicalModelWhereUniqueInput!): PhysicalModel
+  deletePosition(where: PositionWhereUniqueInput!): Position
+  deleteQueryPhysicalModel(where: QueryPhysicalModelWhereUniqueInput!): QueryPhysicalModel
+  deleteScale(where: ScaleWhereUniqueInput!): Scale
+  deleteScene(where: SceneWhereUniqueInput!): Scene
+  deleteSemanticLayoutNode(where: SemanticLayoutNodeWhereUniqueInput!): SemanticLayoutNode
+  deleteUser(where: UserWhereUniqueInput!): User
+  upsertAggregation(where: AggregationWhereUniqueInput!, create: AggregationCreateInput!, update: AggregationUpdateInput!): Aggregation!
+  upsertAssetsInScene(where: AssetsInSceneWhereUniqueInput!, create: AssetsInSceneCreateInput!, update: AssetsInSceneUpdateInput!): AssetsInScene!
+  upsertCameraSettings(where: CameraSettingsWhereUniqueInput!, create: CameraSettingsCreateInput!, update: CameraSettingsUpdateInput!): CameraSettings!
+  upsertDataOverlay(where: DataOverlayWhereUniqueInput!, create: DataOverlayCreateInput!, update: DataOverlayUpdateInput!): DataOverlay!
+  upsertFile(where: FileWhereUniqueInput!, create: FileCreateInput!, update: FileUpdateInput!): File!
+  upsertSourceService(where: SourceServiceWhereUniqueInput!, create: SourceServiceCreateInput!, update: SourceServiceUpdateInput!): SourceService!
+  upsertPhysicalAsset(where: PhysicalAssetWhereUniqueInput!, create: PhysicalAssetCreateInput!, update: PhysicalAssetUpdateInput!): PhysicalAsset!
+  upsertPhysicalModel(where: PhysicalModelWhereUniqueInput!, create: PhysicalModelCreateInput!, update: PhysicalModelUpdateInput!): PhysicalModel!
+  upsertPosition(where: PositionWhereUniqueInput!, create: PositionCreateInput!, update: PositionUpdateInput!): Position!
+  upsertQueryPhysicalModel(where: QueryPhysicalModelWhereUniqueInput!, create: QueryPhysicalModelCreateInput!, update: QueryPhysicalModelUpdateInput!): QueryPhysicalModel!
+  upsertScale(where: ScaleWhereUniqueInput!, create: ScaleCreateInput!, update: ScaleUpdateInput!): Scale!
+  upsertScene(where: SceneWhereUniqueInput!, create: SceneCreateInput!, update: SceneUpdateInput!): Scene!
+  upsertSemanticLayoutNode(where: SemanticLayoutNodeWhereUniqueInput!, create: SemanticLayoutNodeCreateInput!, update: SemanticLayoutNodeUpdateInput!): SemanticLayoutNode!
+  updateManyAggregations(data: AggregationUpdateInput!, where: AggregationWhereInput): BatchPayload!
+  updateManyAssetsInScenes(data: AssetsInSceneUpdateInput!, where: AssetsInSceneWhereInput): BatchPayload!
+  updateManyCameraSettingses(data: CameraSettingsUpdateInput!, where: CameraSettingsWhereInput): BatchPayload!
+  updateManyDataOverlays(data: DataOverlayUpdateInput!, where: DataOverlayWhereInput): BatchPayload!
+  updateManyFiles(data: FileUpdateInput!, where: FileWhereInput): BatchPayload!
+  updateManySourceServices(data: SourceServiceUpdateInput!, where: SourceServiceWhereInput): BatchPayload!
+  updateManyPhysicalAssets(data: PhysicalAssetUpdateInput!, where: PhysicalAssetWhereInput): BatchPayload!
+  updateManyPhysicalModels(data: PhysicalModelUpdateInput!, where: PhysicalModelWhereInput): BatchPayload!
+  updateManyPositions(data: PositionUpdateInput!, where: PositionWhereInput): BatchPayload!
+  updateManyQueryPhysicalModels(data: QueryPhysicalModelUpdateInput!, where: QueryPhysicalModelWhereInput): BatchPayload!
+  updateManyScales(data: ScaleUpdateInput!, where: ScaleWhereInput): BatchPayload!
+  updateManyScenes(data: SceneUpdateInput!, where: SceneWhereInput): BatchPayload!
+  updateManySemanticLayoutNodes(data: SemanticLayoutNodeUpdateInput!, where: SemanticLayoutNodeWhereInput): BatchPayload!
+  deleteManyAggregations(where: AggregationWhereInput): BatchPayload!
+  deleteManyAssetsInScenes(where: AssetsInSceneWhereInput): BatchPayload!
+  deleteManyCameraSettingses(where: CameraSettingsWhereInput): BatchPayload!
+  deleteManyDataOverlays(where: DataOverlayWhereInput): BatchPayload!
+  deleteManyFiles(where: FileWhereInput): BatchPayload!
+  deleteManySourceServices(where: SourceServiceWhereInput): BatchPayload!
+  deleteManyPhysicalAssets(where: PhysicalAssetWhereInput): BatchPayload!
+  deleteManyPhysicalModels(where: PhysicalModelWhereInput): BatchPayload!
+  deleteManyPositions(where: PositionWhereInput): BatchPayload!
+  deleteManyQueryPhysicalModels(where: QueryPhysicalModelWhereInput): BatchPayload!
+  deleteManyScales(where: ScaleWhereInput): BatchPayload!
+  deleteManyScenes(where: SceneWhereInput): BatchPayload!
+  deleteManySemanticLayoutNodes(where: SemanticLayoutNodeWhereInput): BatchPayload!
+  deleteManyUsers(where: UserWhereInput): BatchPayload!
+}
+
+enum MutationType {
+  CREATED
+  UPDATED
+  DELETED
+}
+
+"""An object with an ID"""
+interface Node {
+  """The id of the object."""
+  id: ID!
+}
+
+"""Information about pagination in a connection."""
+type PageInfo {
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
+
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+}
+
+type PhysicalAsset implements Node {
+  colladaPath: String
+  geometry: Json
+  gltfPath: String
+  id: ID!
+  modelType: PhysicalAssetType
+  mtlPath: String
+  name: String!
+  objPath: String
+  physicalModels(where: PhysicalModelWhereInput, orderBy: PhysicalModelOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [PhysicalModel!]
+  scale: Float
+}
+
+"""A connection to a list of items."""
+type PhysicalAssetConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [PhysicalAssetEdge]!
+  aggregate: AggregatePhysicalAsset!
+}
+
+input PhysicalAssetCreateInput {
+  colladaPath: String
+  geometry: Json
+  gltfPath: String
+  modelType: PhysicalAssetType
+  mtlPath: String
+  name: String!
+  objPath: String
+  scale: Float
+  physicalModels: PhysicalModelCreateManyWithoutPhysicalAssetInput
+}
+
+input PhysicalAssetCreateOneWithoutPhysicalModelsInput {
+  create: PhysicalAssetCreateWithoutPhysicalModelsInput
+  connect: PhysicalAssetWhereUniqueInput
+}
+
+input PhysicalAssetCreateWithoutPhysicalModelsInput {
+  colladaPath: String
+  geometry: Json
+  gltfPath: String
+  modelType: PhysicalAssetType
+  mtlPath: String
+  name: String!
+  objPath: String
+  scale: Float
+}
+
+"""An edge in a connection."""
+type PhysicalAssetEdge {
+  """The item at the end of the edge."""
+  node: PhysicalAsset!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum PhysicalAssetOrderByInput {
+  colladaPath_ASC
+  colladaPath_DESC
+  geometry_ASC
+  geometry_DESC
+  gltfPath_ASC
+  gltfPath_DESC
+  id_ASC
+  id_DESC
+  modelType_ASC
+  modelType_DESC
+  mtlPath_ASC
+  mtlPath_DESC
+  name_ASC
+  name_DESC
+  objPath_ASC
+  objPath_DESC
+  scale_ASC
+  scale_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type PhysicalAssetPreviousValues {
+  colladaPath: String
+  geometry: Json
+  gltfPath: String
+  id: ID!
+  modelType: PhysicalAssetType
+  mtlPath: String
+  name: String!
+  objPath: String
+  scale: Float
+}
+
+type PhysicalAssetSubscriptionPayload {
+  mutation: MutationType!
+  node: PhysicalAsset
+  updatedFields: [String!]
+  previousValues: PhysicalAssetPreviousValues
+}
+
+input PhysicalAssetSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [PhysicalAssetSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [PhysicalAssetSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [PhysicalAssetSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: PhysicalAssetWhereInput
+}
+
+enum PhysicalAssetType {
+  OBJ
+  GTLF
+  COLLADA
+  GEOMETRY
+}
+
+input PhysicalAssetUpdateInput {
+  colladaPath: String
+  geometry: Json
+  gltfPath: String
+  modelType: PhysicalAssetType
+  mtlPath: String
+  name: String
+  objPath: String
+  scale: Float
+  physicalModels: PhysicalModelUpdateManyWithoutPhysicalAssetInput
+}
+
+input PhysicalAssetUpdateOneWithoutPhysicalModelsInput {
+  create: PhysicalAssetCreateWithoutPhysicalModelsInput
+  connect: PhysicalAssetWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: PhysicalAssetUpdateWithoutPhysicalModelsDataInput
+  upsert: PhysicalAssetUpsertWithoutPhysicalModelsInput
+}
+
+input PhysicalAssetUpdateWithoutPhysicalModelsDataInput {
+  colladaPath: String
+  geometry: Json
+  gltfPath: String
+  modelType: PhysicalAssetType
+  mtlPath: String
+  name: String
+  objPath: String
+  scale: Float
+}
+
+input PhysicalAssetUpsertWithoutPhysicalModelsInput {
+  update: PhysicalAssetUpdateWithoutPhysicalModelsDataInput!
+  create: PhysicalAssetCreateWithoutPhysicalModelsInput!
+}
+
+input PhysicalAssetWhereInput {
+  """Logical AND on all given filters."""
+  AND: [PhysicalAssetWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [PhysicalAssetWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [PhysicalAssetWhereInput!]
+  colladaPath: String
+
+  """All values that are not equal to given value."""
+  colladaPath_not: String
+
+  """All values that are contained in given list."""
+  colladaPath_in: [String!]
+
+  """All values that are not contained in given list."""
+  colladaPath_not_in: [String!]
+
+  """All values less than the given value."""
+  colladaPath_lt: String
+
+  """All values less than or equal the given value."""
+  colladaPath_lte: String
+
+  """All values greater than the given value."""
+  colladaPath_gt: String
+
+  """All values greater than or equal the given value."""
+  colladaPath_gte: String
+
+  """All values containing the given string."""
+  colladaPath_contains: String
+
+  """All values not containing the given string."""
+  colladaPath_not_contains: String
+
+  """All values starting with the given string."""
+  colladaPath_starts_with: String
+
+  """All values not starting with the given string."""
+  colladaPath_not_starts_with: String
+
+  """All values ending with the given string."""
+  colladaPath_ends_with: String
+
+  """All values not ending with the given string."""
+  colladaPath_not_ends_with: String
+  gltfPath: String
+
+  """All values that are not equal to given value."""
+  gltfPath_not: String
+
+  """All values that are contained in given list."""
+  gltfPath_in: [String!]
+
+  """All values that are not contained in given list."""
+  gltfPath_not_in: [String!]
+
+  """All values less than the given value."""
+  gltfPath_lt: String
+
+  """All values less than or equal the given value."""
+  gltfPath_lte: String
+
+  """All values greater than the given value."""
+  gltfPath_gt: String
+
+  """All values greater than or equal the given value."""
+  gltfPath_gte: String
+
+  """All values containing the given string."""
+  gltfPath_contains: String
+
+  """All values not containing the given string."""
+  gltfPath_not_contains: String
+
+  """All values starting with the given string."""
+  gltfPath_starts_with: String
+
+  """All values not starting with the given string."""
+  gltfPath_not_starts_with: String
+
+  """All values ending with the given string."""
+  gltfPath_ends_with: String
+
+  """All values not ending with the given string."""
+  gltfPath_not_ends_with: String
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  modelType: PhysicalAssetType
+
+  """All values that are not equal to given value."""
+  modelType_not: PhysicalAssetType
+
+  """All values that are contained in given list."""
+  modelType_in: [PhysicalAssetType!]
+
+  """All values that are not contained in given list."""
+  modelType_not_in: [PhysicalAssetType!]
+  mtlPath: String
+
+  """All values that are not equal to given value."""
+  mtlPath_not: String
+
+  """All values that are contained in given list."""
+  mtlPath_in: [String!]
+
+  """All values that are not contained in given list."""
+  mtlPath_not_in: [String!]
+
+  """All values less than the given value."""
+  mtlPath_lt: String
+
+  """All values less than or equal the given value."""
+  mtlPath_lte: String
+
+  """All values greater than the given value."""
+  mtlPath_gt: String
+
+  """All values greater than or equal the given value."""
+  mtlPath_gte: String
+
+  """All values containing the given string."""
+  mtlPath_contains: String
+
+  """All values not containing the given string."""
+  mtlPath_not_contains: String
+
+  """All values starting with the given string."""
+  mtlPath_starts_with: String
+
+  """All values not starting with the given string."""
+  mtlPath_not_starts_with: String
+
+  """All values ending with the given string."""
+  mtlPath_ends_with: String
+
+  """All values not ending with the given string."""
+  mtlPath_not_ends_with: String
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+  objPath: String
+
+  """All values that are not equal to given value."""
+  objPath_not: String
+
+  """All values that are contained in given list."""
+  objPath_in: [String!]
+
+  """All values that are not contained in given list."""
+  objPath_not_in: [String!]
+
+  """All values less than the given value."""
+  objPath_lt: String
+
+  """All values less than or equal the given value."""
+  objPath_lte: String
+
+  """All values greater than the given value."""
+  objPath_gt: String
+
+  """All values greater than or equal the given value."""
+  objPath_gte: String
+
+  """All values containing the given string."""
+  objPath_contains: String
+
+  """All values not containing the given string."""
+  objPath_not_contains: String
+
+  """All values starting with the given string."""
+  objPath_starts_with: String
+
+  """All values not starting with the given string."""
+  objPath_not_starts_with: String
+
+  """All values ending with the given string."""
+  objPath_ends_with: String
+
+  """All values not ending with the given string."""
+  objPath_not_ends_with: String
+  scale: Float
+
+  """All values that are not equal to given value."""
+  scale_not: Float
+
+  """All values that are contained in given list."""
+  scale_in: [Float!]
+
+  """All values that are not contained in given list."""
+  scale_not_in: [Float!]
+
+  """All values less than the given value."""
+  scale_lt: Float
+
+  """All values less than or equal the given value."""
+  scale_lte: Float
+
+  """All values greater than the given value."""
+  scale_gt: Float
+
+  """All values greater than or equal the given value."""
+  scale_gte: Float
+  physicalModels_every: PhysicalModelWhereInput
+  physicalModels_some: PhysicalModelWhereInput
+  physicalModels_none: PhysicalModelWhereInput
+}
+
+input PhysicalAssetWhereUniqueInput {
+  id: ID
+}
+
+type PhysicalModel implements Node {
+  id: ID!
+  name: String
+  physicalAsset(where: PhysicalAssetWhereInput): PhysicalAsset
+  scenes(where: SceneWhereInput, orderBy: SceneOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Scene!]
+  semanticLayoutNodes(where: SemanticLayoutNodeWhereInput, orderBy: SemanticLayoutNodeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [SemanticLayoutNode!]
+}
+
+"""A connection to a list of items."""
+type PhysicalModelConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [PhysicalModelEdge]!
+  aggregate: AggregatePhysicalModel!
+}
+
+input PhysicalModelCreateInput {
+  name: String
+  physicalAsset: PhysicalAssetCreateOneWithoutPhysicalModelsInput
+  scenes: SceneCreateManyWithoutPhysicalModelsInput
+  semanticLayoutNodes: SemanticLayoutNodeCreateManyWithoutPhysicalModelInput
+}
+
+input PhysicalModelCreateManyWithoutPhysicalAssetInput {
+  create: [PhysicalModelCreateWithoutPhysicalAssetInput!]
+  connect: [PhysicalModelWhereUniqueInput!]
+}
+
+input PhysicalModelCreateManyWithoutScenesInput {
+  create: [PhysicalModelCreateWithoutScenesInput!]
+  connect: [PhysicalModelWhereUniqueInput!]
+}
+
+input PhysicalModelCreateOneWithoutSemanticLayoutNodesInput {
+  create: PhysicalModelCreateWithoutSemanticLayoutNodesInput
+  connect: PhysicalModelWhereUniqueInput
+}
+
+input PhysicalModelCreateWithoutPhysicalAssetInput {
+  name: String
+  scenes: SceneCreateManyWithoutPhysicalModelsInput
+  semanticLayoutNodes: SemanticLayoutNodeCreateManyWithoutPhysicalModelInput
+}
+
+input PhysicalModelCreateWithoutScenesInput {
+  name: String
+  physicalAsset: PhysicalAssetCreateOneWithoutPhysicalModelsInput
+  semanticLayoutNodes: SemanticLayoutNodeCreateManyWithoutPhysicalModelInput
+}
+
+input PhysicalModelCreateWithoutSemanticLayoutNodesInput {
+  name: String
+  physicalAsset: PhysicalAssetCreateOneWithoutPhysicalModelsInput
+  scenes: SceneCreateManyWithoutPhysicalModelsInput
+}
+
+"""An edge in a connection."""
+type PhysicalModelEdge {
+  """The item at the end of the edge."""
+  node: PhysicalModel!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum PhysicalModelOrderByInput {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type PhysicalModelPreviousValues {
+  id: ID!
+  name: String
+}
+
+type PhysicalModelSubscriptionPayload {
+  mutation: MutationType!
+  node: PhysicalModel
+  updatedFields: [String!]
+  previousValues: PhysicalModelPreviousValues
+}
+
+input PhysicalModelSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [PhysicalModelSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [PhysicalModelSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [PhysicalModelSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: PhysicalModelWhereInput
+}
+
+input PhysicalModelUpdateInput {
+  name: String
+  physicalAsset: PhysicalAssetUpdateOneWithoutPhysicalModelsInput
+  scenes: SceneUpdateManyWithoutPhysicalModelsInput
+  semanticLayoutNodes: SemanticLayoutNodeUpdateManyWithoutPhysicalModelInput
+}
+
+input PhysicalModelUpdateManyWithoutPhysicalAssetInput {
+  create: [PhysicalModelCreateWithoutPhysicalAssetInput!]
+  connect: [PhysicalModelWhereUniqueInput!]
+  disconnect: [PhysicalModelWhereUniqueInput!]
+  delete: [PhysicalModelWhereUniqueInput!]
+  update: [PhysicalModelUpdateWithWhereUniqueWithoutPhysicalAssetInput!]
+  upsert: [PhysicalModelUpsertWithWhereUniqueWithoutPhysicalAssetInput!]
+}
+
+input PhysicalModelUpdateManyWithoutScenesInput {
+  create: [PhysicalModelCreateWithoutScenesInput!]
+  connect: [PhysicalModelWhereUniqueInput!]
+  disconnect: [PhysicalModelWhereUniqueInput!]
+  delete: [PhysicalModelWhereUniqueInput!]
+  update: [PhysicalModelUpdateWithWhereUniqueWithoutScenesInput!]
+  upsert: [PhysicalModelUpsertWithWhereUniqueWithoutScenesInput!]
+}
+
+input PhysicalModelUpdateOneWithoutSemanticLayoutNodesInput {
+  create: PhysicalModelCreateWithoutSemanticLayoutNodesInput
+  connect: PhysicalModelWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: PhysicalModelUpdateWithoutSemanticLayoutNodesDataInput
+  upsert: PhysicalModelUpsertWithoutSemanticLayoutNodesInput
+}
+
+input PhysicalModelUpdateWithoutPhysicalAssetDataInput {
+  name: String
+  scenes: SceneUpdateManyWithoutPhysicalModelsInput
+  semanticLayoutNodes: SemanticLayoutNodeUpdateManyWithoutPhysicalModelInput
+}
+
+input PhysicalModelUpdateWithoutScenesDataInput {
+  name: String
+  physicalAsset: PhysicalAssetUpdateOneWithoutPhysicalModelsInput
+  semanticLayoutNodes: SemanticLayoutNodeUpdateManyWithoutPhysicalModelInput
+}
+
+input PhysicalModelUpdateWithoutSemanticLayoutNodesDataInput {
+  name: String
+  physicalAsset: PhysicalAssetUpdateOneWithoutPhysicalModelsInput
+  scenes: SceneUpdateManyWithoutPhysicalModelsInput
+}
+
+input PhysicalModelUpdateWithWhereUniqueWithoutPhysicalAssetInput {
+  where: PhysicalModelWhereUniqueInput!
+  data: PhysicalModelUpdateWithoutPhysicalAssetDataInput!
+}
+
+input PhysicalModelUpdateWithWhereUniqueWithoutScenesInput {
+  where: PhysicalModelWhereUniqueInput!
+  data: PhysicalModelUpdateWithoutScenesDataInput!
+}
+
+input PhysicalModelUpsertWithoutSemanticLayoutNodesInput {
+  update: PhysicalModelUpdateWithoutSemanticLayoutNodesDataInput!
+  create: PhysicalModelCreateWithoutSemanticLayoutNodesInput!
+}
+
+input PhysicalModelUpsertWithWhereUniqueWithoutPhysicalAssetInput {
+  where: PhysicalModelWhereUniqueInput!
+  update: PhysicalModelUpdateWithoutPhysicalAssetDataInput!
+  create: PhysicalModelCreateWithoutPhysicalAssetInput!
+}
+
+input PhysicalModelUpsertWithWhereUniqueWithoutScenesInput {
+  where: PhysicalModelWhereUniqueInput!
+  update: PhysicalModelUpdateWithoutScenesDataInput!
+  create: PhysicalModelCreateWithoutScenesInput!
+}
+
+input PhysicalModelWhereInput {
+  """Logical AND on all given filters."""
+  AND: [PhysicalModelWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [PhysicalModelWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [PhysicalModelWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+  physicalAsset: PhysicalAssetWhereInput
+  scenes_every: SceneWhereInput
+  scenes_some: SceneWhereInput
+  scenes_none: SceneWhereInput
+  semanticLayoutNodes_every: SemanticLayoutNodeWhereInput
+  semanticLayoutNodes_some: SemanticLayoutNodeWhereInput
+  semanticLayoutNodes_none: SemanticLayoutNodeWhereInput
+}
+
+input PhysicalModelWhereUniqueInput {
+  id: ID
+}
+
+type Position implements Node {
+  cameraSettingses(where: CameraSettingsWhereInput, orderBy: CameraSettingsOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [CameraSettings!]
+  dataOverlays(where: DataOverlayWhereInput, orderBy: DataOverlayOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [DataOverlay!]
+  id: ID!
+  semanticLayoutNodes(where: SemanticLayoutNodeWhereInput, orderBy: SemanticLayoutNodeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [SemanticLayoutNode!]
+  x: Float
+  y: Float
+  z: Float
+}
+
+"""A connection to a list of items."""
+type PositionConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [PositionEdge]!
+  aggregate: AggregatePosition!
+}
+
+input PositionCreateInput {
+  x: Float
+  y: Float
+  z: Float
+  cameraSettingses: CameraSettingsCreateManyWithoutPositionInput
+  dataOverlays: DataOverlayCreateManyWithoutPositionInput
+  semanticLayoutNodes: SemanticLayoutNodeCreateManyWithoutPositionInput
+}
+
+input PositionCreateOneWithoutCameraSettingsesInput {
+  create: PositionCreateWithoutCameraSettingsesInput
+  connect: PositionWhereUniqueInput
+}
+
+input PositionCreateOneWithoutDataOverlaysInput {
+  create: PositionCreateWithoutDataOverlaysInput
+  connect: PositionWhereUniqueInput
+}
+
+input PositionCreateOneWithoutSemanticLayoutNodesInput {
+  create: PositionCreateWithoutSemanticLayoutNodesInput
+  connect: PositionWhereUniqueInput
+}
+
+input PositionCreateWithoutCameraSettingsesInput {
+  x: Float
+  y: Float
+  z: Float
+  dataOverlays: DataOverlayCreateManyWithoutPositionInput
+  semanticLayoutNodes: SemanticLayoutNodeCreateManyWithoutPositionInput
+}
+
+input PositionCreateWithoutDataOverlaysInput {
+  x: Float
+  y: Float
+  z: Float
+  cameraSettingses: CameraSettingsCreateManyWithoutPositionInput
+  semanticLayoutNodes: SemanticLayoutNodeCreateManyWithoutPositionInput
+}
+
+input PositionCreateWithoutSemanticLayoutNodesInput {
+  x: Float
+  y: Float
+  z: Float
+  cameraSettingses: CameraSettingsCreateManyWithoutPositionInput
+  dataOverlays: DataOverlayCreateManyWithoutPositionInput
+}
+
+"""An edge in a connection."""
+type PositionEdge {
+  """The item at the end of the edge."""
+  node: Position!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum PositionOrderByInput {
+  id_ASC
+  id_DESC
+  x_ASC
+  x_DESC
+  y_ASC
+  y_DESC
+  z_ASC
+  z_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type PositionPreviousValues {
+  id: ID!
+  x: Float
+  y: Float
+  z: Float
+}
+
+type PositionSubscriptionPayload {
+  mutation: MutationType!
+  node: Position
+  updatedFields: [String!]
+  previousValues: PositionPreviousValues
+}
+
+input PositionSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [PositionSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [PositionSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [PositionSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: PositionWhereInput
+}
+
+input PositionUpdateInput {
+  x: Float
+  y: Float
+  z: Float
+  cameraSettingses: CameraSettingsUpdateManyWithoutPositionInput
+  dataOverlays: DataOverlayUpdateManyWithoutPositionInput
+  semanticLayoutNodes: SemanticLayoutNodeUpdateManyWithoutPositionInput
+}
+
+input PositionUpdateOneWithoutCameraSettingsesInput {
+  create: PositionCreateWithoutCameraSettingsesInput
+  connect: PositionWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: PositionUpdateWithoutCameraSettingsesDataInput
+  upsert: PositionUpsertWithoutCameraSettingsesInput
+}
+
+input PositionUpdateOneWithoutDataOverlaysInput {
+  create: PositionCreateWithoutDataOverlaysInput
+  connect: PositionWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: PositionUpdateWithoutDataOverlaysDataInput
+  upsert: PositionUpsertWithoutDataOverlaysInput
+}
+
+input PositionUpdateOneWithoutSemanticLayoutNodesInput {
+  create: PositionCreateWithoutSemanticLayoutNodesInput
+  connect: PositionWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: PositionUpdateWithoutSemanticLayoutNodesDataInput
+  upsert: PositionUpsertWithoutSemanticLayoutNodesInput
+}
+
+input PositionUpdateWithoutCameraSettingsesDataInput {
+  x: Float
+  y: Float
+  z: Float
+  dataOverlays: DataOverlayUpdateManyWithoutPositionInput
+  semanticLayoutNodes: SemanticLayoutNodeUpdateManyWithoutPositionInput
+}
+
+input PositionUpdateWithoutDataOverlaysDataInput {
+  x: Float
+  y: Float
+  z: Float
+  cameraSettingses: CameraSettingsUpdateManyWithoutPositionInput
+  semanticLayoutNodes: SemanticLayoutNodeUpdateManyWithoutPositionInput
+}
+
+input PositionUpdateWithoutSemanticLayoutNodesDataInput {
+  x: Float
+  y: Float
+  z: Float
+  cameraSettingses: CameraSettingsUpdateManyWithoutPositionInput
+  dataOverlays: DataOverlayUpdateManyWithoutPositionInput
+}
+
+input PositionUpsertWithoutCameraSettingsesInput {
+  update: PositionUpdateWithoutCameraSettingsesDataInput!
+  create: PositionCreateWithoutCameraSettingsesInput!
+}
+
+input PositionUpsertWithoutDataOverlaysInput {
+  update: PositionUpdateWithoutDataOverlaysDataInput!
+  create: PositionCreateWithoutDataOverlaysInput!
+}
+
+input PositionUpsertWithoutSemanticLayoutNodesInput {
+  update: PositionUpdateWithoutSemanticLayoutNodesDataInput!
+  create: PositionCreateWithoutSemanticLayoutNodesInput!
+}
+
+input PositionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [PositionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [PositionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [PositionWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  x: Float
+
+  """All values that are not equal to given value."""
+  x_not: Float
+
+  """All values that are contained in given list."""
+  x_in: [Float!]
+
+  """All values that are not contained in given list."""
+  x_not_in: [Float!]
+
+  """All values less than the given value."""
+  x_lt: Float
+
+  """All values less than or equal the given value."""
+  x_lte: Float
+
+  """All values greater than the given value."""
+  x_gt: Float
+
+  """All values greater than or equal the given value."""
+  x_gte: Float
+  y: Float
+
+  """All values that are not equal to given value."""
+  y_not: Float
+
+  """All values that are contained in given list."""
+  y_in: [Float!]
+
+  """All values that are not contained in given list."""
+  y_not_in: [Float!]
+
+  """All values less than the given value."""
+  y_lt: Float
+
+  """All values less than or equal the given value."""
+  y_lte: Float
+
+  """All values greater than the given value."""
+  y_gt: Float
+
+  """All values greater than or equal the given value."""
+  y_gte: Float
+  z: Float
+
+  """All values that are not equal to given value."""
+  z_not: Float
+
+  """All values that are contained in given list."""
+  z_in: [Float!]
+
+  """All values that are not contained in given list."""
+  z_not_in: [Float!]
+
+  """All values less than the given value."""
+  z_lt: Float
+
+  """All values less than or equal the given value."""
+  z_lte: Float
+
+  """All values greater than the given value."""
+  z_gt: Float
+
+  """All values greater than or equal the given value."""
+  z_gte: Float
+  cameraSettingses_every: CameraSettingsWhereInput
+  cameraSettingses_some: CameraSettingsWhereInput
+  cameraSettingses_none: CameraSettingsWhereInput
+  dataOverlays_every: DataOverlayWhereInput
+  dataOverlays_some: DataOverlayWhereInput
+  dataOverlays_none: DataOverlayWhereInput
+  semanticLayoutNodes_every: SemanticLayoutNodeWhereInput
+  semanticLayoutNodes_some: SemanticLayoutNodeWhereInput
+  semanticLayoutNodes_none: SemanticLayoutNodeWhereInput
+}
+
+input PositionWhereUniqueInput {
+  id: ID
+}
+
+type Query {
+  aggregations(where: AggregationWhereInput, orderBy: AggregationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Aggregation]!
+  assetsInScenes(where: AssetsInSceneWhereInput, orderBy: AssetsInSceneOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [AssetsInScene]!
+  cameraSettingses(where: CameraSettingsWhereInput, orderBy: CameraSettingsOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [CameraSettings]!
+  dataOverlays(where: DataOverlayWhereInput, orderBy: DataOverlayOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [DataOverlay]!
+  files(where: FileWhereInput, orderBy: FileOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [File]!
+  sourceServices(where: SourceServiceWhereInput, orderBy: SourceServiceOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [SourceService]!
+  physicalAssets(where: PhysicalAssetWhereInput, orderBy: PhysicalAssetOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [PhysicalAsset]!
+  physicalModels(where: PhysicalModelWhereInput, orderBy: PhysicalModelOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [PhysicalModel]!
+  positions(where: PositionWhereInput, orderBy: PositionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Position]!
+  queryPhysicalModels(where: QueryPhysicalModelWhereInput, orderBy: QueryPhysicalModelOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [QueryPhysicalModel]!
+  scales(where: ScaleWhereInput, orderBy: ScaleOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Scale]!
+  scenes(where: SceneWhereInput, orderBy: SceneOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Scene]!
+  semanticLayoutNodes(where: SemanticLayoutNodeWhereInput, orderBy: SemanticLayoutNodeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [SemanticLayoutNode]!
+  users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
+  aggregation(where: AggregationWhereUniqueInput!): Aggregation
+  assetsInScene(where: AssetsInSceneWhereUniqueInput!): AssetsInScene
+  cameraSettings(where: CameraSettingsWhereUniqueInput!): CameraSettings
+  dataOverlay(where: DataOverlayWhereUniqueInput!): DataOverlay
+  file(where: FileWhereUniqueInput!): File
+  sourceService(where: SourceServiceWhereUniqueInput!): SourceService
+  physicalAsset(where: PhysicalAssetWhereUniqueInput!): PhysicalAsset
+  physicalModel(where: PhysicalModelWhereUniqueInput!): PhysicalModel
+  position(where: PositionWhereUniqueInput!): Position
+  queryPhysicalModel(where: QueryPhysicalModelWhereUniqueInput!): QueryPhysicalModel
+  scale(where: ScaleWhereUniqueInput!): Scale
+  scene(where: SceneWhereUniqueInput!): Scene
+  semanticLayoutNode(where: SemanticLayoutNodeWhereUniqueInput!): SemanticLayoutNode
+  user(where: UserWhereUniqueInput!): User
+  aggregationsConnection(where: AggregationWhereInput, orderBy: AggregationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): AggregationConnection!
+  assetsInScenesConnection(where: AssetsInSceneWhereInput, orderBy: AssetsInSceneOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): AssetsInSceneConnection!
+  cameraSettingsesConnection(where: CameraSettingsWhereInput, orderBy: CameraSettingsOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CameraSettingsConnection!
+  dataOverlaysConnection(where: DataOverlayWhereInput, orderBy: DataOverlayOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): DataOverlayConnection!
+  filesConnection(where: FileWhereInput, orderBy: FileOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): FileConnection!
+  sourceServicesConnection(where: SourceServiceWhereInput, orderBy: SourceServiceOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): SourceServiceConnection!
+  physicalAssetsConnection(where: PhysicalAssetWhereInput, orderBy: PhysicalAssetOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PhysicalAssetConnection!
+  physicalModelsConnection(where: PhysicalModelWhereInput, orderBy: PhysicalModelOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PhysicalModelConnection!
+  positionsConnection(where: PositionWhereInput, orderBy: PositionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PositionConnection!
+  queryPhysicalModelsConnection(where: QueryPhysicalModelWhereInput, orderBy: QueryPhysicalModelOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): QueryPhysicalModelConnection!
+  scalesConnection(where: ScaleWhereInput, orderBy: ScaleOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ScaleConnection!
+  scenesConnection(where: SceneWhereInput, orderBy: SceneOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): SceneConnection!
+  semanticLayoutNodesConnection(where: SemanticLayoutNodeWhereInput, orderBy: SemanticLayoutNodeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): SemanticLayoutNodeConnection!
+  usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
+
+  """Fetches an object given its ID"""
+  node(
+    """The ID of an object"""
+    id: ID!
+  ): Node
+}
+
+type QueryPhysicalModel implements Node {
+  id: ID!
+  name: String!
+  queryId: String!
+}
+
+"""A connection to a list of items."""
+type QueryPhysicalModelConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [QueryPhysicalModelEdge]!
+  aggregate: AggregateQueryPhysicalModel!
+}
+
+input QueryPhysicalModelCreateInput {
+  name: String!
+  queryId: String!
+}
+
+"""An edge in a connection."""
+type QueryPhysicalModelEdge {
+  """The item at the end of the edge."""
+  node: QueryPhysicalModel!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum QueryPhysicalModelOrderByInput {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  queryId_ASC
+  queryId_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type QueryPhysicalModelPreviousValues {
+  id: ID!
+  name: String!
+  queryId: String!
+}
+
+type QueryPhysicalModelSubscriptionPayload {
+  mutation: MutationType!
+  node: QueryPhysicalModel
+  updatedFields: [String!]
+  previousValues: QueryPhysicalModelPreviousValues
+}
+
+input QueryPhysicalModelSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [QueryPhysicalModelSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [QueryPhysicalModelSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [QueryPhysicalModelSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: QueryPhysicalModelWhereInput
+}
+
+input QueryPhysicalModelUpdateInput {
+  name: String
+  queryId: String
+}
+
+input QueryPhysicalModelWhereInput {
+  """Logical AND on all given filters."""
+  AND: [QueryPhysicalModelWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [QueryPhysicalModelWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [QueryPhysicalModelWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+  queryId: String
+
+  """All values that are not equal to given value."""
+  queryId_not: String
+
+  """All values that are contained in given list."""
+  queryId_in: [String!]
+
+  """All values that are not contained in given list."""
+  queryId_not_in: [String!]
+
+  """All values less than the given value."""
+  queryId_lt: String
+
+  """All values less than or equal the given value."""
+  queryId_lte: String
+
+  """All values greater than the given value."""
+  queryId_gt: String
+
+  """All values greater than or equal the given value."""
+  queryId_gte: String
+
+  """All values containing the given string."""
+  queryId_contains: String
+
+  """All values not containing the given string."""
+  queryId_not_contains: String
+
+  """All values starting with the given string."""
+  queryId_starts_with: String
+
+  """All values not starting with the given string."""
+  queryId_not_starts_with: String
+
+  """All values ending with the given string."""
+  queryId_ends_with: String
+
+  """All values not ending with the given string."""
+  queryId_not_ends_with: String
+}
+
+input QueryPhysicalModelWhereUniqueInput {
+  id: ID
+}
+
+type Scale implements Node {
+  dataOverlays(where: DataOverlayWhereInput, orderBy: DataOverlayOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [DataOverlay!]
+  id: ID!
+  semanticLayoutNodes(where: SemanticLayoutNodeWhereInput, orderBy: SemanticLayoutNodeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [SemanticLayoutNode!]
+  x: Float
+  y: Float
+  z: Float
+}
+
+"""A connection to a list of items."""
+type ScaleConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [ScaleEdge]!
+  aggregate: AggregateScale!
+}
+
+input ScaleCreateInput {
+  x: Float
+  y: Float
+  z: Float
+  dataOverlays: DataOverlayCreateManyWithoutScaleInput
+  semanticLayoutNodes: SemanticLayoutNodeCreateManyWithoutScaleInput
+}
+
+input ScaleCreateOneWithoutDataOverlaysInput {
+  create: ScaleCreateWithoutDataOverlaysInput
+  connect: ScaleWhereUniqueInput
+}
+
+input ScaleCreateOneWithoutSemanticLayoutNodesInput {
+  create: ScaleCreateWithoutSemanticLayoutNodesInput
+  connect: ScaleWhereUniqueInput
+}
+
+input ScaleCreateWithoutDataOverlaysInput {
+  x: Float
+  y: Float
+  z: Float
+  semanticLayoutNodes: SemanticLayoutNodeCreateManyWithoutScaleInput
+}
+
+input ScaleCreateWithoutSemanticLayoutNodesInput {
+  x: Float
+  y: Float
+  z: Float
+  dataOverlays: DataOverlayCreateManyWithoutScaleInput
+}
+
+"""An edge in a connection."""
+type ScaleEdge {
+  """The item at the end of the edge."""
+  node: Scale!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum ScaleOrderByInput {
+  id_ASC
+  id_DESC
+  x_ASC
+  x_DESC
+  y_ASC
+  y_DESC
+  z_ASC
+  z_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type ScalePreviousValues {
+  id: ID!
+  x: Float
+  y: Float
+  z: Float
+}
+
+type ScaleSubscriptionPayload {
+  mutation: MutationType!
+  node: Scale
+  updatedFields: [String!]
+  previousValues: ScalePreviousValues
+}
+
+input ScaleSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [ScaleSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [ScaleSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [ScaleSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: ScaleWhereInput
+}
+
+input ScaleUpdateInput {
+  x: Float
+  y: Float
+  z: Float
+  dataOverlays: DataOverlayUpdateManyWithoutScaleInput
+  semanticLayoutNodes: SemanticLayoutNodeUpdateManyWithoutScaleInput
+}
+
+input ScaleUpdateOneWithoutDataOverlaysInput {
+  create: ScaleCreateWithoutDataOverlaysInput
+  connect: ScaleWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: ScaleUpdateWithoutDataOverlaysDataInput
+  upsert: ScaleUpsertWithoutDataOverlaysInput
+}
+
+input ScaleUpdateOneWithoutSemanticLayoutNodesInput {
+  create: ScaleCreateWithoutSemanticLayoutNodesInput
+  connect: ScaleWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: ScaleUpdateWithoutSemanticLayoutNodesDataInput
+  upsert: ScaleUpsertWithoutSemanticLayoutNodesInput
+}
+
+input ScaleUpdateWithoutDataOverlaysDataInput {
+  x: Float
+  y: Float
+  z: Float
+  semanticLayoutNodes: SemanticLayoutNodeUpdateManyWithoutScaleInput
+}
+
+input ScaleUpdateWithoutSemanticLayoutNodesDataInput {
+  x: Float
+  y: Float
+  z: Float
+  dataOverlays: DataOverlayUpdateManyWithoutScaleInput
+}
+
+input ScaleUpsertWithoutDataOverlaysInput {
+  update: ScaleUpdateWithoutDataOverlaysDataInput!
+  create: ScaleCreateWithoutDataOverlaysInput!
+}
+
+input ScaleUpsertWithoutSemanticLayoutNodesInput {
+  update: ScaleUpdateWithoutSemanticLayoutNodesDataInput!
+  create: ScaleCreateWithoutSemanticLayoutNodesInput!
+}
+
+input ScaleWhereInput {
+  """Logical AND on all given filters."""
+  AND: [ScaleWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [ScaleWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [ScaleWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  x: Float
+
+  """All values that are not equal to given value."""
+  x_not: Float
+
+  """All values that are contained in given list."""
+  x_in: [Float!]
+
+  """All values that are not contained in given list."""
+  x_not_in: [Float!]
+
+  """All values less than the given value."""
+  x_lt: Float
+
+  """All values less than or equal the given value."""
+  x_lte: Float
+
+  """All values greater than the given value."""
+  x_gt: Float
+
+  """All values greater than or equal the given value."""
+  x_gte: Float
+  y: Float
+
+  """All values that are not equal to given value."""
+  y_not: Float
+
+  """All values that are contained in given list."""
+  y_in: [Float!]
+
+  """All values that are not contained in given list."""
+  y_not_in: [Float!]
+
+  """All values less than the given value."""
+  y_lt: Float
+
+  """All values less than or equal the given value."""
+  y_lte: Float
+
+  """All values greater than the given value."""
+  y_gt: Float
+
+  """All values greater than or equal the given value."""
+  y_gte: Float
+  z: Float
+
+  """All values that are not equal to given value."""
+  z_not: Float
+
+  """All values that are contained in given list."""
+  z_in: [Float!]
+
+  """All values that are not contained in given list."""
+  z_not_in: [Float!]
+
+  """All values less than the given value."""
+  z_lt: Float
+
+  """All values less than or equal the given value."""
+  z_lte: Float
+
+  """All values greater than the given value."""
+  z_gt: Float
+
+  """All values greater than or equal the given value."""
+  z_gte: Float
+  dataOverlays_every: DataOverlayWhereInput
+  dataOverlays_some: DataOverlayWhereInput
+  dataOverlays_none: DataOverlayWhereInput
+  semanticLayoutNodes_every: SemanticLayoutNodeWhereInput
+  semanticLayoutNodes_some: SemanticLayoutNodeWhereInput
+  semanticLayoutNodes_none: SemanticLayoutNodeWhereInput
+}
+
+input ScaleWhereUniqueInput {
+  id: ID
+}
+
+type Scene implements Node {
+  cameraSettings(where: CameraSettingsWhereInput): CameraSettings
+  containerNode(where: SemanticLayoutNodeWhereInput): SemanticLayoutNode
+  dataOverlays(where: DataOverlayWhereInput, orderBy: DataOverlayOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [DataOverlay!]
+  id: ID!
+  sourceService(where: SourceServiceWhereInput): SourceService
+  name: String!
+  physicalModels(where: PhysicalModelWhereInput, orderBy: PhysicalModelOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [PhysicalModel!]
+  semanticLayoutNodes(where: SemanticLayoutNodeWhereInput, orderBy: SemanticLayoutNodeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [SemanticLayoutNode!]
+}
+
+"""A connection to a list of items."""
+type SceneConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [SceneEdge]!
+  aggregate: AggregateScene!
+}
+
+input SceneCreateInput {
+  name: String!
+  cameraSettings: CameraSettingsCreateOneWithoutScenesInput
+  containerNode: SemanticLayoutNodeCreateOneWithoutScenesInput
+  dataOverlays: DataOverlayCreateManyWithoutScenesInput
+  sourceService: SourceServiceCreateOneWithoutScenesInput
+  physicalModels: PhysicalModelCreateManyWithoutScenesInput
+  semanticLayoutNodes: SemanticLayoutNodeCreateManyWithoutSceneInput
+}
+
+input SceneCreateManyWithoutCameraSettingsInput {
+  create: [SceneCreateWithoutCameraSettingsInput!]
+  connect: [SceneWhereUniqueInput!]
+}
+
+input SceneCreateManyWithoutContainerNodeInput {
+  create: [SceneCreateWithoutContainerNodeInput!]
+  connect: [SceneWhereUniqueInput!]
+}
+
+input SceneCreateManyWithoutDataOverlaysInput {
+  create: [SceneCreateWithoutDataOverlaysInput!]
+  connect: [SceneWhereUniqueInput!]
+}
+
+input SceneCreateManyWithoutPhysicalModelsInput {
+  create: [SceneCreateWithoutPhysicalModelsInput!]
+  connect: [SceneWhereUniqueInput!]
+}
+
+input SceneCreateManyWithoutSourceServiceInput {
+  create: [SceneCreateWithoutSourceServiceInput!]
+  connect: [SceneWhereUniqueInput!]
+}
+
+input SceneCreateOneWithoutSemanticLayoutNodesInput {
+  create: SceneCreateWithoutSemanticLayoutNodesInput
+  connect: SceneWhereUniqueInput
+}
+
+input SceneCreateWithoutCameraSettingsInput {
+  name: String!
+  containerNode: SemanticLayoutNodeCreateOneWithoutScenesInput
+  dataOverlays: DataOverlayCreateManyWithoutScenesInput
+  sourceService: SourceServiceCreateOneWithoutScenesInput
+  physicalModels: PhysicalModelCreateManyWithoutScenesInput
+  semanticLayoutNodes: SemanticLayoutNodeCreateManyWithoutSceneInput
+}
+
+input SceneCreateWithoutContainerNodeInput {
+  name: String!
+  cameraSettings: CameraSettingsCreateOneWithoutScenesInput
+  dataOverlays: DataOverlayCreateManyWithoutScenesInput
+  sourceService: SourceServiceCreateOneWithoutScenesInput
+  physicalModels: PhysicalModelCreateManyWithoutScenesInput
+  semanticLayoutNodes: SemanticLayoutNodeCreateManyWithoutSceneInput
+}
+
+input SceneCreateWithoutDataOverlaysInput {
+  name: String!
+  cameraSettings: CameraSettingsCreateOneWithoutScenesInput
+  containerNode: SemanticLayoutNodeCreateOneWithoutScenesInput
+  sourceService: SourceServiceCreateOneWithoutScenesInput
+  physicalModels: PhysicalModelCreateManyWithoutScenesInput
+  semanticLayoutNodes: SemanticLayoutNodeCreateManyWithoutSceneInput
+}
+
+input SceneCreateWithoutPhysicalModelsInput {
+  name: String!
+  cameraSettings: CameraSettingsCreateOneWithoutScenesInput
+  containerNode: SemanticLayoutNodeCreateOneWithoutScenesInput
+  dataOverlays: DataOverlayCreateManyWithoutScenesInput
+  sourceService: SourceServiceCreateOneWithoutScenesInput
+  semanticLayoutNodes: SemanticLayoutNodeCreateManyWithoutSceneInput
+}
+
+input SceneCreateWithoutSemanticLayoutNodesInput {
+  name: String!
+  cameraSettings: CameraSettingsCreateOneWithoutScenesInput
+  containerNode: SemanticLayoutNodeCreateOneWithoutScenesInput
+  dataOverlays: DataOverlayCreateManyWithoutScenesInput
+  sourceService: SourceServiceCreateOneWithoutScenesInput
+  physicalModels: PhysicalModelCreateManyWithoutScenesInput
+}
+
+input SceneCreateWithoutSourceServiceInput {
+  name: String!
+  cameraSettings: CameraSettingsCreateOneWithoutScenesInput
+  containerNode: SemanticLayoutNodeCreateOneWithoutScenesInput
+  dataOverlays: DataOverlayCreateManyWithoutScenesInput
+  physicalModels: PhysicalModelCreateManyWithoutScenesInput
+  semanticLayoutNodes: SemanticLayoutNodeCreateManyWithoutSceneInput
+}
+
+"""An edge in a connection."""
+type SceneEdge {
+  """The item at the end of the edge."""
+  node: Scene!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum SceneOrderByInput {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type ScenePreviousValues {
+  id: ID!
+  name: String!
+}
+
+type SceneSubscriptionPayload {
+  mutation: MutationType!
+  node: Scene
+  updatedFields: [String!]
+  previousValues: ScenePreviousValues
+}
+
+input SceneSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [SceneSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [SceneSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [SceneSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: SceneWhereInput
+}
+
+input SceneUpdateInput {
+  name: String
+  cameraSettings: CameraSettingsUpdateOneWithoutScenesInput
+  containerNode: SemanticLayoutNodeUpdateOneWithoutScenesInput
+  dataOverlays: DataOverlayUpdateManyWithoutScenesInput
+  sourceService: SourceServiceUpdateOneWithoutScenesInput
+  physicalModels: PhysicalModelUpdateManyWithoutScenesInput
+  semanticLayoutNodes: SemanticLayoutNodeUpdateManyWithoutSceneInput
+}
+
+input SceneUpdateManyWithoutCameraSettingsInput {
+  create: [SceneCreateWithoutCameraSettingsInput!]
+  connect: [SceneWhereUniqueInput!]
+  disconnect: [SceneWhereUniqueInput!]
+  delete: [SceneWhereUniqueInput!]
+  update: [SceneUpdateWithWhereUniqueWithoutCameraSettingsInput!]
+  upsert: [SceneUpsertWithWhereUniqueWithoutCameraSettingsInput!]
+}
+
+input SceneUpdateManyWithoutContainerNodeInput {
+  create: [SceneCreateWithoutContainerNodeInput!]
+  connect: [SceneWhereUniqueInput!]
+  disconnect: [SceneWhereUniqueInput!]
+  delete: [SceneWhereUniqueInput!]
+  update: [SceneUpdateWithWhereUniqueWithoutContainerNodeInput!]
+  upsert: [SceneUpsertWithWhereUniqueWithoutContainerNodeInput!]
+}
+
+input SceneUpdateManyWithoutDataOverlaysInput {
+  create: [SceneCreateWithoutDataOverlaysInput!]
+  connect: [SceneWhereUniqueInput!]
+  disconnect: [SceneWhereUniqueInput!]
+  delete: [SceneWhereUniqueInput!]
+  update: [SceneUpdateWithWhereUniqueWithoutDataOverlaysInput!]
+  upsert: [SceneUpsertWithWhereUniqueWithoutDataOverlaysInput!]
+}
+
+input SceneUpdateManyWithoutPhysicalModelsInput {
+  create: [SceneCreateWithoutPhysicalModelsInput!]
+  connect: [SceneWhereUniqueInput!]
+  disconnect: [SceneWhereUniqueInput!]
+  delete: [SceneWhereUniqueInput!]
+  update: [SceneUpdateWithWhereUniqueWithoutPhysicalModelsInput!]
+  upsert: [SceneUpsertWithWhereUniqueWithoutPhysicalModelsInput!]
+}
+
+input SceneUpdateManyWithoutSourceServiceInput {
+  create: [SceneCreateWithoutSourceServiceInput!]
+  connect: [SceneWhereUniqueInput!]
+  disconnect: [SceneWhereUniqueInput!]
+  delete: [SceneWhereUniqueInput!]
+  update: [SceneUpdateWithWhereUniqueWithoutSourceServiceInput!]
+  upsert: [SceneUpsertWithWhereUniqueWithoutSourceServiceInput!]
+}
+
+input SceneUpdateOneWithoutSemanticLayoutNodesInput {
+  create: SceneCreateWithoutSemanticLayoutNodesInput
+  connect: SceneWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: SceneUpdateWithoutSemanticLayoutNodesDataInput
+  upsert: SceneUpsertWithoutSemanticLayoutNodesInput
+}
+
+input SceneUpdateWithoutCameraSettingsDataInput {
+  name: String
+  containerNode: SemanticLayoutNodeUpdateOneWithoutScenesInput
+  dataOverlays: DataOverlayUpdateManyWithoutScenesInput
+  sourceService: SourceServiceUpdateOneWithoutScenesInput
+  physicalModels: PhysicalModelUpdateManyWithoutScenesInput
+  semanticLayoutNodes: SemanticLayoutNodeUpdateManyWithoutSceneInput
+}
+
+input SceneUpdateWithoutContainerNodeDataInput {
+  name: String
+  cameraSettings: CameraSettingsUpdateOneWithoutScenesInput
+  dataOverlays: DataOverlayUpdateManyWithoutScenesInput
+  sourceService: SourceServiceUpdateOneWithoutScenesInput
+  physicalModels: PhysicalModelUpdateManyWithoutScenesInput
+  semanticLayoutNodes: SemanticLayoutNodeUpdateManyWithoutSceneInput
+}
+
+input SceneUpdateWithoutDataOverlaysDataInput {
+  name: String
+  cameraSettings: CameraSettingsUpdateOneWithoutScenesInput
+  containerNode: SemanticLayoutNodeUpdateOneWithoutScenesInput
+  sourceService: SourceServiceUpdateOneWithoutScenesInput
+  physicalModels: PhysicalModelUpdateManyWithoutScenesInput
+  semanticLayoutNodes: SemanticLayoutNodeUpdateManyWithoutSceneInput
+}
+
+input SceneUpdateWithoutPhysicalModelsDataInput {
+  name: String
+  cameraSettings: CameraSettingsUpdateOneWithoutScenesInput
+  containerNode: SemanticLayoutNodeUpdateOneWithoutScenesInput
+  dataOverlays: DataOverlayUpdateManyWithoutScenesInput
+  sourceService: SourceServiceUpdateOneWithoutScenesInput
+  semanticLayoutNodes: SemanticLayoutNodeUpdateManyWithoutSceneInput
+}
+
+input SceneUpdateWithoutSemanticLayoutNodesDataInput {
+  name: String
+  cameraSettings: CameraSettingsUpdateOneWithoutScenesInput
+  containerNode: SemanticLayoutNodeUpdateOneWithoutScenesInput
+  dataOverlays: DataOverlayUpdateManyWithoutScenesInput
+  sourceService: SourceServiceUpdateOneWithoutScenesInput
+  physicalModels: PhysicalModelUpdateManyWithoutScenesInput
+}
+
+input SceneUpdateWithoutSourceServiceDataInput {
+  name: String
+  cameraSettings: CameraSettingsUpdateOneWithoutScenesInput
+  containerNode: SemanticLayoutNodeUpdateOneWithoutScenesInput
+  dataOverlays: DataOverlayUpdateManyWithoutScenesInput
+  physicalModels: PhysicalModelUpdateManyWithoutScenesInput
+  semanticLayoutNodes: SemanticLayoutNodeUpdateManyWithoutSceneInput
+}
+
+input SceneUpdateWithWhereUniqueWithoutCameraSettingsInput {
+  where: SceneWhereUniqueInput!
+  data: SceneUpdateWithoutCameraSettingsDataInput!
+}
+
+input SceneUpdateWithWhereUniqueWithoutContainerNodeInput {
+  where: SceneWhereUniqueInput!
+  data: SceneUpdateWithoutContainerNodeDataInput!
+}
+
+input SceneUpdateWithWhereUniqueWithoutDataOverlaysInput {
+  where: SceneWhereUniqueInput!
+  data: SceneUpdateWithoutDataOverlaysDataInput!
+}
+
+input SceneUpdateWithWhereUniqueWithoutPhysicalModelsInput {
+  where: SceneWhereUniqueInput!
+  data: SceneUpdateWithoutPhysicalModelsDataInput!
+}
+
+input SceneUpdateWithWhereUniqueWithoutSourceServiceInput {
+  where: SceneWhereUniqueInput!
+  data: SceneUpdateWithoutSourceServiceDataInput!
+}
+
+input SceneUpsertWithoutSemanticLayoutNodesInput {
+  update: SceneUpdateWithoutSemanticLayoutNodesDataInput!
+  create: SceneCreateWithoutSemanticLayoutNodesInput!
+}
+
+input SceneUpsertWithWhereUniqueWithoutCameraSettingsInput {
+  where: SceneWhereUniqueInput!
+  update: SceneUpdateWithoutCameraSettingsDataInput!
+  create: SceneCreateWithoutCameraSettingsInput!
+}
+
+input SceneUpsertWithWhereUniqueWithoutContainerNodeInput {
+  where: SceneWhereUniqueInput!
+  update: SceneUpdateWithoutContainerNodeDataInput!
+  create: SceneCreateWithoutContainerNodeInput!
+}
+
+input SceneUpsertWithWhereUniqueWithoutDataOverlaysInput {
+  where: SceneWhereUniqueInput!
+  update: SceneUpdateWithoutDataOverlaysDataInput!
+  create: SceneCreateWithoutDataOverlaysInput!
+}
+
+input SceneUpsertWithWhereUniqueWithoutPhysicalModelsInput {
+  where: SceneWhereUniqueInput!
+  update: SceneUpdateWithoutPhysicalModelsDataInput!
+  create: SceneCreateWithoutPhysicalModelsInput!
+}
+
+input SceneUpsertWithWhereUniqueWithoutSourceServiceInput {
+  where: SceneWhereUniqueInput!
+  update: SceneUpdateWithoutSourceServiceDataInput!
+  create: SceneCreateWithoutSourceServiceInput!
+}
+
+input SceneWhereInput {
+  """Logical AND on all given filters."""
+  AND: [SceneWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [SceneWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [SceneWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+  cameraSettings: CameraSettingsWhereInput
+  containerNode: SemanticLayoutNodeWhereInput
+  dataOverlays_every: DataOverlayWhereInput
+  dataOverlays_some: DataOverlayWhereInput
+  dataOverlays_none: DataOverlayWhereInput
+  sourceService: SourceServiceWhereInput
+  physicalModels_every: PhysicalModelWhereInput
+  physicalModels_some: PhysicalModelWhereInput
+  physicalModels_none: PhysicalModelWhereInput
+  semanticLayoutNodes_every: SemanticLayoutNodeWhereInput
+  semanticLayoutNodes_some: SemanticLayoutNodeWhereInput
+  semanticLayoutNodes_none: SemanticLayoutNodeWhereInput
+}
+
+input SceneWhereUniqueInput {
+  id: ID
+}
+
+type SemanticLayoutNode implements Node {
+  id: ID!
+  name: String
+  physicalModel(where: PhysicalModelWhereInput): PhysicalModel
+  position(where: PositionWhereInput): Position
+  quantity: Int
+  scale(where: ScaleWhereInput): Scale
+  scene(where: SceneWhereInput): Scene
+  scenes(where: SceneWhereInput, orderBy: SceneOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Scene!]
+}
+
+"""A connection to a list of items."""
+type SemanticLayoutNodeConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [SemanticLayoutNodeEdge]!
+  aggregate: AggregateSemanticLayoutNode!
+}
+
+input SemanticLayoutNodeCreateInput {
+  name: String
+  quantity: Int
+  physicalModel: PhysicalModelCreateOneWithoutSemanticLayoutNodesInput
+  position: PositionCreateOneWithoutSemanticLayoutNodesInput
+  scale: ScaleCreateOneWithoutSemanticLayoutNodesInput
+  scene: SceneCreateOneWithoutSemanticLayoutNodesInput
+  scenes: SceneCreateManyWithoutContainerNodeInput
+}
+
+input SemanticLayoutNodeCreateManyWithoutPhysicalModelInput {
+  create: [SemanticLayoutNodeCreateWithoutPhysicalModelInput!]
+  connect: [SemanticLayoutNodeWhereUniqueInput!]
+}
+
+input SemanticLayoutNodeCreateManyWithoutPositionInput {
+  create: [SemanticLayoutNodeCreateWithoutPositionInput!]
+  connect: [SemanticLayoutNodeWhereUniqueInput!]
+}
+
+input SemanticLayoutNodeCreateManyWithoutScaleInput {
+  create: [SemanticLayoutNodeCreateWithoutScaleInput!]
+  connect: [SemanticLayoutNodeWhereUniqueInput!]
+}
+
+input SemanticLayoutNodeCreateManyWithoutSceneInput {
+  create: [SemanticLayoutNodeCreateWithoutSceneInput!]
+  connect: [SemanticLayoutNodeWhereUniqueInput!]
+}
+
+input SemanticLayoutNodeCreateOneWithoutScenesInput {
+  create: SemanticLayoutNodeCreateWithoutScenesInput
+  connect: SemanticLayoutNodeWhereUniqueInput
+}
+
+input SemanticLayoutNodeCreateWithoutPhysicalModelInput {
+  name: String
+  quantity: Int
+  position: PositionCreateOneWithoutSemanticLayoutNodesInput
+  scale: ScaleCreateOneWithoutSemanticLayoutNodesInput
+  scene: SceneCreateOneWithoutSemanticLayoutNodesInput
+  scenes: SceneCreateManyWithoutContainerNodeInput
+}
+
+input SemanticLayoutNodeCreateWithoutPositionInput {
+  name: String
+  quantity: Int
+  physicalModel: PhysicalModelCreateOneWithoutSemanticLayoutNodesInput
+  scale: ScaleCreateOneWithoutSemanticLayoutNodesInput
+  scene: SceneCreateOneWithoutSemanticLayoutNodesInput
+  scenes: SceneCreateManyWithoutContainerNodeInput
+}
+
+input SemanticLayoutNodeCreateWithoutScaleInput {
+  name: String
+  quantity: Int
+  physicalModel: PhysicalModelCreateOneWithoutSemanticLayoutNodesInput
+  position: PositionCreateOneWithoutSemanticLayoutNodesInput
+  scene: SceneCreateOneWithoutSemanticLayoutNodesInput
+  scenes: SceneCreateManyWithoutContainerNodeInput
+}
+
+input SemanticLayoutNodeCreateWithoutSceneInput {
+  name: String
+  quantity: Int
+  physicalModel: PhysicalModelCreateOneWithoutSemanticLayoutNodesInput
+  position: PositionCreateOneWithoutSemanticLayoutNodesInput
+  scale: ScaleCreateOneWithoutSemanticLayoutNodesInput
+  scenes: SceneCreateManyWithoutContainerNodeInput
+}
+
+input SemanticLayoutNodeCreateWithoutScenesInput {
+  name: String
+  quantity: Int
+  physicalModel: PhysicalModelCreateOneWithoutSemanticLayoutNodesInput
+  position: PositionCreateOneWithoutSemanticLayoutNodesInput
+  scale: ScaleCreateOneWithoutSemanticLayoutNodesInput
+  scene: SceneCreateOneWithoutSemanticLayoutNodesInput
+}
+
+"""An edge in a connection."""
+type SemanticLayoutNodeEdge {
+  """The item at the end of the edge."""
+  node: SemanticLayoutNode!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum SemanticLayoutNodeOrderByInput {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  quantity_ASC
+  quantity_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type SemanticLayoutNodePreviousValues {
+  id: ID!
+  name: String
+  quantity: Int
+}
+
+type SemanticLayoutNodeSubscriptionPayload {
+  mutation: MutationType!
+  node: SemanticLayoutNode
+  updatedFields: [String!]
+  previousValues: SemanticLayoutNodePreviousValues
+}
+
+input SemanticLayoutNodeSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [SemanticLayoutNodeSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [SemanticLayoutNodeSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [SemanticLayoutNodeSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: SemanticLayoutNodeWhereInput
+}
+
+input SemanticLayoutNodeUpdateInput {
+  name: String
+  quantity: Int
+  physicalModel: PhysicalModelUpdateOneWithoutSemanticLayoutNodesInput
+  position: PositionUpdateOneWithoutSemanticLayoutNodesInput
+  scale: ScaleUpdateOneWithoutSemanticLayoutNodesInput
+  scene: SceneUpdateOneWithoutSemanticLayoutNodesInput
+  scenes: SceneUpdateManyWithoutContainerNodeInput
+}
+
+input SemanticLayoutNodeUpdateManyWithoutPhysicalModelInput {
+  create: [SemanticLayoutNodeCreateWithoutPhysicalModelInput!]
+  connect: [SemanticLayoutNodeWhereUniqueInput!]
+  disconnect: [SemanticLayoutNodeWhereUniqueInput!]
+  delete: [SemanticLayoutNodeWhereUniqueInput!]
+  update: [SemanticLayoutNodeUpdateWithWhereUniqueWithoutPhysicalModelInput!]
+  upsert: [SemanticLayoutNodeUpsertWithWhereUniqueWithoutPhysicalModelInput!]
+}
+
+input SemanticLayoutNodeUpdateManyWithoutPositionInput {
+  create: [SemanticLayoutNodeCreateWithoutPositionInput!]
+  connect: [SemanticLayoutNodeWhereUniqueInput!]
+  disconnect: [SemanticLayoutNodeWhereUniqueInput!]
+  delete: [SemanticLayoutNodeWhereUniqueInput!]
+  update: [SemanticLayoutNodeUpdateWithWhereUniqueWithoutPositionInput!]
+  upsert: [SemanticLayoutNodeUpsertWithWhereUniqueWithoutPositionInput!]
+}
+
+input SemanticLayoutNodeUpdateManyWithoutScaleInput {
+  create: [SemanticLayoutNodeCreateWithoutScaleInput!]
+  connect: [SemanticLayoutNodeWhereUniqueInput!]
+  disconnect: [SemanticLayoutNodeWhereUniqueInput!]
+  delete: [SemanticLayoutNodeWhereUniqueInput!]
+  update: [SemanticLayoutNodeUpdateWithWhereUniqueWithoutScaleInput!]
+  upsert: [SemanticLayoutNodeUpsertWithWhereUniqueWithoutScaleInput!]
+}
+
+input SemanticLayoutNodeUpdateManyWithoutSceneInput {
+  create: [SemanticLayoutNodeCreateWithoutSceneInput!]
+  connect: [SemanticLayoutNodeWhereUniqueInput!]
+  disconnect: [SemanticLayoutNodeWhereUniqueInput!]
+  delete: [SemanticLayoutNodeWhereUniqueInput!]
+  update: [SemanticLayoutNodeUpdateWithWhereUniqueWithoutSceneInput!]
+  upsert: [SemanticLayoutNodeUpsertWithWhereUniqueWithoutSceneInput!]
+}
+
+input SemanticLayoutNodeUpdateOneWithoutScenesInput {
+  create: SemanticLayoutNodeCreateWithoutScenesInput
+  connect: SemanticLayoutNodeWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: SemanticLayoutNodeUpdateWithoutScenesDataInput
+  upsert: SemanticLayoutNodeUpsertWithoutScenesInput
+}
+
+input SemanticLayoutNodeUpdateWithoutPhysicalModelDataInput {
+  name: String
+  quantity: Int
+  position: PositionUpdateOneWithoutSemanticLayoutNodesInput
+  scale: ScaleUpdateOneWithoutSemanticLayoutNodesInput
+  scene: SceneUpdateOneWithoutSemanticLayoutNodesInput
+  scenes: SceneUpdateManyWithoutContainerNodeInput
+}
+
+input SemanticLayoutNodeUpdateWithoutPositionDataInput {
+  name: String
+  quantity: Int
+  physicalModel: PhysicalModelUpdateOneWithoutSemanticLayoutNodesInput
+  scale: ScaleUpdateOneWithoutSemanticLayoutNodesInput
+  scene: SceneUpdateOneWithoutSemanticLayoutNodesInput
+  scenes: SceneUpdateManyWithoutContainerNodeInput
+}
+
+input SemanticLayoutNodeUpdateWithoutScaleDataInput {
+  name: String
+  quantity: Int
+  physicalModel: PhysicalModelUpdateOneWithoutSemanticLayoutNodesInput
+  position: PositionUpdateOneWithoutSemanticLayoutNodesInput
+  scene: SceneUpdateOneWithoutSemanticLayoutNodesInput
+  scenes: SceneUpdateManyWithoutContainerNodeInput
+}
+
+input SemanticLayoutNodeUpdateWithoutSceneDataInput {
+  name: String
+  quantity: Int
+  physicalModel: PhysicalModelUpdateOneWithoutSemanticLayoutNodesInput
+  position: PositionUpdateOneWithoutSemanticLayoutNodesInput
+  scale: ScaleUpdateOneWithoutSemanticLayoutNodesInput
+  scenes: SceneUpdateManyWithoutContainerNodeInput
+}
+
+input SemanticLayoutNodeUpdateWithoutScenesDataInput {
+  name: String
+  quantity: Int
+  physicalModel: PhysicalModelUpdateOneWithoutSemanticLayoutNodesInput
+  position: PositionUpdateOneWithoutSemanticLayoutNodesInput
+  scale: ScaleUpdateOneWithoutSemanticLayoutNodesInput
+  scene: SceneUpdateOneWithoutSemanticLayoutNodesInput
+}
+
+input SemanticLayoutNodeUpdateWithWhereUniqueWithoutPhysicalModelInput {
+  where: SemanticLayoutNodeWhereUniqueInput!
+  data: SemanticLayoutNodeUpdateWithoutPhysicalModelDataInput!
+}
+
+input SemanticLayoutNodeUpdateWithWhereUniqueWithoutPositionInput {
+  where: SemanticLayoutNodeWhereUniqueInput!
+  data: SemanticLayoutNodeUpdateWithoutPositionDataInput!
+}
+
+input SemanticLayoutNodeUpdateWithWhereUniqueWithoutScaleInput {
+  where: SemanticLayoutNodeWhereUniqueInput!
+  data: SemanticLayoutNodeUpdateWithoutScaleDataInput!
+}
+
+input SemanticLayoutNodeUpdateWithWhereUniqueWithoutSceneInput {
+  where: SemanticLayoutNodeWhereUniqueInput!
+  data: SemanticLayoutNodeUpdateWithoutSceneDataInput!
+}
+
+input SemanticLayoutNodeUpsertWithoutScenesInput {
+  update: SemanticLayoutNodeUpdateWithoutScenesDataInput!
+  create: SemanticLayoutNodeCreateWithoutScenesInput!
+}
+
+input SemanticLayoutNodeUpsertWithWhereUniqueWithoutPhysicalModelInput {
+  where: SemanticLayoutNodeWhereUniqueInput!
+  update: SemanticLayoutNodeUpdateWithoutPhysicalModelDataInput!
+  create: SemanticLayoutNodeCreateWithoutPhysicalModelInput!
+}
+
+input SemanticLayoutNodeUpsertWithWhereUniqueWithoutPositionInput {
+  where: SemanticLayoutNodeWhereUniqueInput!
+  update: SemanticLayoutNodeUpdateWithoutPositionDataInput!
+  create: SemanticLayoutNodeCreateWithoutPositionInput!
+}
+
+input SemanticLayoutNodeUpsertWithWhereUniqueWithoutScaleInput {
+  where: SemanticLayoutNodeWhereUniqueInput!
+  update: SemanticLayoutNodeUpdateWithoutScaleDataInput!
+  create: SemanticLayoutNodeCreateWithoutScaleInput!
+}
+
+input SemanticLayoutNodeUpsertWithWhereUniqueWithoutSceneInput {
+  where: SemanticLayoutNodeWhereUniqueInput!
+  update: SemanticLayoutNodeUpdateWithoutSceneDataInput!
+  create: SemanticLayoutNodeCreateWithoutSceneInput!
+}
+
+input SemanticLayoutNodeWhereInput {
+  """Logical AND on all given filters."""
+  AND: [SemanticLayoutNodeWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [SemanticLayoutNodeWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [SemanticLayoutNodeWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+  quantity: Int
+
+  """All values that are not equal to given value."""
+  quantity_not: Int
+
+  """All values that are contained in given list."""
+  quantity_in: [Int!]
+
+  """All values that are not contained in given list."""
+  quantity_not_in: [Int!]
+
+  """All values less than the given value."""
+  quantity_lt: Int
+
+  """All values less than or equal the given value."""
+  quantity_lte: Int
+
+  """All values greater than the given value."""
+  quantity_gt: Int
+
+  """All values greater than or equal the given value."""
+  quantity_gte: Int
+  physicalModel: PhysicalModelWhereInput
+  position: PositionWhereInput
+  scale: ScaleWhereInput
+  scene: SceneWhereInput
+  scenes_every: SceneWhereInput
+  scenes_some: SceneWhereInput
+  scenes_none: SceneWhereInput
+}
+
+input SemanticLayoutNodeWhereUniqueInput {
+  id: ID
+}
+
+type SourceService implements Node {
+  id: ID!
+  name: String!
+  scenes(where: SceneWhereInput, orderBy: SceneOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Scene!]
+  url: String!
+}
+
+"""A connection to a list of items."""
+type SourceServiceConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [SourceServiceEdge]!
+  aggregate: AggregateSourceService!
+}
+
+input SourceServiceCreateInput {
+  name: String!
+  url: String!
+  scenes: SceneCreateManyWithoutSourceServiceInput
+}
+
+input SourceServiceCreateOneWithoutScenesInput {
+  create: SourceServiceCreateWithoutScenesInput
+  connect: SourceServiceWhereUniqueInput
+}
+
+input SourceServiceCreateWithoutScenesInput {
+  name: String!
+  url: String!
+}
+
+"""An edge in a connection."""
+type SourceServiceEdge {
+  """The item at the end of the edge."""
+  node: SourceService!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum SourceServiceOrderByInput {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  url_ASC
+  url_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type SourceServicePreviousValues {
+  id: ID!
+  name: String!
+  url: String!
+}
+
+type SourceServiceSubscriptionPayload {
+  mutation: MutationType!
+  node: SourceService
+  updatedFields: [String!]
+  previousValues: SourceServicePreviousValues
+}
+
+input SourceServiceSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [SourceServiceSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [SourceServiceSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [SourceServiceSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: SourceServiceWhereInput
+}
+
+input SourceServiceUpdateInput {
+  name: String
+  url: String
+  scenes: SceneUpdateManyWithoutSourceServiceInput
+}
+
+input SourceServiceUpdateOneWithoutScenesInput {
+  create: SourceServiceCreateWithoutScenesInput
+  connect: SourceServiceWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: SourceServiceUpdateWithoutScenesDataInput
+  upsert: SourceServiceUpsertWithoutScenesInput
+}
+
+input SourceServiceUpdateWithoutScenesDataInput {
+  name: String
+  url: String
+}
+
+input SourceServiceUpsertWithoutScenesInput {
+  update: SourceServiceUpdateWithoutScenesDataInput!
+  create: SourceServiceCreateWithoutScenesInput!
+}
+
+input SourceServiceWhereInput {
+  """Logical AND on all given filters."""
+  AND: [SourceServiceWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [SourceServiceWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [SourceServiceWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+  url: String
+
+  """All values that are not equal to given value."""
+  url_not: String
+
+  """All values that are contained in given list."""
+  url_in: [String!]
+
+  """All values that are not contained in given list."""
+  url_not_in: [String!]
+
+  """All values less than the given value."""
+  url_lt: String
+
+  """All values less than or equal the given value."""
+  url_lte: String
+
+  """All values greater than the given value."""
+  url_gt: String
+
+  """All values greater than or equal the given value."""
+  url_gte: String
+
+  """All values containing the given string."""
+  url_contains: String
+
+  """All values not containing the given string."""
+  url_not_contains: String
+
+  """All values starting with the given string."""
+  url_starts_with: String
+
+  """All values not starting with the given string."""
+  url_not_starts_with: String
+
+  """All values ending with the given string."""
+  url_ends_with: String
+
+  """All values not ending with the given string."""
+  url_not_ends_with: String
+  scenes_every: SceneWhereInput
+  scenes_some: SceneWhereInput
+  scenes_none: SceneWhereInput
+}
+
+input SourceServiceWhereUniqueInput {
+  id: ID
+}
+
+type Subscription {
+  aggregation(where: AggregationSubscriptionWhereInput): AggregationSubscriptionPayload
+  assetsInScene(where: AssetsInSceneSubscriptionWhereInput): AssetsInSceneSubscriptionPayload
+  cameraSettings(where: CameraSettingsSubscriptionWhereInput): CameraSettingsSubscriptionPayload
+  dataOverlay(where: DataOverlaySubscriptionWhereInput): DataOverlaySubscriptionPayload
+  file(where: FileSubscriptionWhereInput): FileSubscriptionPayload
+  sourceService(where: SourceServiceSubscriptionWhereInput): SourceServiceSubscriptionPayload
+  physicalAsset(where: PhysicalAssetSubscriptionWhereInput): PhysicalAssetSubscriptionPayload
+  physicalModel(where: PhysicalModelSubscriptionWhereInput): PhysicalModelSubscriptionPayload
+  position(where: PositionSubscriptionWhereInput): PositionSubscriptionPayload
+  queryPhysicalModel(where: QueryPhysicalModelSubscriptionWhereInput): QueryPhysicalModelSubscriptionPayload
+  scale(where: ScaleSubscriptionWhereInput): ScaleSubscriptionPayload
+  scene(where: SceneSubscriptionWhereInput): SceneSubscriptionPayload
+  semanticLayoutNode(where: SemanticLayoutNodeSubscriptionWhereInput): SemanticLayoutNodeSubscriptionPayload
+  user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
+}
+
+type User implements Node {
+  createdAt: DateTime!
+  id: ID!
+  updatedAt: DateTime!
+}
+
+"""A connection to a list of items."""
+type UserConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [UserEdge]!
+  aggregate: AggregateUser!
+}
+
+"""An edge in a connection."""
+type UserEdge {
+  """The item at the end of the edge."""
+  node: User!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum UserOrderByInput {
+  createdAt_ASC
+  createdAt_DESC
+  id_ASC
+  id_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+type UserPreviousValues {
+  createdAt: DateTime!
+  id: ID!
+  updatedAt: DateTime!
+}
+
+type UserSubscriptionPayload {
+  mutation: MutationType!
+  node: User
+  updatedFields: [String!]
+  previousValues: UserPreviousValues
+}
+
+input UserSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [UserSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [UserSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [UserSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: UserWhereInput
+}
+
+input UserWhereInput {
+  """Logical AND on all given filters."""
+  AND: [UserWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [UserWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [UserWhereInput!]
+  createdAt: DateTime
+
+  """All values that are not equal to given value."""
+  createdAt_not: DateTime
+
+  """All values that are contained in given list."""
+  createdAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  createdAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  createdAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  createdAt_lte: DateTime
+
+  """All values greater than the given value."""
+  createdAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  createdAt_gte: DateTime
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  updatedAt: DateTime
+
+  """All values that are not equal to given value."""
+  updatedAt_not: DateTime
+
+  """All values that are contained in given list."""
+  updatedAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  updatedAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  updatedAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  updatedAt_lte: DateTime
+
+  """All values greater than the given value."""
+  updatedAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  updatedAt_gte: DateTime
+}
+
+input UserWhereUniqueInput {
+  id: ID
+}

@@ -1,0 +1,21 @@
+# import Post from "./generated/prisma.graphql"
+
+type Query {
+  info: String
+  
+}
+
+type Mutation {
+  info: String
+  hydrateScenes(uri: String): Scene
+}
+
+type Subscription {
+  info: String
+}
+
+
+type AuthPayload {
+  token: String!
+  user: User!
+}
