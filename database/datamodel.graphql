@@ -44,6 +44,9 @@ type DataOverlay {
   position: Position @relation(name: "DataOverlayOnPosition")
   scale: Scale @relation(name: "DataOverlayOnScale")
   scenes: [Scene!]! @relation(name: "SceneOnDataOverlay")
+  sourceService: SourceService @relation(name: "DataOverlayOnSourceService")
+  sourceQuery: String
+  sourceQueryName: String
 }
 
 type File {
@@ -61,12 +64,14 @@ type SourceService {
   id: ID! @unique
   name: String!
   scenes: [Scene!]! @relation(name: "SceneOnSourceService")
+  semanticLayoutNodes: [SemanticLayoutNode!]! @relation(name: "SemanticLayoutNodeOnSourceService")
+  dataOverlays: [DataOverlay!]! @relation(name: "DataOverlayOnSourceService")
   url: String!
 }
 
 type PhysicalAsset {
   colladaPath: String
-  geometry: Json
+  geometry: String
   gltfPath: String
   id: ID! @unique
   modelType: PhysicalAssetType
@@ -74,7 +79,7 @@ type PhysicalAsset {
   name: String!
   objPath: String
   physicalModels: [PhysicalModel!]! @relation(name: "PhysicalModelOnPhysicalAsset")
-  scale: Float 
+  scale: Float
 }
 
 type PhysicalModel {
@@ -130,6 +135,9 @@ type SemanticLayoutNode {
   scale: Scale @relation(name: "SemanticLayoutNodeOnScale")
   scene: Scene @relation(name: "SceneOnSemanticLayoutNode")
   scenes: [Scene!]! @relation(name: "SceneOnSemanticLayoutNode1")
+  sourceService: SourceService  @relation(name: "SemanticLayoutNodeOnSourceService")
+  sourceQuery: String
+  sourceQueryName: String
 }
 
 type User {
