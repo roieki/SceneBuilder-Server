@@ -38,7 +38,19 @@ const scene = {
       return pluralize.isPlural(x)
     })
 
-    // console.log('pluralQueries', pluralQueries)
+    let serviceExists = await ctx.db.exists.SourceService({ url: uri })
+    console.log('serviceExists', serviceExists, ctx.db.query)
+    let sourceService
+
+    if (!serviceExists) {
+      console.error(`service ${uri} does not exist`)
+      return
+    } else {
+      sourceService = await ctx.db.query.sourceService(
+        { where: { url: uri } },
+        info
+      )
+    }
 
     let scenes = await Promise.all(
       pluralQueries.map(async typeName => {
@@ -53,7 +65,7 @@ const scene = {
         let query = gql(queryTxt)
         let result = await client.query({ query })
         let singularName = pluralize.singular(typeName)
-        let name = typeName + '_aggregation'
+        let sceneName = typeName + '_aggregation'
 
         let scene
         let dataOverlays = []
@@ -63,12 +75,12 @@ const scene = {
         if (result.data && result.data[typeName].length > 0) {
           nodes = result.data[typeName].map((node, key) => ({
             name: `${singularName}_${key}`,
-            sourceQuery: `${singularName}(id: ${node.id}){ id }`,
-            sourceService: uri,
+            sourceQuery: `${singularName}({ where: { id: '${
+              node.id
+            }' }}){ id }`,
+            sourceService: { connect: { id: sourceService.id } },
             sourceQueryName: `${singularName}`
           }))
-
-          console.log('nodes', nodes)
         }
 
         semanticLayoutNodes = await Promise.all(
@@ -78,46 +90,65 @@ const scene = {
                 name: node.name
               }
             )
-            let n
             if (!semanticLayoutNodeExists) {
-              n = await ctx.db.mutation.createSemanticLayoutNode({
-                data: node
-              })
-              return n.id
-            } else {
-              n = await ctx.db.mutation.updateSemanticLayoutNode({
-                where: {
-                  name: node.name
+              return await ctx.db.mutation.createSemanticLayoutNode(
+                {
+                  data: node
                 },
-                data: node
-              })
+                info
+              )
+            } else {
+              return await ctx.db.mutation.updateSemanticLayoutNode(
+                {
+                  where: {
+                    name: node.name
+                  },
+                  data: node
+                },
+                info
+              )
             }
-
-            console.log('NODE', n)
-            return n.id
           })
         )
 
-        let sceneExists = await ctx.db.exists.Scene({ name })
+        // console.log('semanticLayoutNodes', semanticLayoutNodes)
+
+        let sceneExists = await ctx.db.exists.Scene({ name: sceneName })
 
         if (!sceneExists) {
-          scene = await ctx.db.mutation.createScene({ data: { name } })
+          scene = await ctx.db.mutation.createScene(
+            {
+              data: { name: sceneName }
+            },
+            info
+          )
         } else {
-          scene = await ctx.db.query.Scene({ where: { name } })
+          scene = await ctx.db.query.scene({ where: { name: sceneName } }, info)
         }
 
+        console.log(
+          'NODES!!!',
+          semanticLayoutNodes.map(node => ({ id: node.id }))
+        )
+        let sceneId = scene.id
+        delete scene.id
+
         let updated = {
-          ...scene,
-          name,
-          semanticLayoutNodes
+          ...scene
+        }
+
+        if (semanticLayoutNodes.length > 0) {
+          updated.semanticLayoutNodes = {
+            connect: semanticLayoutNodes.map(node => ({ id: node.id }))
+          }
         }
 
         await ctx.db.mutation.updateScene({
-          where: { id: scene.id },
+          where: { id: sceneId },
           data: updated
         })
 
-        return scene
+        return updated
       })
     )
 

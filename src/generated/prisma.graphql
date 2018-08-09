@@ -1,5 +1,5 @@
 # source: https://us1.prisma.sh/roie-schwaber-cohen-c0f7d8/scenebuilder/dev
-# timestamp: Wed Aug 08 2018 16:54:59 GMT-0700 (PDT)
+# timestamp: Thu Aug 09 2018 10:57:06 GMT-0700 (PDT)
 
 type AggregateAggregation {
   count: Int!
@@ -3961,6 +3961,7 @@ input SceneWhereInput {
 
 input SceneWhereUniqueInput {
   id: ID
+  name: String
 }
 
 type SemanticLayoutNode implements Node {
@@ -4577,6 +4578,7 @@ input SemanticLayoutNodeWhereInput {
 
 input SemanticLayoutNodeWhereUniqueInput {
   id: ID
+  name: String
 }
 
 type SourceService implements Node {
@@ -4922,6 +4924,8 @@ input SourceServiceWhereInput {
 
 input SourceServiceWhereUniqueInput {
   id: ID
+  name: String
+  url: String
 }
 
 type Subscription {

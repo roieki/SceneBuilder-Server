@@ -25,7 +25,7 @@ type Aggregation {
 }
 
 type AssetsInScene {
-  assets: [PhysicalAssetType!]! 
+  assets: [PhysicalAssetType!]!
   id: ID! @unique
 }
 
@@ -62,11 +62,12 @@ type File {
 
 type SourceService {
   id: ID! @unique
-  name: String!
+  name: String! @unique
   scenes: [Scene!]! @relation(name: "SceneOnSourceService")
-  semanticLayoutNodes: [SemanticLayoutNode!]! @relation(name: "SemanticLayoutNodeOnSourceService")
+  semanticLayoutNodes: [SemanticLayoutNode!]!
+    @relation(name: "SemanticLayoutNodeOnSourceService")
   dataOverlays: [DataOverlay!]! @relation(name: "DataOverlayOnSourceService")
-  url: String!
+  url: String! @unique
 }
 
 type PhysicalAsset {
@@ -78,7 +79,8 @@ type PhysicalAsset {
   mtlPath: String
   name: String!
   objPath: String
-  physicalModels: [PhysicalModel!]! @relation(name: "PhysicalModelOnPhysicalAsset")
+  physicalModels: [PhysicalModel!]!
+    @relation(name: "PhysicalModelOnPhysicalAsset")
   scale: Float
 }
 
@@ -87,14 +89,17 @@ type PhysicalModel {
   name: String
   physicalAsset: PhysicalAsset @relation(name: "PhysicalModelOnPhysicalAsset")
   scenes: [Scene!]! @relation(name: "SceneOnPhysicalModel")
-  semanticLayoutNodes: [SemanticLayoutNode!]! @relation(name: "SemanticLayoutNodeOnPhysicalModel")
+  semanticLayoutNodes: [SemanticLayoutNode!]!
+    @relation(name: "SemanticLayoutNodeOnPhysicalModel")
 }
 
 type Position {
-  cameraSettingses: [CameraSettings!]! @relation(name: "CameraSettingsOnPosition")
+  cameraSettingses: [CameraSettings!]!
+    @relation(name: "CameraSettingsOnPosition")
   dataOverlays: [DataOverlay!]! @relation(name: "DataOverlayOnPosition")
   id: ID! @unique
-  semanticLayoutNodes: [SemanticLayoutNode!]! @relation(name: "SemanticLayoutNodeOnPosition")
+  semanticLayoutNodes: [SemanticLayoutNode!]!
+    @relation(name: "SemanticLayoutNodeOnPosition")
   x: Float
   y: Float
   z: Float
@@ -109,7 +114,8 @@ type QueryPhysicalModel {
 type Scale {
   dataOverlays: [DataOverlay!]! @relation(name: "DataOverlayOnScale")
   id: ID! @unique
-  semanticLayoutNodes: [SemanticLayoutNode!]! @relation(name: "SemanticLayoutNodeOnScale")
+  semanticLayoutNodes: [SemanticLayoutNode!]!
+    @relation(name: "SemanticLayoutNodeOnScale")
   x: Float
   y: Float
   z: Float
@@ -117,25 +123,29 @@ type Scale {
 
 type Scene {
   cameraSettings: CameraSettings @relation(name: "SceneOnCameraSettings")
-  containerNode: SemanticLayoutNode @relation(name: "SceneOnSemanticLayoutNode1")
+  containerNode: SemanticLayoutNode
+    @relation(name: "SceneOnSemanticLayoutNode1")
   dataOverlays: [DataOverlay!]! @relation(name: "SceneOnDataOverlay")
   id: ID! @unique
   sourceService: SourceService @relation(name: "SceneOnSourceService")
-  name: String!
+  name: String! @unique
   physicalModels: [PhysicalModel!]! @relation(name: "SceneOnPhysicalModel")
-  semanticLayoutNodes: [SemanticLayoutNode!]! @relation(name: "SceneOnSemanticLayoutNode")
+  semanticLayoutNodes: [SemanticLayoutNode!]!
+    @relation(name: "SceneOnSemanticLayoutNode")
 }
 
 type SemanticLayoutNode {
   id: ID! @unique
-  name: String
-  physicalModel: PhysicalModel @relation(name: "SemanticLayoutNodeOnPhysicalModel")
+  name: String @unique
+  physicalModel: PhysicalModel
+    @relation(name: "SemanticLayoutNodeOnPhysicalModel")
   position: Position @relation(name: "SemanticLayoutNodeOnPosition")
-  quantity: Int 
+  quantity: Int
   scale: Scale @relation(name: "SemanticLayoutNodeOnScale")
   scene: Scene @relation(name: "SceneOnSemanticLayoutNode")
   scenes: [Scene!]! @relation(name: "SceneOnSemanticLayoutNode1")
-  sourceService: SourceService  @relation(name: "SemanticLayoutNodeOnSourceService")
+  sourceService: SourceService
+    @relation(name: "SemanticLayoutNodeOnSourceService")
   sourceQuery: String
   sourceQueryName: String
 }
