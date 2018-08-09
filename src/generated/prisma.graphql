@@ -1,5 +1,5 @@
 # source: https://us1.prisma.sh/roie-schwaber-cohen-c0f7d8/scenebuilder/dev
-# timestamp: Mon Aug 06 2018 19:09:20 GMT-0700 (PDT)
+# timestamp: Wed Aug 08 2018 16:54:59 GMT-0700 (PDT)
 
 type AggregateAggregation {
   count: Int!
@@ -738,6 +738,9 @@ type DataOverlay implements Node {
   position(where: PositionWhereInput): Position
   scale(where: ScaleWhereInput): Scale
   scenes(where: SceneWhereInput, orderBy: SceneOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Scene!]
+  sourceService(where: SourceServiceWhereInput): SourceService
+  sourceQuery: String
+  sourceQueryName: String
 }
 
 """A connection to a list of items."""
@@ -753,9 +756,12 @@ type DataOverlayConnection {
 input DataOverlayCreateInput {
   name: String!
   path: String!
+  sourceQuery: String
+  sourceQueryName: String
   position: PositionCreateOneWithoutDataOverlaysInput
   scale: ScaleCreateOneWithoutDataOverlaysInput
   scenes: SceneCreateManyWithoutDataOverlaysInput
+  sourceService: SourceServiceCreateOneWithoutDataOverlaysInput
 }
 
 input DataOverlayCreateManyWithoutPositionInput {
@@ -773,25 +779,49 @@ input DataOverlayCreateManyWithoutScenesInput {
   connect: [DataOverlayWhereUniqueInput!]
 }
 
+input DataOverlayCreateManyWithoutSourceServiceInput {
+  create: [DataOverlayCreateWithoutSourceServiceInput!]
+  connect: [DataOverlayWhereUniqueInput!]
+}
+
 input DataOverlayCreateWithoutPositionInput {
   name: String!
   path: String!
+  sourceQuery: String
+  sourceQueryName: String
   scale: ScaleCreateOneWithoutDataOverlaysInput
   scenes: SceneCreateManyWithoutDataOverlaysInput
+  sourceService: SourceServiceCreateOneWithoutDataOverlaysInput
 }
 
 input DataOverlayCreateWithoutScaleInput {
   name: String!
   path: String!
+  sourceQuery: String
+  sourceQueryName: String
   position: PositionCreateOneWithoutDataOverlaysInput
   scenes: SceneCreateManyWithoutDataOverlaysInput
+  sourceService: SourceServiceCreateOneWithoutDataOverlaysInput
 }
 
 input DataOverlayCreateWithoutScenesInput {
   name: String!
   path: String!
+  sourceQuery: String
+  sourceQueryName: String
   position: PositionCreateOneWithoutDataOverlaysInput
   scale: ScaleCreateOneWithoutDataOverlaysInput
+  sourceService: SourceServiceCreateOneWithoutDataOverlaysInput
+}
+
+input DataOverlayCreateWithoutSourceServiceInput {
+  name: String!
+  path: String!
+  sourceQuery: String
+  sourceQueryName: String
+  position: PositionCreateOneWithoutDataOverlaysInput
+  scale: ScaleCreateOneWithoutDataOverlaysInput
+  scenes: SceneCreateManyWithoutDataOverlaysInput
 }
 
 """An edge in a connection."""
@@ -810,6 +840,10 @@ enum DataOverlayOrderByInput {
   name_DESC
   path_ASC
   path_DESC
+  sourceQuery_ASC
+  sourceQuery_DESC
+  sourceQueryName_ASC
+  sourceQueryName_DESC
   updatedAt_ASC
   updatedAt_DESC
   createdAt_ASC
@@ -820,6 +854,8 @@ type DataOverlayPreviousValues {
   id: ID!
   name: String!
   path: String!
+  sourceQuery: String
+  sourceQueryName: String
 }
 
 type DataOverlaySubscriptionPayload {
@@ -864,9 +900,12 @@ input DataOverlaySubscriptionWhereInput {
 input DataOverlayUpdateInput {
   name: String
   path: String
+  sourceQuery: String
+  sourceQueryName: String
   position: PositionUpdateOneWithoutDataOverlaysInput
   scale: ScaleUpdateOneWithoutDataOverlaysInput
   scenes: SceneUpdateManyWithoutDataOverlaysInput
+  sourceService: SourceServiceUpdateOneWithoutDataOverlaysInput
 }
 
 input DataOverlayUpdateManyWithoutPositionInput {
@@ -896,25 +935,53 @@ input DataOverlayUpdateManyWithoutScenesInput {
   upsert: [DataOverlayUpsertWithWhereUniqueWithoutScenesInput!]
 }
 
+input DataOverlayUpdateManyWithoutSourceServiceInput {
+  create: [DataOverlayCreateWithoutSourceServiceInput!]
+  connect: [DataOverlayWhereUniqueInput!]
+  disconnect: [DataOverlayWhereUniqueInput!]
+  delete: [DataOverlayWhereUniqueInput!]
+  update: [DataOverlayUpdateWithWhereUniqueWithoutSourceServiceInput!]
+  upsert: [DataOverlayUpsertWithWhereUniqueWithoutSourceServiceInput!]
+}
+
 input DataOverlayUpdateWithoutPositionDataInput {
   name: String
   path: String
+  sourceQuery: String
+  sourceQueryName: String
   scale: ScaleUpdateOneWithoutDataOverlaysInput
   scenes: SceneUpdateManyWithoutDataOverlaysInput
+  sourceService: SourceServiceUpdateOneWithoutDataOverlaysInput
 }
 
 input DataOverlayUpdateWithoutScaleDataInput {
   name: String
   path: String
+  sourceQuery: String
+  sourceQueryName: String
   position: PositionUpdateOneWithoutDataOverlaysInput
   scenes: SceneUpdateManyWithoutDataOverlaysInput
+  sourceService: SourceServiceUpdateOneWithoutDataOverlaysInput
 }
 
 input DataOverlayUpdateWithoutScenesDataInput {
   name: String
   path: String
+  sourceQuery: String
+  sourceQueryName: String
   position: PositionUpdateOneWithoutDataOverlaysInput
   scale: ScaleUpdateOneWithoutDataOverlaysInput
+  sourceService: SourceServiceUpdateOneWithoutDataOverlaysInput
+}
+
+input DataOverlayUpdateWithoutSourceServiceDataInput {
+  name: String
+  path: String
+  sourceQuery: String
+  sourceQueryName: String
+  position: PositionUpdateOneWithoutDataOverlaysInput
+  scale: ScaleUpdateOneWithoutDataOverlaysInput
+  scenes: SceneUpdateManyWithoutDataOverlaysInput
 }
 
 input DataOverlayUpdateWithWhereUniqueWithoutPositionInput {
@@ -930,6 +997,11 @@ input DataOverlayUpdateWithWhereUniqueWithoutScaleInput {
 input DataOverlayUpdateWithWhereUniqueWithoutScenesInput {
   where: DataOverlayWhereUniqueInput!
   data: DataOverlayUpdateWithoutScenesDataInput!
+}
+
+input DataOverlayUpdateWithWhereUniqueWithoutSourceServiceInput {
+  where: DataOverlayWhereUniqueInput!
+  data: DataOverlayUpdateWithoutSourceServiceDataInput!
 }
 
 input DataOverlayUpsertWithWhereUniqueWithoutPositionInput {
@@ -948,6 +1020,12 @@ input DataOverlayUpsertWithWhereUniqueWithoutScenesInput {
   where: DataOverlayWhereUniqueInput!
   update: DataOverlayUpdateWithoutScenesDataInput!
   create: DataOverlayCreateWithoutScenesInput!
+}
+
+input DataOverlayUpsertWithWhereUniqueWithoutSourceServiceInput {
+  where: DataOverlayWhereUniqueInput!
+  update: DataOverlayUpdateWithoutSourceServiceDataInput!
+  create: DataOverlayCreateWithoutSourceServiceInput!
 }
 
 input DataOverlayWhereInput {
@@ -1079,11 +1157,92 @@ input DataOverlayWhereInput {
 
   """All values not ending with the given string."""
   path_not_ends_with: String
+  sourceQuery: String
+
+  """All values that are not equal to given value."""
+  sourceQuery_not: String
+
+  """All values that are contained in given list."""
+  sourceQuery_in: [String!]
+
+  """All values that are not contained in given list."""
+  sourceQuery_not_in: [String!]
+
+  """All values less than the given value."""
+  sourceQuery_lt: String
+
+  """All values less than or equal the given value."""
+  sourceQuery_lte: String
+
+  """All values greater than the given value."""
+  sourceQuery_gt: String
+
+  """All values greater than or equal the given value."""
+  sourceQuery_gte: String
+
+  """All values containing the given string."""
+  sourceQuery_contains: String
+
+  """All values not containing the given string."""
+  sourceQuery_not_contains: String
+
+  """All values starting with the given string."""
+  sourceQuery_starts_with: String
+
+  """All values not starting with the given string."""
+  sourceQuery_not_starts_with: String
+
+  """All values ending with the given string."""
+  sourceQuery_ends_with: String
+
+  """All values not ending with the given string."""
+  sourceQuery_not_ends_with: String
+  sourceQueryName: String
+
+  """All values that are not equal to given value."""
+  sourceQueryName_not: String
+
+  """All values that are contained in given list."""
+  sourceQueryName_in: [String!]
+
+  """All values that are not contained in given list."""
+  sourceQueryName_not_in: [String!]
+
+  """All values less than the given value."""
+  sourceQueryName_lt: String
+
+  """All values less than or equal the given value."""
+  sourceQueryName_lte: String
+
+  """All values greater than the given value."""
+  sourceQueryName_gt: String
+
+  """All values greater than or equal the given value."""
+  sourceQueryName_gte: String
+
+  """All values containing the given string."""
+  sourceQueryName_contains: String
+
+  """All values not containing the given string."""
+  sourceQueryName_not_contains: String
+
+  """All values starting with the given string."""
+  sourceQueryName_starts_with: String
+
+  """All values not starting with the given string."""
+  sourceQueryName_not_starts_with: String
+
+  """All values ending with the given string."""
+  sourceQueryName_ends_with: String
+
+  """All values not ending with the given string."""
+  sourceQueryName_not_ends_with: String
   position: PositionWhereInput
   scale: ScaleWhereInput
   scenes_every: SceneWhereInput
   scenes_some: SceneWhereInput
   scenes_none: SceneWhereInput
+  sourceService: SourceServiceWhereInput
 }
 
 input DataOverlayWhereUniqueInput {
@@ -1490,9 +1649,6 @@ input FileWhereUniqueInput {
   url: String
 }
 
-"""Raw JSON value"""
-scalar Json
-
 """
 The `Long` scalar type represents non-fractional signed whole numeric values.
 Long can represent values between -(2^63) and 2^63 - 1.
@@ -1612,7 +1768,7 @@ type PageInfo {
 
 type PhysicalAsset implements Node {
   colladaPath: String
-  geometry: Json
+  geometry: String
   gltfPath: String
   id: ID!
   modelType: PhysicalAssetType
@@ -1635,7 +1791,7 @@ type PhysicalAssetConnection {
 
 input PhysicalAssetCreateInput {
   colladaPath: String
-  geometry: Json
+  geometry: String
   gltfPath: String
   modelType: PhysicalAssetType
   mtlPath: String
@@ -1652,7 +1808,7 @@ input PhysicalAssetCreateOneWithoutPhysicalModelsInput {
 
 input PhysicalAssetCreateWithoutPhysicalModelsInput {
   colladaPath: String
-  geometry: Json
+  geometry: String
   gltfPath: String
   modelType: PhysicalAssetType
   mtlPath: String
@@ -1697,7 +1853,7 @@ enum PhysicalAssetOrderByInput {
 
 type PhysicalAssetPreviousValues {
   colladaPath: String
-  geometry: Json
+  geometry: String
   gltfPath: String
   id: ID!
   modelType: PhysicalAssetType
@@ -1755,7 +1911,7 @@ enum PhysicalAssetType {
 
 input PhysicalAssetUpdateInput {
   colladaPath: String
-  geometry: Json
+  geometry: String
   gltfPath: String
   modelType: PhysicalAssetType
   mtlPath: String
@@ -1776,7 +1932,7 @@ input PhysicalAssetUpdateOneWithoutPhysicalModelsInput {
 
 input PhysicalAssetUpdateWithoutPhysicalModelsDataInput {
   colladaPath: String
-  geometry: Json
+  geometry: String
   gltfPath: String
   modelType: PhysicalAssetType
   mtlPath: String
@@ -1839,6 +1995,46 @@ input PhysicalAssetWhereInput {
 
   """All values not ending with the given string."""
   colladaPath_not_ends_with: String
+  geometry: String
+
+  """All values that are not equal to given value."""
+  geometry_not: String
+
+  """All values that are contained in given list."""
+  geometry_in: [String!]
+
+  """All values that are not contained in given list."""
+  geometry_not_in: [String!]
+
+  """All values less than the given value."""
+  geometry_lt: String
+
+  """All values less than or equal the given value."""
+  geometry_lte: String
+
+  """All values greater than the given value."""
+  geometry_gt: String
+
+  """All values greater than or equal the given value."""
+  geometry_gte: String
+
+  """All values containing the given string."""
+  geometry_contains: String
+
+  """All values not containing the given string."""
+  geometry_not_contains: String
+
+  """All values starting with the given string."""
+  geometry_starts_with: String
+
+  """All values not starting with the given string."""
+  geometry_not_starts_with: String
+
+  """All values ending with the given string."""
+  geometry_ends_with: String
+
+  """All values not ending with the given string."""
+  geometry_not_ends_with: String
   gltfPath: String
 
   """All values that are not equal to given value."""
@@ -3776,6 +3972,9 @@ type SemanticLayoutNode implements Node {
   scale(where: ScaleWhereInput): Scale
   scene(where: SceneWhereInput): Scene
   scenes(where: SceneWhereInput, orderBy: SceneOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Scene!]
+  sourceService(where: SourceServiceWhereInput): SourceService
+  sourceQuery: String
+  sourceQueryName: String
 }
 
 """A connection to a list of items."""
@@ -3791,11 +3990,14 @@ type SemanticLayoutNodeConnection {
 input SemanticLayoutNodeCreateInput {
   name: String
   quantity: Int
+  sourceQuery: String
+  sourceQueryName: String
   physicalModel: PhysicalModelCreateOneWithoutSemanticLayoutNodesInput
   position: PositionCreateOneWithoutSemanticLayoutNodesInput
   scale: ScaleCreateOneWithoutSemanticLayoutNodesInput
   scene: SceneCreateOneWithoutSemanticLayoutNodesInput
   scenes: SceneCreateManyWithoutContainerNodeInput
+  sourceService: SourceServiceCreateOneWithoutSemanticLayoutNodesInput
 }
 
 input SemanticLayoutNodeCreateManyWithoutPhysicalModelInput {
@@ -3818,6 +4020,11 @@ input SemanticLayoutNodeCreateManyWithoutSceneInput {
   connect: [SemanticLayoutNodeWhereUniqueInput!]
 }
 
+input SemanticLayoutNodeCreateManyWithoutSourceServiceInput {
+  create: [SemanticLayoutNodeCreateWithoutSourceServiceInput!]
+  connect: [SemanticLayoutNodeWhereUniqueInput!]
+}
+
 input SemanticLayoutNodeCreateOneWithoutScenesInput {
   create: SemanticLayoutNodeCreateWithoutScenesInput
   connect: SemanticLayoutNodeWhereUniqueInput
@@ -3826,46 +4033,73 @@ input SemanticLayoutNodeCreateOneWithoutScenesInput {
 input SemanticLayoutNodeCreateWithoutPhysicalModelInput {
   name: String
   quantity: Int
+  sourceQuery: String
+  sourceQueryName: String
   position: PositionCreateOneWithoutSemanticLayoutNodesInput
   scale: ScaleCreateOneWithoutSemanticLayoutNodesInput
   scene: SceneCreateOneWithoutSemanticLayoutNodesInput
   scenes: SceneCreateManyWithoutContainerNodeInput
+  sourceService: SourceServiceCreateOneWithoutSemanticLayoutNodesInput
 }
 
 input SemanticLayoutNodeCreateWithoutPositionInput {
   name: String
   quantity: Int
+  sourceQuery: String
+  sourceQueryName: String
   physicalModel: PhysicalModelCreateOneWithoutSemanticLayoutNodesInput
   scale: ScaleCreateOneWithoutSemanticLayoutNodesInput
   scene: SceneCreateOneWithoutSemanticLayoutNodesInput
   scenes: SceneCreateManyWithoutContainerNodeInput
+  sourceService: SourceServiceCreateOneWithoutSemanticLayoutNodesInput
 }
 
 input SemanticLayoutNodeCreateWithoutScaleInput {
   name: String
   quantity: Int
+  sourceQuery: String
+  sourceQueryName: String
   physicalModel: PhysicalModelCreateOneWithoutSemanticLayoutNodesInput
   position: PositionCreateOneWithoutSemanticLayoutNodesInput
   scene: SceneCreateOneWithoutSemanticLayoutNodesInput
   scenes: SceneCreateManyWithoutContainerNodeInput
+  sourceService: SourceServiceCreateOneWithoutSemanticLayoutNodesInput
 }
 
 input SemanticLayoutNodeCreateWithoutSceneInput {
   name: String
   quantity: Int
+  sourceQuery: String
+  sourceQueryName: String
   physicalModel: PhysicalModelCreateOneWithoutSemanticLayoutNodesInput
   position: PositionCreateOneWithoutSemanticLayoutNodesInput
   scale: ScaleCreateOneWithoutSemanticLayoutNodesInput
   scenes: SceneCreateManyWithoutContainerNodeInput
+  sourceService: SourceServiceCreateOneWithoutSemanticLayoutNodesInput
 }
 
 input SemanticLayoutNodeCreateWithoutScenesInput {
   name: String
   quantity: Int
+  sourceQuery: String
+  sourceQueryName: String
   physicalModel: PhysicalModelCreateOneWithoutSemanticLayoutNodesInput
   position: PositionCreateOneWithoutSemanticLayoutNodesInput
   scale: ScaleCreateOneWithoutSemanticLayoutNodesInput
   scene: SceneCreateOneWithoutSemanticLayoutNodesInput
+  sourceService: SourceServiceCreateOneWithoutSemanticLayoutNodesInput
+}
+
+input SemanticLayoutNodeCreateWithoutSourceServiceInput {
+  name: String
+  quantity: Int
+  sourceQuery: String
+  sourceQueryName: String
+  physicalModel: PhysicalModelCreateOneWithoutSemanticLayoutNodesInput
+  position: PositionCreateOneWithoutSemanticLayoutNodesInput
+  scale: ScaleCreateOneWithoutSemanticLayoutNodesInput
+  scene: SceneCreateOneWithoutSemanticLayoutNodesInput
+  scenes: SceneCreateManyWithoutContainerNodeInput
 }
 
 """An edge in a connection."""
@@ -3884,6 +4118,10 @@ enum SemanticLayoutNodeOrderByInput {
   name_DESC
   quantity_ASC
   quantity_DESC
+  sourceQuery_ASC
+  sourceQuery_DESC
+  sourceQueryName_ASC
+  sourceQueryName_DESC
   updatedAt_ASC
   updatedAt_DESC
   createdAt_ASC
@@ -3894,6 +4132,8 @@ type SemanticLayoutNodePreviousValues {
   id: ID!
   name: String
   quantity: Int
+  sourceQuery: String
+  sourceQueryName: String
 }
 
 type SemanticLayoutNodeSubscriptionPayload {
@@ -3938,11 +4178,14 @@ input SemanticLayoutNodeSubscriptionWhereInput {
 input SemanticLayoutNodeUpdateInput {
   name: String
   quantity: Int
+  sourceQuery: String
+  sourceQueryName: String
   physicalModel: PhysicalModelUpdateOneWithoutSemanticLayoutNodesInput
   position: PositionUpdateOneWithoutSemanticLayoutNodesInput
   scale: ScaleUpdateOneWithoutSemanticLayoutNodesInput
   scene: SceneUpdateOneWithoutSemanticLayoutNodesInput
   scenes: SceneUpdateManyWithoutContainerNodeInput
+  sourceService: SourceServiceUpdateOneWithoutSemanticLayoutNodesInput
 }
 
 input SemanticLayoutNodeUpdateManyWithoutPhysicalModelInput {
@@ -3981,6 +4224,15 @@ input SemanticLayoutNodeUpdateManyWithoutSceneInput {
   upsert: [SemanticLayoutNodeUpsertWithWhereUniqueWithoutSceneInput!]
 }
 
+input SemanticLayoutNodeUpdateManyWithoutSourceServiceInput {
+  create: [SemanticLayoutNodeCreateWithoutSourceServiceInput!]
+  connect: [SemanticLayoutNodeWhereUniqueInput!]
+  disconnect: [SemanticLayoutNodeWhereUniqueInput!]
+  delete: [SemanticLayoutNodeWhereUniqueInput!]
+  update: [SemanticLayoutNodeUpdateWithWhereUniqueWithoutSourceServiceInput!]
+  upsert: [SemanticLayoutNodeUpsertWithWhereUniqueWithoutSourceServiceInput!]
+}
+
 input SemanticLayoutNodeUpdateOneWithoutScenesInput {
   create: SemanticLayoutNodeCreateWithoutScenesInput
   connect: SemanticLayoutNodeWhereUniqueInput
@@ -3993,46 +4245,73 @@ input SemanticLayoutNodeUpdateOneWithoutScenesInput {
 input SemanticLayoutNodeUpdateWithoutPhysicalModelDataInput {
   name: String
   quantity: Int
+  sourceQuery: String
+  sourceQueryName: String
   position: PositionUpdateOneWithoutSemanticLayoutNodesInput
   scale: ScaleUpdateOneWithoutSemanticLayoutNodesInput
   scene: SceneUpdateOneWithoutSemanticLayoutNodesInput
   scenes: SceneUpdateManyWithoutContainerNodeInput
+  sourceService: SourceServiceUpdateOneWithoutSemanticLayoutNodesInput
 }
 
 input SemanticLayoutNodeUpdateWithoutPositionDataInput {
   name: String
   quantity: Int
+  sourceQuery: String
+  sourceQueryName: String
   physicalModel: PhysicalModelUpdateOneWithoutSemanticLayoutNodesInput
   scale: ScaleUpdateOneWithoutSemanticLayoutNodesInput
   scene: SceneUpdateOneWithoutSemanticLayoutNodesInput
   scenes: SceneUpdateManyWithoutContainerNodeInput
+  sourceService: SourceServiceUpdateOneWithoutSemanticLayoutNodesInput
 }
 
 input SemanticLayoutNodeUpdateWithoutScaleDataInput {
   name: String
   quantity: Int
+  sourceQuery: String
+  sourceQueryName: String
   physicalModel: PhysicalModelUpdateOneWithoutSemanticLayoutNodesInput
   position: PositionUpdateOneWithoutSemanticLayoutNodesInput
   scene: SceneUpdateOneWithoutSemanticLayoutNodesInput
   scenes: SceneUpdateManyWithoutContainerNodeInput
+  sourceService: SourceServiceUpdateOneWithoutSemanticLayoutNodesInput
 }
 
 input SemanticLayoutNodeUpdateWithoutSceneDataInput {
   name: String
   quantity: Int
+  sourceQuery: String
+  sourceQueryName: String
   physicalModel: PhysicalModelUpdateOneWithoutSemanticLayoutNodesInput
   position: PositionUpdateOneWithoutSemanticLayoutNodesInput
   scale: ScaleUpdateOneWithoutSemanticLayoutNodesInput
   scenes: SceneUpdateManyWithoutContainerNodeInput
+  sourceService: SourceServiceUpdateOneWithoutSemanticLayoutNodesInput
 }
 
 input SemanticLayoutNodeUpdateWithoutScenesDataInput {
   name: String
   quantity: Int
+  sourceQuery: String
+  sourceQueryName: String
   physicalModel: PhysicalModelUpdateOneWithoutSemanticLayoutNodesInput
   position: PositionUpdateOneWithoutSemanticLayoutNodesInput
   scale: ScaleUpdateOneWithoutSemanticLayoutNodesInput
   scene: SceneUpdateOneWithoutSemanticLayoutNodesInput
+  sourceService: SourceServiceUpdateOneWithoutSemanticLayoutNodesInput
+}
+
+input SemanticLayoutNodeUpdateWithoutSourceServiceDataInput {
+  name: String
+  quantity: Int
+  sourceQuery: String
+  sourceQueryName: String
+  physicalModel: PhysicalModelUpdateOneWithoutSemanticLayoutNodesInput
+  position: PositionUpdateOneWithoutSemanticLayoutNodesInput
+  scale: ScaleUpdateOneWithoutSemanticLayoutNodesInput
+  scene: SceneUpdateOneWithoutSemanticLayoutNodesInput
+  scenes: SceneUpdateManyWithoutContainerNodeInput
 }
 
 input SemanticLayoutNodeUpdateWithWhereUniqueWithoutPhysicalModelInput {
@@ -4053,6 +4332,11 @@ input SemanticLayoutNodeUpdateWithWhereUniqueWithoutScaleInput {
 input SemanticLayoutNodeUpdateWithWhereUniqueWithoutSceneInput {
   where: SemanticLayoutNodeWhereUniqueInput!
   data: SemanticLayoutNodeUpdateWithoutSceneDataInput!
+}
+
+input SemanticLayoutNodeUpdateWithWhereUniqueWithoutSourceServiceInput {
+  where: SemanticLayoutNodeWhereUniqueInput!
+  data: SemanticLayoutNodeUpdateWithoutSourceServiceDataInput!
 }
 
 input SemanticLayoutNodeUpsertWithoutScenesInput {
@@ -4082,6 +4366,12 @@ input SemanticLayoutNodeUpsertWithWhereUniqueWithoutSceneInput {
   where: SemanticLayoutNodeWhereUniqueInput!
   update: SemanticLayoutNodeUpdateWithoutSceneDataInput!
   create: SemanticLayoutNodeCreateWithoutSceneInput!
+}
+
+input SemanticLayoutNodeUpsertWithWhereUniqueWithoutSourceServiceInput {
+  where: SemanticLayoutNodeWhereUniqueInput!
+  update: SemanticLayoutNodeUpdateWithoutSourceServiceDataInput!
+  create: SemanticLayoutNodeCreateWithoutSourceServiceInput!
 }
 
 input SemanticLayoutNodeWhereInput {
@@ -4195,6 +4485,86 @@ input SemanticLayoutNodeWhereInput {
 
   """All values greater than or equal the given value."""
   quantity_gte: Int
+  sourceQuery: String
+
+  """All values that are not equal to given value."""
+  sourceQuery_not: String
+
+  """All values that are contained in given list."""
+  sourceQuery_in: [String!]
+
+  """All values that are not contained in given list."""
+  sourceQuery_not_in: [String!]
+
+  """All values less than the given value."""
+  sourceQuery_lt: String
+
+  """All values less than or equal the given value."""
+  sourceQuery_lte: String
+
+  """All values greater than the given value."""
+  sourceQuery_gt: String
+
+  """All values greater than or equal the given value."""
+  sourceQuery_gte: String
+
+  """All values containing the given string."""
+  sourceQuery_contains: String
+
+  """All values not containing the given string."""
+  sourceQuery_not_contains: String
+
+  """All values starting with the given string."""
+  sourceQuery_starts_with: String
+
+  """All values not starting with the given string."""
+  sourceQuery_not_starts_with: String
+
+  """All values ending with the given string."""
+  sourceQuery_ends_with: String
+
+  """All values not ending with the given string."""
+  sourceQuery_not_ends_with: String
+  sourceQueryName: String
+
+  """All values that are not equal to given value."""
+  sourceQueryName_not: String
+
+  """All values that are contained in given list."""
+  sourceQueryName_in: [String!]
+
+  """All values that are not contained in given list."""
+  sourceQueryName_not_in: [String!]
+
+  """All values less than the given value."""
+  sourceQueryName_lt: String
+
+  """All values less than or equal the given value."""
+  sourceQueryName_lte: String
+
+  """All values greater than the given value."""
+  sourceQueryName_gt: String
+
+  """All values greater than or equal the given value."""
+  sourceQueryName_gte: String
+
+  """All values containing the given string."""
+  sourceQueryName_contains: String
+
+  """All values not containing the given string."""
+  sourceQueryName_not_contains: String
+
+  """All values starting with the given string."""
+  sourceQueryName_starts_with: String
+
+  """All values not starting with the given string."""
+  sourceQueryName_not_starts_with: String
+
+  """All values ending with the given string."""
+  sourceQueryName_ends_with: String
+
+  """All values not ending with the given string."""
+  sourceQueryName_not_ends_with: String
   physicalModel: PhysicalModelWhereInput
   position: PositionWhereInput
   scale: ScaleWhereInput
@@ -4202,6 +4572,7 @@ input SemanticLayoutNodeWhereInput {
   scenes_every: SceneWhereInput
   scenes_some: SceneWhereInput
   scenes_none: SceneWhereInput
+  sourceService: SourceServiceWhereInput
 }
 
 input SemanticLayoutNodeWhereUniqueInput {
@@ -4212,6 +4583,8 @@ type SourceService implements Node {
   id: ID!
   name: String!
   scenes(where: SceneWhereInput, orderBy: SceneOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Scene!]
+  semanticLayoutNodes(where: SemanticLayoutNodeWhereInput, orderBy: SemanticLayoutNodeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [SemanticLayoutNode!]
+  dataOverlays(where: DataOverlayWhereInput, orderBy: DataOverlayOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [DataOverlay!]
   url: String!
 }
 
@@ -4229,6 +4602,13 @@ input SourceServiceCreateInput {
   name: String!
   url: String!
   scenes: SceneCreateManyWithoutSourceServiceInput
+  semanticLayoutNodes: SemanticLayoutNodeCreateManyWithoutSourceServiceInput
+  dataOverlays: DataOverlayCreateManyWithoutSourceServiceInput
+}
+
+input SourceServiceCreateOneWithoutDataOverlaysInput {
+  create: SourceServiceCreateWithoutDataOverlaysInput
+  connect: SourceServiceWhereUniqueInput
 }
 
 input SourceServiceCreateOneWithoutScenesInput {
@@ -4236,9 +4616,30 @@ input SourceServiceCreateOneWithoutScenesInput {
   connect: SourceServiceWhereUniqueInput
 }
 
+input SourceServiceCreateOneWithoutSemanticLayoutNodesInput {
+  create: SourceServiceCreateWithoutSemanticLayoutNodesInput
+  connect: SourceServiceWhereUniqueInput
+}
+
+input SourceServiceCreateWithoutDataOverlaysInput {
+  name: String!
+  url: String!
+  scenes: SceneCreateManyWithoutSourceServiceInput
+  semanticLayoutNodes: SemanticLayoutNodeCreateManyWithoutSourceServiceInput
+}
+
 input SourceServiceCreateWithoutScenesInput {
   name: String!
   url: String!
+  semanticLayoutNodes: SemanticLayoutNodeCreateManyWithoutSourceServiceInput
+  dataOverlays: DataOverlayCreateManyWithoutSourceServiceInput
+}
+
+input SourceServiceCreateWithoutSemanticLayoutNodesInput {
+  name: String!
+  url: String!
+  scenes: SceneCreateManyWithoutSourceServiceInput
+  dataOverlays: DataOverlayCreateManyWithoutSourceServiceInput
 }
 
 """An edge in a connection."""
@@ -4312,6 +4713,17 @@ input SourceServiceUpdateInput {
   name: String
   url: String
   scenes: SceneUpdateManyWithoutSourceServiceInput
+  semanticLayoutNodes: SemanticLayoutNodeUpdateManyWithoutSourceServiceInput
+  dataOverlays: DataOverlayUpdateManyWithoutSourceServiceInput
+}
+
+input SourceServiceUpdateOneWithoutDataOverlaysInput {
+  create: SourceServiceCreateWithoutDataOverlaysInput
+  connect: SourceServiceWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: SourceServiceUpdateWithoutDataOverlaysDataInput
+  upsert: SourceServiceUpsertWithoutDataOverlaysInput
 }
 
 input SourceServiceUpdateOneWithoutScenesInput {
@@ -4323,14 +4735,49 @@ input SourceServiceUpdateOneWithoutScenesInput {
   upsert: SourceServiceUpsertWithoutScenesInput
 }
 
+input SourceServiceUpdateOneWithoutSemanticLayoutNodesInput {
+  create: SourceServiceCreateWithoutSemanticLayoutNodesInput
+  connect: SourceServiceWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: SourceServiceUpdateWithoutSemanticLayoutNodesDataInput
+  upsert: SourceServiceUpsertWithoutSemanticLayoutNodesInput
+}
+
+input SourceServiceUpdateWithoutDataOverlaysDataInput {
+  name: String
+  url: String
+  scenes: SceneUpdateManyWithoutSourceServiceInput
+  semanticLayoutNodes: SemanticLayoutNodeUpdateManyWithoutSourceServiceInput
+}
+
 input SourceServiceUpdateWithoutScenesDataInput {
   name: String
   url: String
+  semanticLayoutNodes: SemanticLayoutNodeUpdateManyWithoutSourceServiceInput
+  dataOverlays: DataOverlayUpdateManyWithoutSourceServiceInput
+}
+
+input SourceServiceUpdateWithoutSemanticLayoutNodesDataInput {
+  name: String
+  url: String
+  scenes: SceneUpdateManyWithoutSourceServiceInput
+  dataOverlays: DataOverlayUpdateManyWithoutSourceServiceInput
+}
+
+input SourceServiceUpsertWithoutDataOverlaysInput {
+  update: SourceServiceUpdateWithoutDataOverlaysDataInput!
+  create: SourceServiceCreateWithoutDataOverlaysInput!
 }
 
 input SourceServiceUpsertWithoutScenesInput {
   update: SourceServiceUpdateWithoutScenesDataInput!
   create: SourceServiceCreateWithoutScenesInput!
+}
+
+input SourceServiceUpsertWithoutSemanticLayoutNodesInput {
+  update: SourceServiceUpdateWithoutSemanticLayoutNodesDataInput!
+  create: SourceServiceCreateWithoutSemanticLayoutNodesInput!
 }
 
 input SourceServiceWhereInput {
@@ -4465,6 +4912,12 @@ input SourceServiceWhereInput {
   scenes_every: SceneWhereInput
   scenes_some: SceneWhereInput
   scenes_none: SceneWhereInput
+  semanticLayoutNodes_every: SemanticLayoutNodeWhereInput
+  semanticLayoutNodes_some: SemanticLayoutNodeWhereInput
+  semanticLayoutNodes_none: SemanticLayoutNodeWhereInput
+  dataOverlays_every: DataOverlayWhereInput
+  dataOverlays_some: DataOverlayWhereInput
+  dataOverlays_none: DataOverlayWhereInput
 }
 
 input SourceServiceWhereUniqueInput {
