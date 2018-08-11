@@ -1,5 +1,5 @@
 # source: https://us1.prisma.sh/roie-schwaber-cohen-c0f7d8/scenebuilder/dev
-# timestamp: Thu Aug 09 2018 10:57:06 GMT-0700 (PDT)
+# timestamp: Thu Aug 09 2018 14:48:09 GMT-0700 (PDT)
 
 type AggregateAggregation {
   count: Int!
@@ -34,6 +34,10 @@ type AggregatePosition {
 }
 
 type AggregateQueryPhysicalModel {
+  count: Int!
+}
+
+type AggregateRotation {
   count: Int!
 }
 
@@ -738,6 +742,7 @@ type DataOverlay implements Node {
   position(where: PositionWhereInput): Position
   scale(where: ScaleWhereInput): Scale
   scenes(where: SceneWhereInput, orderBy: SceneOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Scene!]
+  rotation(where: RotationWhereInput): Rotation
   sourceService(where: SourceServiceWhereInput): SourceService
   sourceQuery: String
   sourceQueryName: String
@@ -761,11 +766,17 @@ input DataOverlayCreateInput {
   position: PositionCreateOneWithoutDataOverlaysInput
   scale: ScaleCreateOneWithoutDataOverlaysInput
   scenes: SceneCreateManyWithoutDataOverlaysInput
+  rotation: RotationCreateOneWithoutDataOverlaysInput
   sourceService: SourceServiceCreateOneWithoutDataOverlaysInput
 }
 
 input DataOverlayCreateManyWithoutPositionInput {
   create: [DataOverlayCreateWithoutPositionInput!]
+  connect: [DataOverlayWhereUniqueInput!]
+}
+
+input DataOverlayCreateManyWithoutRotationInput {
+  create: [DataOverlayCreateWithoutRotationInput!]
   connect: [DataOverlayWhereUniqueInput!]
 }
 
@@ -791,6 +802,18 @@ input DataOverlayCreateWithoutPositionInput {
   sourceQueryName: String
   scale: ScaleCreateOneWithoutDataOverlaysInput
   scenes: SceneCreateManyWithoutDataOverlaysInput
+  rotation: RotationCreateOneWithoutDataOverlaysInput
+  sourceService: SourceServiceCreateOneWithoutDataOverlaysInput
+}
+
+input DataOverlayCreateWithoutRotationInput {
+  name: String!
+  path: String!
+  sourceQuery: String
+  sourceQueryName: String
+  position: PositionCreateOneWithoutDataOverlaysInput
+  scale: ScaleCreateOneWithoutDataOverlaysInput
+  scenes: SceneCreateManyWithoutDataOverlaysInput
   sourceService: SourceServiceCreateOneWithoutDataOverlaysInput
 }
 
@@ -801,6 +824,7 @@ input DataOverlayCreateWithoutScaleInput {
   sourceQueryName: String
   position: PositionCreateOneWithoutDataOverlaysInput
   scenes: SceneCreateManyWithoutDataOverlaysInput
+  rotation: RotationCreateOneWithoutDataOverlaysInput
   sourceService: SourceServiceCreateOneWithoutDataOverlaysInput
 }
 
@@ -811,6 +835,7 @@ input DataOverlayCreateWithoutScenesInput {
   sourceQueryName: String
   position: PositionCreateOneWithoutDataOverlaysInput
   scale: ScaleCreateOneWithoutDataOverlaysInput
+  rotation: RotationCreateOneWithoutDataOverlaysInput
   sourceService: SourceServiceCreateOneWithoutDataOverlaysInput
 }
 
@@ -822,6 +847,7 @@ input DataOverlayCreateWithoutSourceServiceInput {
   position: PositionCreateOneWithoutDataOverlaysInput
   scale: ScaleCreateOneWithoutDataOverlaysInput
   scenes: SceneCreateManyWithoutDataOverlaysInput
+  rotation: RotationCreateOneWithoutDataOverlaysInput
 }
 
 """An edge in a connection."""
@@ -905,6 +931,7 @@ input DataOverlayUpdateInput {
   position: PositionUpdateOneWithoutDataOverlaysInput
   scale: ScaleUpdateOneWithoutDataOverlaysInput
   scenes: SceneUpdateManyWithoutDataOverlaysInput
+  rotation: RotationUpdateOneWithoutDataOverlaysInput
   sourceService: SourceServiceUpdateOneWithoutDataOverlaysInput
 }
 
@@ -915,6 +942,15 @@ input DataOverlayUpdateManyWithoutPositionInput {
   delete: [DataOverlayWhereUniqueInput!]
   update: [DataOverlayUpdateWithWhereUniqueWithoutPositionInput!]
   upsert: [DataOverlayUpsertWithWhereUniqueWithoutPositionInput!]
+}
+
+input DataOverlayUpdateManyWithoutRotationInput {
+  create: [DataOverlayCreateWithoutRotationInput!]
+  connect: [DataOverlayWhereUniqueInput!]
+  disconnect: [DataOverlayWhereUniqueInput!]
+  delete: [DataOverlayWhereUniqueInput!]
+  update: [DataOverlayUpdateWithWhereUniqueWithoutRotationInput!]
+  upsert: [DataOverlayUpsertWithWhereUniqueWithoutRotationInput!]
 }
 
 input DataOverlayUpdateManyWithoutScaleInput {
@@ -951,6 +987,18 @@ input DataOverlayUpdateWithoutPositionDataInput {
   sourceQueryName: String
   scale: ScaleUpdateOneWithoutDataOverlaysInput
   scenes: SceneUpdateManyWithoutDataOverlaysInput
+  rotation: RotationUpdateOneWithoutDataOverlaysInput
+  sourceService: SourceServiceUpdateOneWithoutDataOverlaysInput
+}
+
+input DataOverlayUpdateWithoutRotationDataInput {
+  name: String
+  path: String
+  sourceQuery: String
+  sourceQueryName: String
+  position: PositionUpdateOneWithoutDataOverlaysInput
+  scale: ScaleUpdateOneWithoutDataOverlaysInput
+  scenes: SceneUpdateManyWithoutDataOverlaysInput
   sourceService: SourceServiceUpdateOneWithoutDataOverlaysInput
 }
 
@@ -961,6 +1009,7 @@ input DataOverlayUpdateWithoutScaleDataInput {
   sourceQueryName: String
   position: PositionUpdateOneWithoutDataOverlaysInput
   scenes: SceneUpdateManyWithoutDataOverlaysInput
+  rotation: RotationUpdateOneWithoutDataOverlaysInput
   sourceService: SourceServiceUpdateOneWithoutDataOverlaysInput
 }
 
@@ -971,6 +1020,7 @@ input DataOverlayUpdateWithoutScenesDataInput {
   sourceQueryName: String
   position: PositionUpdateOneWithoutDataOverlaysInput
   scale: ScaleUpdateOneWithoutDataOverlaysInput
+  rotation: RotationUpdateOneWithoutDataOverlaysInput
   sourceService: SourceServiceUpdateOneWithoutDataOverlaysInput
 }
 
@@ -982,11 +1032,17 @@ input DataOverlayUpdateWithoutSourceServiceDataInput {
   position: PositionUpdateOneWithoutDataOverlaysInput
   scale: ScaleUpdateOneWithoutDataOverlaysInput
   scenes: SceneUpdateManyWithoutDataOverlaysInput
+  rotation: RotationUpdateOneWithoutDataOverlaysInput
 }
 
 input DataOverlayUpdateWithWhereUniqueWithoutPositionInput {
   where: DataOverlayWhereUniqueInput!
   data: DataOverlayUpdateWithoutPositionDataInput!
+}
+
+input DataOverlayUpdateWithWhereUniqueWithoutRotationInput {
+  where: DataOverlayWhereUniqueInput!
+  data: DataOverlayUpdateWithoutRotationDataInput!
 }
 
 input DataOverlayUpdateWithWhereUniqueWithoutScaleInput {
@@ -1008,6 +1064,12 @@ input DataOverlayUpsertWithWhereUniqueWithoutPositionInput {
   where: DataOverlayWhereUniqueInput!
   update: DataOverlayUpdateWithoutPositionDataInput!
   create: DataOverlayCreateWithoutPositionInput!
+}
+
+input DataOverlayUpsertWithWhereUniqueWithoutRotationInput {
+  where: DataOverlayWhereUniqueInput!
+  update: DataOverlayUpdateWithoutRotationDataInput!
+  create: DataOverlayCreateWithoutRotationInput!
 }
 
 input DataOverlayUpsertWithWhereUniqueWithoutScaleInput {
@@ -1242,6 +1304,7 @@ input DataOverlayWhereInput {
   scenes_every: SceneWhereInput
   scenes_some: SceneWhereInput
   scenes_none: SceneWhereInput
+  rotation: RotationWhereInput
   sourceService: SourceServiceWhereInput
 }
 
@@ -1667,6 +1730,7 @@ type Mutation {
   createPosition(data: PositionCreateInput!): Position!
   createQueryPhysicalModel(data: QueryPhysicalModelCreateInput!): QueryPhysicalModel!
   createScale(data: ScaleCreateInput!): Scale!
+  createRotation(data: RotationCreateInput!): Rotation!
   createScene(data: SceneCreateInput!): Scene!
   createSemanticLayoutNode(data: SemanticLayoutNodeCreateInput!): SemanticLayoutNode!
   createUser: User!
@@ -1681,6 +1745,7 @@ type Mutation {
   updatePosition(data: PositionUpdateInput!, where: PositionWhereUniqueInput!): Position
   updateQueryPhysicalModel(data: QueryPhysicalModelUpdateInput!, where: QueryPhysicalModelWhereUniqueInput!): QueryPhysicalModel
   updateScale(data: ScaleUpdateInput!, where: ScaleWhereUniqueInput!): Scale
+  updateRotation(data: RotationUpdateInput!, where: RotationWhereUniqueInput!): Rotation
   updateScene(data: SceneUpdateInput!, where: SceneWhereUniqueInput!): Scene
   updateSemanticLayoutNode(data: SemanticLayoutNodeUpdateInput!, where: SemanticLayoutNodeWhereUniqueInput!): SemanticLayoutNode
   deleteAggregation(where: AggregationWhereUniqueInput!): Aggregation
@@ -1694,6 +1759,7 @@ type Mutation {
   deletePosition(where: PositionWhereUniqueInput!): Position
   deleteQueryPhysicalModel(where: QueryPhysicalModelWhereUniqueInput!): QueryPhysicalModel
   deleteScale(where: ScaleWhereUniqueInput!): Scale
+  deleteRotation(where: RotationWhereUniqueInput!): Rotation
   deleteScene(where: SceneWhereUniqueInput!): Scene
   deleteSemanticLayoutNode(where: SemanticLayoutNodeWhereUniqueInput!): SemanticLayoutNode
   deleteUser(where: UserWhereUniqueInput!): User
@@ -1708,6 +1774,7 @@ type Mutation {
   upsertPosition(where: PositionWhereUniqueInput!, create: PositionCreateInput!, update: PositionUpdateInput!): Position!
   upsertQueryPhysicalModel(where: QueryPhysicalModelWhereUniqueInput!, create: QueryPhysicalModelCreateInput!, update: QueryPhysicalModelUpdateInput!): QueryPhysicalModel!
   upsertScale(where: ScaleWhereUniqueInput!, create: ScaleCreateInput!, update: ScaleUpdateInput!): Scale!
+  upsertRotation(where: RotationWhereUniqueInput!, create: RotationCreateInput!, update: RotationUpdateInput!): Rotation!
   upsertScene(where: SceneWhereUniqueInput!, create: SceneCreateInput!, update: SceneUpdateInput!): Scene!
   upsertSemanticLayoutNode(where: SemanticLayoutNodeWhereUniqueInput!, create: SemanticLayoutNodeCreateInput!, update: SemanticLayoutNodeUpdateInput!): SemanticLayoutNode!
   updateManyAggregations(data: AggregationUpdateInput!, where: AggregationWhereInput): BatchPayload!
@@ -1721,6 +1788,7 @@ type Mutation {
   updateManyPositions(data: PositionUpdateInput!, where: PositionWhereInput): BatchPayload!
   updateManyQueryPhysicalModels(data: QueryPhysicalModelUpdateInput!, where: QueryPhysicalModelWhereInput): BatchPayload!
   updateManyScales(data: ScaleUpdateInput!, where: ScaleWhereInput): BatchPayload!
+  updateManyRotations(data: RotationUpdateInput!, where: RotationWhereInput): BatchPayload!
   updateManyScenes(data: SceneUpdateInput!, where: SceneWhereInput): BatchPayload!
   updateManySemanticLayoutNodes(data: SemanticLayoutNodeUpdateInput!, where: SemanticLayoutNodeWhereInput): BatchPayload!
   deleteManyAggregations(where: AggregationWhereInput): BatchPayload!
@@ -1734,6 +1802,7 @@ type Mutation {
   deleteManyPositions(where: PositionWhereInput): BatchPayload!
   deleteManyQueryPhysicalModels(where: QueryPhysicalModelWhereInput): BatchPayload!
   deleteManyScales(where: ScaleWhereInput): BatchPayload!
+  deleteManyRotations(where: RotationWhereInput): BatchPayload!
   deleteManyScenes(where: SceneWhereInput): BatchPayload!
   deleteManySemanticLayoutNodes(where: SemanticLayoutNodeWhereInput): BatchPayload!
   deleteManyUsers(where: UserWhereInput): BatchPayload!
@@ -1776,7 +1845,6 @@ type PhysicalAsset implements Node {
   name: String!
   objPath: String
   physicalModels(where: PhysicalModelWhereInput, orderBy: PhysicalModelOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [PhysicalModel!]
-  scale: Float
 }
 
 """A connection to a list of items."""
@@ -1797,7 +1865,6 @@ input PhysicalAssetCreateInput {
   mtlPath: String
   name: String!
   objPath: String
-  scale: Float
   physicalModels: PhysicalModelCreateManyWithoutPhysicalAssetInput
 }
 
@@ -1814,7 +1881,6 @@ input PhysicalAssetCreateWithoutPhysicalModelsInput {
   mtlPath: String
   name: String!
   objPath: String
-  scale: Float
 }
 
 """An edge in a connection."""
@@ -1843,8 +1909,6 @@ enum PhysicalAssetOrderByInput {
   name_DESC
   objPath_ASC
   objPath_DESC
-  scale_ASC
-  scale_DESC
   updatedAt_ASC
   updatedAt_DESC
   createdAt_ASC
@@ -1860,7 +1924,6 @@ type PhysicalAssetPreviousValues {
   mtlPath: String
   name: String!
   objPath: String
-  scale: Float
 }
 
 type PhysicalAssetSubscriptionPayload {
@@ -1917,7 +1980,6 @@ input PhysicalAssetUpdateInput {
   mtlPath: String
   name: String
   objPath: String
-  scale: Float
   physicalModels: PhysicalModelUpdateManyWithoutPhysicalAssetInput
 }
 
@@ -1938,7 +2000,6 @@ input PhysicalAssetUpdateWithoutPhysicalModelsDataInput {
   mtlPath: String
   name: String
   objPath: String
-  scale: Float
 }
 
 input PhysicalAssetUpsertWithoutPhysicalModelsInput {
@@ -2245,28 +2306,6 @@ input PhysicalAssetWhereInput {
 
   """All values not ending with the given string."""
   objPath_not_ends_with: String
-  scale: Float
-
-  """All values that are not equal to given value."""
-  scale_not: Float
-
-  """All values that are contained in given list."""
-  scale_in: [Float!]
-
-  """All values that are not contained in given list."""
-  scale_not_in: [Float!]
-
-  """All values less than the given value."""
-  scale_lt: Float
-
-  """All values less than or equal the given value."""
-  scale_lte: Float
-
-  """All values greater than the given value."""
-  scale_gt: Float
-
-  """All values greater than or equal the given value."""
-  scale_gte: Float
   physicalModels_every: PhysicalModelWhereInput
   physicalModels_some: PhysicalModelWhereInput
   physicalModels_none: PhysicalModelWhereInput
@@ -2934,6 +2973,7 @@ type Query {
   positions(where: PositionWhereInput, orderBy: PositionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Position]!
   queryPhysicalModels(where: QueryPhysicalModelWhereInput, orderBy: QueryPhysicalModelOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [QueryPhysicalModel]!
   scales(where: ScaleWhereInput, orderBy: ScaleOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Scale]!
+  rotations(where: RotationWhereInput, orderBy: RotationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Rotation]!
   scenes(where: SceneWhereInput, orderBy: SceneOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Scene]!
   semanticLayoutNodes(where: SemanticLayoutNodeWhereInput, orderBy: SemanticLayoutNodeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [SemanticLayoutNode]!
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
@@ -2948,6 +2988,7 @@ type Query {
   position(where: PositionWhereUniqueInput!): Position
   queryPhysicalModel(where: QueryPhysicalModelWhereUniqueInput!): QueryPhysicalModel
   scale(where: ScaleWhereUniqueInput!): Scale
+  rotation(where: RotationWhereUniqueInput!): Rotation
   scene(where: SceneWhereUniqueInput!): Scene
   semanticLayoutNode(where: SemanticLayoutNodeWhereUniqueInput!): SemanticLayoutNode
   user(where: UserWhereUniqueInput!): User
@@ -2962,6 +3003,7 @@ type Query {
   positionsConnection(where: PositionWhereInput, orderBy: PositionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PositionConnection!
   queryPhysicalModelsConnection(where: QueryPhysicalModelWhereInput, orderBy: QueryPhysicalModelOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): QueryPhysicalModelConnection!
   scalesConnection(where: ScaleWhereInput, orderBy: ScaleOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ScaleConnection!
+  rotationsConnection(where: RotationWhereInput, orderBy: RotationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): RotationConnection!
   scenesConnection(where: SceneWhereInput, orderBy: SceneOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): SceneConnection!
   semanticLayoutNodesConnection(where: SemanticLayoutNodeWhereInput, orderBy: SemanticLayoutNodeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): SemanticLayoutNodeConnection!
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
@@ -3198,6 +3240,304 @@ input QueryPhysicalModelWhereInput {
 }
 
 input QueryPhysicalModelWhereUniqueInput {
+  id: ID
+}
+
+type Rotation implements Node {
+  id: ID!
+  dataOverlays(where: DataOverlayWhereInput, orderBy: DataOverlayOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [DataOverlay!]
+  semanticLayoutNodes(where: SemanticLayoutNodeWhereInput, orderBy: SemanticLayoutNodeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [SemanticLayoutNode!]
+  x: Float
+  y: Float
+  z: Float
+}
+
+"""A connection to a list of items."""
+type RotationConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [RotationEdge]!
+  aggregate: AggregateRotation!
+}
+
+input RotationCreateInput {
+  x: Float
+  y: Float
+  z: Float
+  dataOverlays: DataOverlayCreateManyWithoutRotationInput
+  semanticLayoutNodes: SemanticLayoutNodeCreateManyWithoutRotationInput
+}
+
+input RotationCreateOneWithoutDataOverlaysInput {
+  create: RotationCreateWithoutDataOverlaysInput
+  connect: RotationWhereUniqueInput
+}
+
+input RotationCreateOneWithoutSemanticLayoutNodesInput {
+  create: RotationCreateWithoutSemanticLayoutNodesInput
+  connect: RotationWhereUniqueInput
+}
+
+input RotationCreateWithoutDataOverlaysInput {
+  x: Float
+  y: Float
+  z: Float
+  semanticLayoutNodes: SemanticLayoutNodeCreateManyWithoutRotationInput
+}
+
+input RotationCreateWithoutSemanticLayoutNodesInput {
+  x: Float
+  y: Float
+  z: Float
+  dataOverlays: DataOverlayCreateManyWithoutRotationInput
+}
+
+"""An edge in a connection."""
+type RotationEdge {
+  """The item at the end of the edge."""
+  node: Rotation!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum RotationOrderByInput {
+  id_ASC
+  id_DESC
+  x_ASC
+  x_DESC
+  y_ASC
+  y_DESC
+  z_ASC
+  z_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type RotationPreviousValues {
+  id: ID!
+  x: Float
+  y: Float
+  z: Float
+}
+
+type RotationSubscriptionPayload {
+  mutation: MutationType!
+  node: Rotation
+  updatedFields: [String!]
+  previousValues: RotationPreviousValues
+}
+
+input RotationSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [RotationSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [RotationSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [RotationSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: RotationWhereInput
+}
+
+input RotationUpdateInput {
+  x: Float
+  y: Float
+  z: Float
+  dataOverlays: DataOverlayUpdateManyWithoutRotationInput
+  semanticLayoutNodes: SemanticLayoutNodeUpdateManyWithoutRotationInput
+}
+
+input RotationUpdateOneWithoutDataOverlaysInput {
+  create: RotationCreateWithoutDataOverlaysInput
+  connect: RotationWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: RotationUpdateWithoutDataOverlaysDataInput
+  upsert: RotationUpsertWithoutDataOverlaysInput
+}
+
+input RotationUpdateOneWithoutSemanticLayoutNodesInput {
+  create: RotationCreateWithoutSemanticLayoutNodesInput
+  connect: RotationWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: RotationUpdateWithoutSemanticLayoutNodesDataInput
+  upsert: RotationUpsertWithoutSemanticLayoutNodesInput
+}
+
+input RotationUpdateWithoutDataOverlaysDataInput {
+  x: Float
+  y: Float
+  z: Float
+  semanticLayoutNodes: SemanticLayoutNodeUpdateManyWithoutRotationInput
+}
+
+input RotationUpdateWithoutSemanticLayoutNodesDataInput {
+  x: Float
+  y: Float
+  z: Float
+  dataOverlays: DataOverlayUpdateManyWithoutRotationInput
+}
+
+input RotationUpsertWithoutDataOverlaysInput {
+  update: RotationUpdateWithoutDataOverlaysDataInput!
+  create: RotationCreateWithoutDataOverlaysInput!
+}
+
+input RotationUpsertWithoutSemanticLayoutNodesInput {
+  update: RotationUpdateWithoutSemanticLayoutNodesDataInput!
+  create: RotationCreateWithoutSemanticLayoutNodesInput!
+}
+
+input RotationWhereInput {
+  """Logical AND on all given filters."""
+  AND: [RotationWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [RotationWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [RotationWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  x: Float
+
+  """All values that are not equal to given value."""
+  x_not: Float
+
+  """All values that are contained in given list."""
+  x_in: [Float!]
+
+  """All values that are not contained in given list."""
+  x_not_in: [Float!]
+
+  """All values less than the given value."""
+  x_lt: Float
+
+  """All values less than or equal the given value."""
+  x_lte: Float
+
+  """All values greater than the given value."""
+  x_gt: Float
+
+  """All values greater than or equal the given value."""
+  x_gte: Float
+  y: Float
+
+  """All values that are not equal to given value."""
+  y_not: Float
+
+  """All values that are contained in given list."""
+  y_in: [Float!]
+
+  """All values that are not contained in given list."""
+  y_not_in: [Float!]
+
+  """All values less than the given value."""
+  y_lt: Float
+
+  """All values less than or equal the given value."""
+  y_lte: Float
+
+  """All values greater than the given value."""
+  y_gt: Float
+
+  """All values greater than or equal the given value."""
+  y_gte: Float
+  z: Float
+
+  """All values that are not equal to given value."""
+  z_not: Float
+
+  """All values that are contained in given list."""
+  z_in: [Float!]
+
+  """All values that are not contained in given list."""
+  z_not_in: [Float!]
+
+  """All values less than the given value."""
+  z_lt: Float
+
+  """All values less than or equal the given value."""
+  z_lte: Float
+
+  """All values greater than the given value."""
+  z_gt: Float
+
+  """All values greater than or equal the given value."""
+  z_gte: Float
+  dataOverlays_every: DataOverlayWhereInput
+  dataOverlays_some: DataOverlayWhereInput
+  dataOverlays_none: DataOverlayWhereInput
+  semanticLayoutNodes_every: SemanticLayoutNodeWhereInput
+  semanticLayoutNodes_some: SemanticLayoutNodeWhereInput
+  semanticLayoutNodes_none: SemanticLayoutNodeWhereInput
+}
+
+input RotationWhereUniqueInput {
   id: ID
 }
 
@@ -3523,11 +3863,11 @@ type SceneConnection {
 input SceneCreateInput {
   name: String!
   cameraSettings: CameraSettingsCreateOneWithoutScenesInput
-  containerNode: SemanticLayoutNodeCreateOneWithoutScenesInput
+  containerNode: SemanticLayoutNodeCreateOneWithoutContainedScenesInput
   dataOverlays: DataOverlayCreateManyWithoutScenesInput
   sourceService: SourceServiceCreateOneWithoutScenesInput
   physicalModels: PhysicalModelCreateManyWithoutScenesInput
-  semanticLayoutNodes: SemanticLayoutNodeCreateManyWithoutSceneInput
+  semanticLayoutNodes: SemanticLayoutNodeCreateManyWithoutScenesInput
 }
 
 input SceneCreateManyWithoutCameraSettingsInput {
@@ -3550,23 +3890,23 @@ input SceneCreateManyWithoutPhysicalModelsInput {
   connect: [SceneWhereUniqueInput!]
 }
 
+input SceneCreateManyWithoutSemanticLayoutNodesInput {
+  create: [SceneCreateWithoutSemanticLayoutNodesInput!]
+  connect: [SceneWhereUniqueInput!]
+}
+
 input SceneCreateManyWithoutSourceServiceInput {
   create: [SceneCreateWithoutSourceServiceInput!]
   connect: [SceneWhereUniqueInput!]
 }
 
-input SceneCreateOneWithoutSemanticLayoutNodesInput {
-  create: SceneCreateWithoutSemanticLayoutNodesInput
-  connect: SceneWhereUniqueInput
-}
-
 input SceneCreateWithoutCameraSettingsInput {
   name: String!
-  containerNode: SemanticLayoutNodeCreateOneWithoutScenesInput
+  containerNode: SemanticLayoutNodeCreateOneWithoutContainedScenesInput
   dataOverlays: DataOverlayCreateManyWithoutScenesInput
   sourceService: SourceServiceCreateOneWithoutScenesInput
   physicalModels: PhysicalModelCreateManyWithoutScenesInput
-  semanticLayoutNodes: SemanticLayoutNodeCreateManyWithoutSceneInput
+  semanticLayoutNodes: SemanticLayoutNodeCreateManyWithoutScenesInput
 }
 
 input SceneCreateWithoutContainerNodeInput {
@@ -3575,31 +3915,31 @@ input SceneCreateWithoutContainerNodeInput {
   dataOverlays: DataOverlayCreateManyWithoutScenesInput
   sourceService: SourceServiceCreateOneWithoutScenesInput
   physicalModels: PhysicalModelCreateManyWithoutScenesInput
-  semanticLayoutNodes: SemanticLayoutNodeCreateManyWithoutSceneInput
+  semanticLayoutNodes: SemanticLayoutNodeCreateManyWithoutScenesInput
 }
 
 input SceneCreateWithoutDataOverlaysInput {
   name: String!
   cameraSettings: CameraSettingsCreateOneWithoutScenesInput
-  containerNode: SemanticLayoutNodeCreateOneWithoutScenesInput
+  containerNode: SemanticLayoutNodeCreateOneWithoutContainedScenesInput
   sourceService: SourceServiceCreateOneWithoutScenesInput
   physicalModels: PhysicalModelCreateManyWithoutScenesInput
-  semanticLayoutNodes: SemanticLayoutNodeCreateManyWithoutSceneInput
+  semanticLayoutNodes: SemanticLayoutNodeCreateManyWithoutScenesInput
 }
 
 input SceneCreateWithoutPhysicalModelsInput {
   name: String!
   cameraSettings: CameraSettingsCreateOneWithoutScenesInput
-  containerNode: SemanticLayoutNodeCreateOneWithoutScenesInput
+  containerNode: SemanticLayoutNodeCreateOneWithoutContainedScenesInput
   dataOverlays: DataOverlayCreateManyWithoutScenesInput
   sourceService: SourceServiceCreateOneWithoutScenesInput
-  semanticLayoutNodes: SemanticLayoutNodeCreateManyWithoutSceneInput
+  semanticLayoutNodes: SemanticLayoutNodeCreateManyWithoutScenesInput
 }
 
 input SceneCreateWithoutSemanticLayoutNodesInput {
   name: String!
   cameraSettings: CameraSettingsCreateOneWithoutScenesInput
-  containerNode: SemanticLayoutNodeCreateOneWithoutScenesInput
+  containerNode: SemanticLayoutNodeCreateOneWithoutContainedScenesInput
   dataOverlays: DataOverlayCreateManyWithoutScenesInput
   sourceService: SourceServiceCreateOneWithoutScenesInput
   physicalModels: PhysicalModelCreateManyWithoutScenesInput
@@ -3608,10 +3948,10 @@ input SceneCreateWithoutSemanticLayoutNodesInput {
 input SceneCreateWithoutSourceServiceInput {
   name: String!
   cameraSettings: CameraSettingsCreateOneWithoutScenesInput
-  containerNode: SemanticLayoutNodeCreateOneWithoutScenesInput
+  containerNode: SemanticLayoutNodeCreateOneWithoutContainedScenesInput
   dataOverlays: DataOverlayCreateManyWithoutScenesInput
   physicalModels: PhysicalModelCreateManyWithoutScenesInput
-  semanticLayoutNodes: SemanticLayoutNodeCreateManyWithoutSceneInput
+  semanticLayoutNodes: SemanticLayoutNodeCreateManyWithoutScenesInput
 }
 
 """An edge in a connection."""
@@ -3681,11 +4021,11 @@ input SceneSubscriptionWhereInput {
 input SceneUpdateInput {
   name: String
   cameraSettings: CameraSettingsUpdateOneWithoutScenesInput
-  containerNode: SemanticLayoutNodeUpdateOneWithoutScenesInput
+  containerNode: SemanticLayoutNodeUpdateOneWithoutContainedScenesInput
   dataOverlays: DataOverlayUpdateManyWithoutScenesInput
   sourceService: SourceServiceUpdateOneWithoutScenesInput
   physicalModels: PhysicalModelUpdateManyWithoutScenesInput
-  semanticLayoutNodes: SemanticLayoutNodeUpdateManyWithoutSceneInput
+  semanticLayoutNodes: SemanticLayoutNodeUpdateManyWithoutScenesInput
 }
 
 input SceneUpdateManyWithoutCameraSettingsInput {
@@ -3724,6 +4064,15 @@ input SceneUpdateManyWithoutPhysicalModelsInput {
   upsert: [SceneUpsertWithWhereUniqueWithoutPhysicalModelsInput!]
 }
 
+input SceneUpdateManyWithoutSemanticLayoutNodesInput {
+  create: [SceneCreateWithoutSemanticLayoutNodesInput!]
+  connect: [SceneWhereUniqueInput!]
+  disconnect: [SceneWhereUniqueInput!]
+  delete: [SceneWhereUniqueInput!]
+  update: [SceneUpdateWithWhereUniqueWithoutSemanticLayoutNodesInput!]
+  upsert: [SceneUpsertWithWhereUniqueWithoutSemanticLayoutNodesInput!]
+}
+
 input SceneUpdateManyWithoutSourceServiceInput {
   create: [SceneCreateWithoutSourceServiceInput!]
   connect: [SceneWhereUniqueInput!]
@@ -3733,22 +4082,13 @@ input SceneUpdateManyWithoutSourceServiceInput {
   upsert: [SceneUpsertWithWhereUniqueWithoutSourceServiceInput!]
 }
 
-input SceneUpdateOneWithoutSemanticLayoutNodesInput {
-  create: SceneCreateWithoutSemanticLayoutNodesInput
-  connect: SceneWhereUniqueInput
-  disconnect: Boolean
-  delete: Boolean
-  update: SceneUpdateWithoutSemanticLayoutNodesDataInput
-  upsert: SceneUpsertWithoutSemanticLayoutNodesInput
-}
-
 input SceneUpdateWithoutCameraSettingsDataInput {
   name: String
-  containerNode: SemanticLayoutNodeUpdateOneWithoutScenesInput
+  containerNode: SemanticLayoutNodeUpdateOneWithoutContainedScenesInput
   dataOverlays: DataOverlayUpdateManyWithoutScenesInput
   sourceService: SourceServiceUpdateOneWithoutScenesInput
   physicalModels: PhysicalModelUpdateManyWithoutScenesInput
-  semanticLayoutNodes: SemanticLayoutNodeUpdateManyWithoutSceneInput
+  semanticLayoutNodes: SemanticLayoutNodeUpdateManyWithoutScenesInput
 }
 
 input SceneUpdateWithoutContainerNodeDataInput {
@@ -3757,31 +4097,31 @@ input SceneUpdateWithoutContainerNodeDataInput {
   dataOverlays: DataOverlayUpdateManyWithoutScenesInput
   sourceService: SourceServiceUpdateOneWithoutScenesInput
   physicalModels: PhysicalModelUpdateManyWithoutScenesInput
-  semanticLayoutNodes: SemanticLayoutNodeUpdateManyWithoutSceneInput
+  semanticLayoutNodes: SemanticLayoutNodeUpdateManyWithoutScenesInput
 }
 
 input SceneUpdateWithoutDataOverlaysDataInput {
   name: String
   cameraSettings: CameraSettingsUpdateOneWithoutScenesInput
-  containerNode: SemanticLayoutNodeUpdateOneWithoutScenesInput
+  containerNode: SemanticLayoutNodeUpdateOneWithoutContainedScenesInput
   sourceService: SourceServiceUpdateOneWithoutScenesInput
   physicalModels: PhysicalModelUpdateManyWithoutScenesInput
-  semanticLayoutNodes: SemanticLayoutNodeUpdateManyWithoutSceneInput
+  semanticLayoutNodes: SemanticLayoutNodeUpdateManyWithoutScenesInput
 }
 
 input SceneUpdateWithoutPhysicalModelsDataInput {
   name: String
   cameraSettings: CameraSettingsUpdateOneWithoutScenesInput
-  containerNode: SemanticLayoutNodeUpdateOneWithoutScenesInput
+  containerNode: SemanticLayoutNodeUpdateOneWithoutContainedScenesInput
   dataOverlays: DataOverlayUpdateManyWithoutScenesInput
   sourceService: SourceServiceUpdateOneWithoutScenesInput
-  semanticLayoutNodes: SemanticLayoutNodeUpdateManyWithoutSceneInput
+  semanticLayoutNodes: SemanticLayoutNodeUpdateManyWithoutScenesInput
 }
 
 input SceneUpdateWithoutSemanticLayoutNodesDataInput {
   name: String
   cameraSettings: CameraSettingsUpdateOneWithoutScenesInput
-  containerNode: SemanticLayoutNodeUpdateOneWithoutScenesInput
+  containerNode: SemanticLayoutNodeUpdateOneWithoutContainedScenesInput
   dataOverlays: DataOverlayUpdateManyWithoutScenesInput
   sourceService: SourceServiceUpdateOneWithoutScenesInput
   physicalModels: PhysicalModelUpdateManyWithoutScenesInput
@@ -3790,10 +4130,10 @@ input SceneUpdateWithoutSemanticLayoutNodesDataInput {
 input SceneUpdateWithoutSourceServiceDataInput {
   name: String
   cameraSettings: CameraSettingsUpdateOneWithoutScenesInput
-  containerNode: SemanticLayoutNodeUpdateOneWithoutScenesInput
+  containerNode: SemanticLayoutNodeUpdateOneWithoutContainedScenesInput
   dataOverlays: DataOverlayUpdateManyWithoutScenesInput
   physicalModels: PhysicalModelUpdateManyWithoutScenesInput
-  semanticLayoutNodes: SemanticLayoutNodeUpdateManyWithoutSceneInput
+  semanticLayoutNodes: SemanticLayoutNodeUpdateManyWithoutScenesInput
 }
 
 input SceneUpdateWithWhereUniqueWithoutCameraSettingsInput {
@@ -3816,14 +4156,14 @@ input SceneUpdateWithWhereUniqueWithoutPhysicalModelsInput {
   data: SceneUpdateWithoutPhysicalModelsDataInput!
 }
 
+input SceneUpdateWithWhereUniqueWithoutSemanticLayoutNodesInput {
+  where: SceneWhereUniqueInput!
+  data: SceneUpdateWithoutSemanticLayoutNodesDataInput!
+}
+
 input SceneUpdateWithWhereUniqueWithoutSourceServiceInput {
   where: SceneWhereUniqueInput!
   data: SceneUpdateWithoutSourceServiceDataInput!
-}
-
-input SceneUpsertWithoutSemanticLayoutNodesInput {
-  update: SceneUpdateWithoutSemanticLayoutNodesDataInput!
-  create: SceneCreateWithoutSemanticLayoutNodesInput!
 }
 
 input SceneUpsertWithWhereUniqueWithoutCameraSettingsInput {
@@ -3848,6 +4188,12 @@ input SceneUpsertWithWhereUniqueWithoutPhysicalModelsInput {
   where: SceneWhereUniqueInput!
   update: SceneUpdateWithoutPhysicalModelsDataInput!
   create: SceneCreateWithoutPhysicalModelsInput!
+}
+
+input SceneUpsertWithWhereUniqueWithoutSemanticLayoutNodesInput {
+  where: SceneWhereUniqueInput!
+  update: SceneUpdateWithoutSemanticLayoutNodesDataInput!
+  create: SceneCreateWithoutSemanticLayoutNodesInput!
 }
 
 input SceneUpsertWithWhereUniqueWithoutSourceServiceInput {
@@ -3971,11 +4317,12 @@ type SemanticLayoutNode implements Node {
   position(where: PositionWhereInput): Position
   quantity: Int
   scale(where: ScaleWhereInput): Scale
-  scene(where: SceneWhereInput): Scene
+  containedScenes(where: SceneWhereInput, orderBy: SceneOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Scene!]
   scenes(where: SceneWhereInput, orderBy: SceneOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Scene!]
   sourceService(where: SourceServiceWhereInput): SourceService
   sourceQuery: String
   sourceQueryName: String
+  rotation(where: RotationWhereInput): Rotation
 }
 
 """A connection to a list of items."""
@@ -3996,9 +4343,10 @@ input SemanticLayoutNodeCreateInput {
   physicalModel: PhysicalModelCreateOneWithoutSemanticLayoutNodesInput
   position: PositionCreateOneWithoutSemanticLayoutNodesInput
   scale: ScaleCreateOneWithoutSemanticLayoutNodesInput
-  scene: SceneCreateOneWithoutSemanticLayoutNodesInput
-  scenes: SceneCreateManyWithoutContainerNodeInput
+  containedScenes: SceneCreateManyWithoutContainerNodeInput
+  scenes: SceneCreateManyWithoutSemanticLayoutNodesInput
   sourceService: SourceServiceCreateOneWithoutSemanticLayoutNodesInput
+  rotation: RotationCreateOneWithoutSemanticLayoutNodesInput
 }
 
 input SemanticLayoutNodeCreateManyWithoutPhysicalModelInput {
@@ -4011,13 +4359,18 @@ input SemanticLayoutNodeCreateManyWithoutPositionInput {
   connect: [SemanticLayoutNodeWhereUniqueInput!]
 }
 
+input SemanticLayoutNodeCreateManyWithoutRotationInput {
+  create: [SemanticLayoutNodeCreateWithoutRotationInput!]
+  connect: [SemanticLayoutNodeWhereUniqueInput!]
+}
+
 input SemanticLayoutNodeCreateManyWithoutScaleInput {
   create: [SemanticLayoutNodeCreateWithoutScaleInput!]
   connect: [SemanticLayoutNodeWhereUniqueInput!]
 }
 
-input SemanticLayoutNodeCreateManyWithoutSceneInput {
-  create: [SemanticLayoutNodeCreateWithoutSceneInput!]
+input SemanticLayoutNodeCreateManyWithoutScenesInput {
+  create: [SemanticLayoutNodeCreateWithoutScenesInput!]
   connect: [SemanticLayoutNodeWhereUniqueInput!]
 }
 
@@ -4026,9 +4379,22 @@ input SemanticLayoutNodeCreateManyWithoutSourceServiceInput {
   connect: [SemanticLayoutNodeWhereUniqueInput!]
 }
 
-input SemanticLayoutNodeCreateOneWithoutScenesInput {
-  create: SemanticLayoutNodeCreateWithoutScenesInput
+input SemanticLayoutNodeCreateOneWithoutContainedScenesInput {
+  create: SemanticLayoutNodeCreateWithoutContainedScenesInput
   connect: SemanticLayoutNodeWhereUniqueInput
+}
+
+input SemanticLayoutNodeCreateWithoutContainedScenesInput {
+  name: String
+  quantity: Int
+  sourceQuery: String
+  sourceQueryName: String
+  physicalModel: PhysicalModelCreateOneWithoutSemanticLayoutNodesInput
+  position: PositionCreateOneWithoutSemanticLayoutNodesInput
+  scale: ScaleCreateOneWithoutSemanticLayoutNodesInput
+  scenes: SceneCreateManyWithoutSemanticLayoutNodesInput
+  sourceService: SourceServiceCreateOneWithoutSemanticLayoutNodesInput
+  rotation: RotationCreateOneWithoutSemanticLayoutNodesInput
 }
 
 input SemanticLayoutNodeCreateWithoutPhysicalModelInput {
@@ -4038,9 +4404,10 @@ input SemanticLayoutNodeCreateWithoutPhysicalModelInput {
   sourceQueryName: String
   position: PositionCreateOneWithoutSemanticLayoutNodesInput
   scale: ScaleCreateOneWithoutSemanticLayoutNodesInput
-  scene: SceneCreateOneWithoutSemanticLayoutNodesInput
-  scenes: SceneCreateManyWithoutContainerNodeInput
+  containedScenes: SceneCreateManyWithoutContainerNodeInput
+  scenes: SceneCreateManyWithoutSemanticLayoutNodesInput
   sourceService: SourceServiceCreateOneWithoutSemanticLayoutNodesInput
+  rotation: RotationCreateOneWithoutSemanticLayoutNodesInput
 }
 
 input SemanticLayoutNodeCreateWithoutPositionInput {
@@ -4050,8 +4417,22 @@ input SemanticLayoutNodeCreateWithoutPositionInput {
   sourceQueryName: String
   physicalModel: PhysicalModelCreateOneWithoutSemanticLayoutNodesInput
   scale: ScaleCreateOneWithoutSemanticLayoutNodesInput
-  scene: SceneCreateOneWithoutSemanticLayoutNodesInput
-  scenes: SceneCreateManyWithoutContainerNodeInput
+  containedScenes: SceneCreateManyWithoutContainerNodeInput
+  scenes: SceneCreateManyWithoutSemanticLayoutNodesInput
+  sourceService: SourceServiceCreateOneWithoutSemanticLayoutNodesInput
+  rotation: RotationCreateOneWithoutSemanticLayoutNodesInput
+}
+
+input SemanticLayoutNodeCreateWithoutRotationInput {
+  name: String
+  quantity: Int
+  sourceQuery: String
+  sourceQueryName: String
+  physicalModel: PhysicalModelCreateOneWithoutSemanticLayoutNodesInput
+  position: PositionCreateOneWithoutSemanticLayoutNodesInput
+  scale: ScaleCreateOneWithoutSemanticLayoutNodesInput
+  containedScenes: SceneCreateManyWithoutContainerNodeInput
+  scenes: SceneCreateManyWithoutSemanticLayoutNodesInput
   sourceService: SourceServiceCreateOneWithoutSemanticLayoutNodesInput
 }
 
@@ -4062,21 +4443,10 @@ input SemanticLayoutNodeCreateWithoutScaleInput {
   sourceQueryName: String
   physicalModel: PhysicalModelCreateOneWithoutSemanticLayoutNodesInput
   position: PositionCreateOneWithoutSemanticLayoutNodesInput
-  scene: SceneCreateOneWithoutSemanticLayoutNodesInput
-  scenes: SceneCreateManyWithoutContainerNodeInput
+  containedScenes: SceneCreateManyWithoutContainerNodeInput
+  scenes: SceneCreateManyWithoutSemanticLayoutNodesInput
   sourceService: SourceServiceCreateOneWithoutSemanticLayoutNodesInput
-}
-
-input SemanticLayoutNodeCreateWithoutSceneInput {
-  name: String
-  quantity: Int
-  sourceQuery: String
-  sourceQueryName: String
-  physicalModel: PhysicalModelCreateOneWithoutSemanticLayoutNodesInput
-  position: PositionCreateOneWithoutSemanticLayoutNodesInput
-  scale: ScaleCreateOneWithoutSemanticLayoutNodesInput
-  scenes: SceneCreateManyWithoutContainerNodeInput
-  sourceService: SourceServiceCreateOneWithoutSemanticLayoutNodesInput
+  rotation: RotationCreateOneWithoutSemanticLayoutNodesInput
 }
 
 input SemanticLayoutNodeCreateWithoutScenesInput {
@@ -4087,8 +4457,9 @@ input SemanticLayoutNodeCreateWithoutScenesInput {
   physicalModel: PhysicalModelCreateOneWithoutSemanticLayoutNodesInput
   position: PositionCreateOneWithoutSemanticLayoutNodesInput
   scale: ScaleCreateOneWithoutSemanticLayoutNodesInput
-  scene: SceneCreateOneWithoutSemanticLayoutNodesInput
+  containedScenes: SceneCreateManyWithoutContainerNodeInput
   sourceService: SourceServiceCreateOneWithoutSemanticLayoutNodesInput
+  rotation: RotationCreateOneWithoutSemanticLayoutNodesInput
 }
 
 input SemanticLayoutNodeCreateWithoutSourceServiceInput {
@@ -4099,8 +4470,9 @@ input SemanticLayoutNodeCreateWithoutSourceServiceInput {
   physicalModel: PhysicalModelCreateOneWithoutSemanticLayoutNodesInput
   position: PositionCreateOneWithoutSemanticLayoutNodesInput
   scale: ScaleCreateOneWithoutSemanticLayoutNodesInput
-  scene: SceneCreateOneWithoutSemanticLayoutNodesInput
-  scenes: SceneCreateManyWithoutContainerNodeInput
+  containedScenes: SceneCreateManyWithoutContainerNodeInput
+  scenes: SceneCreateManyWithoutSemanticLayoutNodesInput
+  rotation: RotationCreateOneWithoutSemanticLayoutNodesInput
 }
 
 """An edge in a connection."""
@@ -4184,9 +4556,10 @@ input SemanticLayoutNodeUpdateInput {
   physicalModel: PhysicalModelUpdateOneWithoutSemanticLayoutNodesInput
   position: PositionUpdateOneWithoutSemanticLayoutNodesInput
   scale: ScaleUpdateOneWithoutSemanticLayoutNodesInput
-  scene: SceneUpdateOneWithoutSemanticLayoutNodesInput
-  scenes: SceneUpdateManyWithoutContainerNodeInput
+  containedScenes: SceneUpdateManyWithoutContainerNodeInput
+  scenes: SceneUpdateManyWithoutSemanticLayoutNodesInput
   sourceService: SourceServiceUpdateOneWithoutSemanticLayoutNodesInput
+  rotation: RotationUpdateOneWithoutSemanticLayoutNodesInput
 }
 
 input SemanticLayoutNodeUpdateManyWithoutPhysicalModelInput {
@@ -4207,6 +4580,15 @@ input SemanticLayoutNodeUpdateManyWithoutPositionInput {
   upsert: [SemanticLayoutNodeUpsertWithWhereUniqueWithoutPositionInput!]
 }
 
+input SemanticLayoutNodeUpdateManyWithoutRotationInput {
+  create: [SemanticLayoutNodeCreateWithoutRotationInput!]
+  connect: [SemanticLayoutNodeWhereUniqueInput!]
+  disconnect: [SemanticLayoutNodeWhereUniqueInput!]
+  delete: [SemanticLayoutNodeWhereUniqueInput!]
+  update: [SemanticLayoutNodeUpdateWithWhereUniqueWithoutRotationInput!]
+  upsert: [SemanticLayoutNodeUpsertWithWhereUniqueWithoutRotationInput!]
+}
+
 input SemanticLayoutNodeUpdateManyWithoutScaleInput {
   create: [SemanticLayoutNodeCreateWithoutScaleInput!]
   connect: [SemanticLayoutNodeWhereUniqueInput!]
@@ -4216,13 +4598,13 @@ input SemanticLayoutNodeUpdateManyWithoutScaleInput {
   upsert: [SemanticLayoutNodeUpsertWithWhereUniqueWithoutScaleInput!]
 }
 
-input SemanticLayoutNodeUpdateManyWithoutSceneInput {
-  create: [SemanticLayoutNodeCreateWithoutSceneInput!]
+input SemanticLayoutNodeUpdateManyWithoutScenesInput {
+  create: [SemanticLayoutNodeCreateWithoutScenesInput!]
   connect: [SemanticLayoutNodeWhereUniqueInput!]
   disconnect: [SemanticLayoutNodeWhereUniqueInput!]
   delete: [SemanticLayoutNodeWhereUniqueInput!]
-  update: [SemanticLayoutNodeUpdateWithWhereUniqueWithoutSceneInput!]
-  upsert: [SemanticLayoutNodeUpsertWithWhereUniqueWithoutSceneInput!]
+  update: [SemanticLayoutNodeUpdateWithWhereUniqueWithoutScenesInput!]
+  upsert: [SemanticLayoutNodeUpsertWithWhereUniqueWithoutScenesInput!]
 }
 
 input SemanticLayoutNodeUpdateManyWithoutSourceServiceInput {
@@ -4234,13 +4616,26 @@ input SemanticLayoutNodeUpdateManyWithoutSourceServiceInput {
   upsert: [SemanticLayoutNodeUpsertWithWhereUniqueWithoutSourceServiceInput!]
 }
 
-input SemanticLayoutNodeUpdateOneWithoutScenesInput {
-  create: SemanticLayoutNodeCreateWithoutScenesInput
+input SemanticLayoutNodeUpdateOneWithoutContainedScenesInput {
+  create: SemanticLayoutNodeCreateWithoutContainedScenesInput
   connect: SemanticLayoutNodeWhereUniqueInput
   disconnect: Boolean
   delete: Boolean
-  update: SemanticLayoutNodeUpdateWithoutScenesDataInput
-  upsert: SemanticLayoutNodeUpsertWithoutScenesInput
+  update: SemanticLayoutNodeUpdateWithoutContainedScenesDataInput
+  upsert: SemanticLayoutNodeUpsertWithoutContainedScenesInput
+}
+
+input SemanticLayoutNodeUpdateWithoutContainedScenesDataInput {
+  name: String
+  quantity: Int
+  sourceQuery: String
+  sourceQueryName: String
+  physicalModel: PhysicalModelUpdateOneWithoutSemanticLayoutNodesInput
+  position: PositionUpdateOneWithoutSemanticLayoutNodesInput
+  scale: ScaleUpdateOneWithoutSemanticLayoutNodesInput
+  scenes: SceneUpdateManyWithoutSemanticLayoutNodesInput
+  sourceService: SourceServiceUpdateOneWithoutSemanticLayoutNodesInput
+  rotation: RotationUpdateOneWithoutSemanticLayoutNodesInput
 }
 
 input SemanticLayoutNodeUpdateWithoutPhysicalModelDataInput {
@@ -4250,9 +4645,10 @@ input SemanticLayoutNodeUpdateWithoutPhysicalModelDataInput {
   sourceQueryName: String
   position: PositionUpdateOneWithoutSemanticLayoutNodesInput
   scale: ScaleUpdateOneWithoutSemanticLayoutNodesInput
-  scene: SceneUpdateOneWithoutSemanticLayoutNodesInput
-  scenes: SceneUpdateManyWithoutContainerNodeInput
+  containedScenes: SceneUpdateManyWithoutContainerNodeInput
+  scenes: SceneUpdateManyWithoutSemanticLayoutNodesInput
   sourceService: SourceServiceUpdateOneWithoutSemanticLayoutNodesInput
+  rotation: RotationUpdateOneWithoutSemanticLayoutNodesInput
 }
 
 input SemanticLayoutNodeUpdateWithoutPositionDataInput {
@@ -4262,8 +4658,22 @@ input SemanticLayoutNodeUpdateWithoutPositionDataInput {
   sourceQueryName: String
   physicalModel: PhysicalModelUpdateOneWithoutSemanticLayoutNodesInput
   scale: ScaleUpdateOneWithoutSemanticLayoutNodesInput
-  scene: SceneUpdateOneWithoutSemanticLayoutNodesInput
-  scenes: SceneUpdateManyWithoutContainerNodeInput
+  containedScenes: SceneUpdateManyWithoutContainerNodeInput
+  scenes: SceneUpdateManyWithoutSemanticLayoutNodesInput
+  sourceService: SourceServiceUpdateOneWithoutSemanticLayoutNodesInput
+  rotation: RotationUpdateOneWithoutSemanticLayoutNodesInput
+}
+
+input SemanticLayoutNodeUpdateWithoutRotationDataInput {
+  name: String
+  quantity: Int
+  sourceQuery: String
+  sourceQueryName: String
+  physicalModel: PhysicalModelUpdateOneWithoutSemanticLayoutNodesInput
+  position: PositionUpdateOneWithoutSemanticLayoutNodesInput
+  scale: ScaleUpdateOneWithoutSemanticLayoutNodesInput
+  containedScenes: SceneUpdateManyWithoutContainerNodeInput
+  scenes: SceneUpdateManyWithoutSemanticLayoutNodesInput
   sourceService: SourceServiceUpdateOneWithoutSemanticLayoutNodesInput
 }
 
@@ -4274,21 +4684,10 @@ input SemanticLayoutNodeUpdateWithoutScaleDataInput {
   sourceQueryName: String
   physicalModel: PhysicalModelUpdateOneWithoutSemanticLayoutNodesInput
   position: PositionUpdateOneWithoutSemanticLayoutNodesInput
-  scene: SceneUpdateOneWithoutSemanticLayoutNodesInput
-  scenes: SceneUpdateManyWithoutContainerNodeInput
+  containedScenes: SceneUpdateManyWithoutContainerNodeInput
+  scenes: SceneUpdateManyWithoutSemanticLayoutNodesInput
   sourceService: SourceServiceUpdateOneWithoutSemanticLayoutNodesInput
-}
-
-input SemanticLayoutNodeUpdateWithoutSceneDataInput {
-  name: String
-  quantity: Int
-  sourceQuery: String
-  sourceQueryName: String
-  physicalModel: PhysicalModelUpdateOneWithoutSemanticLayoutNodesInput
-  position: PositionUpdateOneWithoutSemanticLayoutNodesInput
-  scale: ScaleUpdateOneWithoutSemanticLayoutNodesInput
-  scenes: SceneUpdateManyWithoutContainerNodeInput
-  sourceService: SourceServiceUpdateOneWithoutSemanticLayoutNodesInput
+  rotation: RotationUpdateOneWithoutSemanticLayoutNodesInput
 }
 
 input SemanticLayoutNodeUpdateWithoutScenesDataInput {
@@ -4299,8 +4698,9 @@ input SemanticLayoutNodeUpdateWithoutScenesDataInput {
   physicalModel: PhysicalModelUpdateOneWithoutSemanticLayoutNodesInput
   position: PositionUpdateOneWithoutSemanticLayoutNodesInput
   scale: ScaleUpdateOneWithoutSemanticLayoutNodesInput
-  scene: SceneUpdateOneWithoutSemanticLayoutNodesInput
+  containedScenes: SceneUpdateManyWithoutContainerNodeInput
   sourceService: SourceServiceUpdateOneWithoutSemanticLayoutNodesInput
+  rotation: RotationUpdateOneWithoutSemanticLayoutNodesInput
 }
 
 input SemanticLayoutNodeUpdateWithoutSourceServiceDataInput {
@@ -4311,8 +4711,9 @@ input SemanticLayoutNodeUpdateWithoutSourceServiceDataInput {
   physicalModel: PhysicalModelUpdateOneWithoutSemanticLayoutNodesInput
   position: PositionUpdateOneWithoutSemanticLayoutNodesInput
   scale: ScaleUpdateOneWithoutSemanticLayoutNodesInput
-  scene: SceneUpdateOneWithoutSemanticLayoutNodesInput
-  scenes: SceneUpdateManyWithoutContainerNodeInput
+  containedScenes: SceneUpdateManyWithoutContainerNodeInput
+  scenes: SceneUpdateManyWithoutSemanticLayoutNodesInput
+  rotation: RotationUpdateOneWithoutSemanticLayoutNodesInput
 }
 
 input SemanticLayoutNodeUpdateWithWhereUniqueWithoutPhysicalModelInput {
@@ -4325,14 +4726,19 @@ input SemanticLayoutNodeUpdateWithWhereUniqueWithoutPositionInput {
   data: SemanticLayoutNodeUpdateWithoutPositionDataInput!
 }
 
+input SemanticLayoutNodeUpdateWithWhereUniqueWithoutRotationInput {
+  where: SemanticLayoutNodeWhereUniqueInput!
+  data: SemanticLayoutNodeUpdateWithoutRotationDataInput!
+}
+
 input SemanticLayoutNodeUpdateWithWhereUniqueWithoutScaleInput {
   where: SemanticLayoutNodeWhereUniqueInput!
   data: SemanticLayoutNodeUpdateWithoutScaleDataInput!
 }
 
-input SemanticLayoutNodeUpdateWithWhereUniqueWithoutSceneInput {
+input SemanticLayoutNodeUpdateWithWhereUniqueWithoutScenesInput {
   where: SemanticLayoutNodeWhereUniqueInput!
-  data: SemanticLayoutNodeUpdateWithoutSceneDataInput!
+  data: SemanticLayoutNodeUpdateWithoutScenesDataInput!
 }
 
 input SemanticLayoutNodeUpdateWithWhereUniqueWithoutSourceServiceInput {
@@ -4340,9 +4746,9 @@ input SemanticLayoutNodeUpdateWithWhereUniqueWithoutSourceServiceInput {
   data: SemanticLayoutNodeUpdateWithoutSourceServiceDataInput!
 }
 
-input SemanticLayoutNodeUpsertWithoutScenesInput {
-  update: SemanticLayoutNodeUpdateWithoutScenesDataInput!
-  create: SemanticLayoutNodeCreateWithoutScenesInput!
+input SemanticLayoutNodeUpsertWithoutContainedScenesInput {
+  update: SemanticLayoutNodeUpdateWithoutContainedScenesDataInput!
+  create: SemanticLayoutNodeCreateWithoutContainedScenesInput!
 }
 
 input SemanticLayoutNodeUpsertWithWhereUniqueWithoutPhysicalModelInput {
@@ -4357,16 +4763,22 @@ input SemanticLayoutNodeUpsertWithWhereUniqueWithoutPositionInput {
   create: SemanticLayoutNodeCreateWithoutPositionInput!
 }
 
+input SemanticLayoutNodeUpsertWithWhereUniqueWithoutRotationInput {
+  where: SemanticLayoutNodeWhereUniqueInput!
+  update: SemanticLayoutNodeUpdateWithoutRotationDataInput!
+  create: SemanticLayoutNodeCreateWithoutRotationInput!
+}
+
 input SemanticLayoutNodeUpsertWithWhereUniqueWithoutScaleInput {
   where: SemanticLayoutNodeWhereUniqueInput!
   update: SemanticLayoutNodeUpdateWithoutScaleDataInput!
   create: SemanticLayoutNodeCreateWithoutScaleInput!
 }
 
-input SemanticLayoutNodeUpsertWithWhereUniqueWithoutSceneInput {
+input SemanticLayoutNodeUpsertWithWhereUniqueWithoutScenesInput {
   where: SemanticLayoutNodeWhereUniqueInput!
-  update: SemanticLayoutNodeUpdateWithoutSceneDataInput!
-  create: SemanticLayoutNodeCreateWithoutSceneInput!
+  update: SemanticLayoutNodeUpdateWithoutScenesDataInput!
+  create: SemanticLayoutNodeCreateWithoutScenesInput!
 }
 
 input SemanticLayoutNodeUpsertWithWhereUniqueWithoutSourceServiceInput {
@@ -4569,11 +4981,14 @@ input SemanticLayoutNodeWhereInput {
   physicalModel: PhysicalModelWhereInput
   position: PositionWhereInput
   scale: ScaleWhereInput
-  scene: SceneWhereInput
+  containedScenes_every: SceneWhereInput
+  containedScenes_some: SceneWhereInput
+  containedScenes_none: SceneWhereInput
   scenes_every: SceneWhereInput
   scenes_some: SceneWhereInput
   scenes_none: SceneWhereInput
   sourceService: SourceServiceWhereInput
+  rotation: RotationWhereInput
 }
 
 input SemanticLayoutNodeWhereUniqueInput {
@@ -4940,6 +5355,7 @@ type Subscription {
   position(where: PositionSubscriptionWhereInput): PositionSubscriptionPayload
   queryPhysicalModel(where: QueryPhysicalModelSubscriptionWhereInput): QueryPhysicalModelSubscriptionPayload
   scale(where: ScaleSubscriptionWhereInput): ScaleSubscriptionPayload
+  rotation(where: RotationSubscriptionWhereInput): RotationSubscriptionPayload
   scene(where: SceneSubscriptionWhereInput): SceneSubscriptionPayload
   semanticLayoutNode(where: SemanticLayoutNodeSubscriptionWhereInput): SemanticLayoutNodeSubscriptionPayload
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload

@@ -44,6 +44,7 @@ type DataOverlay {
   position: Position @relation(name: "DataOverlayOnPosition")
   scale: Scale @relation(name: "DataOverlayOnScale")
   scenes: [Scene!]! @relation(name: "SceneOnDataOverlay")
+  rotation: Rotation @relation(name: "DataOverlayOnRotation")
   sourceService: SourceService @relation(name: "DataOverlayOnSourceService")
   sourceQuery: String
   sourceQueryName: String
@@ -81,7 +82,6 @@ type PhysicalAsset {
   objPath: String
   physicalModels: [PhysicalModel!]!
     @relation(name: "PhysicalModelOnPhysicalAsset")
-  scale: Float
 }
 
 type PhysicalModel {
@@ -121,10 +121,19 @@ type Scale {
   z: Float
 }
 
+type Rotation {
+  id: ID! @unique
+  dataOverlays: [DataOverlay!]! @relation(name: "DataOverlayOnRotation")
+  semanticLayoutNodes: [SemanticLayoutNode!]!
+    @relation(name: "SemanticLayoutNodeOnRotation")
+  x: Float
+  y: Float
+  z: Float
+}
+
 type Scene {
   cameraSettings: CameraSettings @relation(name: "SceneOnCameraSettings")
-  containerNode: SemanticLayoutNode
-    @relation(name: "SceneOnSemanticLayoutNode1")
+  containerNode: SemanticLayoutNode @relation(name: "ContainerNodeOnScene")
   dataOverlays: [DataOverlay!]! @relation(name: "SceneOnDataOverlay")
   id: ID! @unique
   sourceService: SourceService @relation(name: "SceneOnSourceService")
@@ -142,12 +151,13 @@ type SemanticLayoutNode {
   position: Position @relation(name: "SemanticLayoutNodeOnPosition")
   quantity: Int
   scale: Scale @relation(name: "SemanticLayoutNodeOnScale")
-  scene: Scene @relation(name: "SceneOnSemanticLayoutNode")
-  scenes: [Scene!]! @relation(name: "SceneOnSemanticLayoutNode1")
+  containedScenes: [Scene!]! @relation(name: "ContainerNodeOnScene")
+  scenes: [Scene!]! @relation(name: "SceneOnSemanticLayoutNode")
   sourceService: SourceService
     @relation(name: "SemanticLayoutNodeOnSourceService")
   sourceQuery: String
   sourceQueryName: String
+  rotation: Rotation @relation(name: "SemanticLayoutNodeOnRotation")
 }
 
 type User {

@@ -1,19 +1,51 @@
 # import Post from "./generated/prisma.graphql"
-
 type Query {
   info: String
-  
+}
+
+input OverlayQuerySpecInput {
+  queryName: String
+  queryParameters: String
+  queryVariables: String
+  resultSelection: String
+  overlayName: String
+}
+
+input TypeSpecInput {
+  name: String
+  resultSelection: String
+  overlays: [OverlayQuerySpecInput]
+}
+
+enum SceneType {
+  INSTANCE
+  AGGREGATION
+}
+
+input SceneSpecInput {
+  name: String
+  types: [TypeSpecInput]
+  sceneType: SceneType
+  containerType: TypeSpecInput # For aggregations
+  overlays: [OverlayQuerySpecInput]
+}
+
+input ScenesSpecInput {
+  scenes: [SceneSpecInput]
 }
 
 type Mutation {
   info: String
-  hydrateScenes(uri: String): Scene
+  hydrateScenes(
+    datamodelUrl: String!
+    logicUrl: String!
+    scenesSpec: ScenesSpecInput
+  ): [Scene]
 }
 
 type Subscription {
   info: String
 }
-
 
 type AuthPayload {
   token: String!
